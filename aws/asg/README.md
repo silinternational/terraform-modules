@@ -25,3 +25,20 @@ an auto scaling group that uses the configuration.
  - `ecs_instance_role_id` - The ID for created IAM role `ecsInstanceRole`
  - `ecs_instance_profile_id` - The ID for created IAM profile `ecsInstanceProfile`
  - `ecs_service_role_id` - The ID for created IAM role `ecsServiceRole`
+
+## Example Usage
+
+```
+module "asg" {
+  source = "github.com/silinternational/terraform-modules//aws/asg"
+  tag_app_name = "${var.tag_app_name}"
+  tag_app_env = "${var.tag_app_env}"
+  aws_instance = "${var.aws_instance}"
+  aws_zones = "${var.aws_zones}"
+  private_subnet_ids = ["${module.vpc.private_subnet_ids}"]
+  default_sg_id = "${module.vpc.vpc_default_sg_id}"
+  ecs_instance_profile_id = "${module.ecs.ecs_instance_profile_id}"
+  ecs_cluster_name = "${module.ecs.ecs_cluster_name}"
+  ami_id = "${module.ecs.ami_id}"
+}
+```

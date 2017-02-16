@@ -19,3 +19,13 @@ IAM roles to function.
  - `ecs_instance_profile_id` - The ID for created IAM profile `ecsInstanceProfile`
  - `ecs_service_role_id` - The ID for created IAM role `ecsServiceRole`
  - `ami_id` - The ID for the latest ECS optimized AMI
+
+## Usage Example
+
+```
+module "ecs" {
+  source = "github.com/silinternational/terraform-modules//aws/ecs"
+  tag_app_name = "${var.tag_app_name}"
+  tag_app_env = "${var.tag_app_env}"
+}
+```

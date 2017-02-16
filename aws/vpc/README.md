@@ -20,3 +20,14 @@ be useful.
  - `vpc_default_sg_id` - The VPC default security group ID
  - `public_subnet_ids` - A list of the public subnet IDs
  - `private_subnet_ids` - A list of the private subnet IDs
+
+## Example Usage
+
+```
+module "vpc" {
+  source = "github.com/silinternational/terraform-modules//aws/vpc"
+  tag_app_name = "${var.tag_app_name}"
+  tag_app_env = "${var.tag_app_env}"
+  aws_zones = "${var.aws_zones}"
+}
+```
