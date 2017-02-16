@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "as_conf" {
     name_prefix = "asg-lc-${var.tag_app_name}-${var.tag_app_env}"
-    image_id = "${data.aws_ami.ecs_ami.id}"
+    image_id = "${var.ami_id}"
     instance_type = "${var.aws_instance["instance_type"]}"
     root_block_device {
       volume_size = "${var.aws_instance["volume_size"]}"
