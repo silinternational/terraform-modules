@@ -22,7 +22,7 @@ IAM roles to function.
 
 ## Usage Example
 
-```
+```hcl
 module "ecs" {
   source = "github.com/silinternational/terraform-modules//aws/ecs"
   tag_app_name = "${var.tag_app_name}"

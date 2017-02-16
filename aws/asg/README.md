@@ -28,7 +28,7 @@ an auto scaling group that uses the configuration.
 
 ## Example Usage
 
-```
+```hcl
 module "asg" {
   source = "github.com/silinternational/terraform-modules//aws/asg"
   tag_app_name = "${var.tag_app_name}"

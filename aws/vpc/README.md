@@ -23,7 +23,7 @@ be useful.
 
 ## Example Usage
 
-```
+```hcl
 module "vpc" {
   source = "github.com/silinternational/terraform-modules//aws/vpc"
   tag_app_name = "${var.tag_app_name}"
