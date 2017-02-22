@@ -55,7 +55,6 @@ resource "aws_eip" "gateway_eip" {
 }
 resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = "${aws_eip.gateway_eip.id}"
-  //subnet_id = "${aws_subnet.public-1c.id}"
   subnet_id = "${aws_subnet.public_subnet.0.id}"
   depends_on = ["aws_internet_gateway.internet_gateway"]
 }
@@ -92,4 +91,17 @@ resource "aws_route_table_association" "public_route" {
   count = "${length(var.aws_zones)}"
   subnet_id = "${element(aws_subnet.public_subnet.*.id, count.index)}"
   route_table_id = "${aws_route_table.igw_route_table.id}"
+}
+
+/*
+ * Create DB Subnet Group for private subnets
+ */
+resource "aws_db_subnet_group" "db_subnet_group" {
+  name = "db-subnet-${var.tag_app_name}-${var.tag_app_env}"
+  subnet_ids = ["${aws_subnet.private_subnet.*.id}"]
+  tags {
+    Name = "db-subnet-${var.tag_app_name}-${var.tag_app_env}",
+    app_name = "${var.tag_app_name}"
+    app_env = "${var.tag_app_env}"
+  }
 }

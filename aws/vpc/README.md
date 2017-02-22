@@ -8,6 +8,7 @@ be useful.
  - Create public and private subnets for each `aws_zones` specified
  - Provision a Internet Gateway and configure public subnets to route through it
  - Provision a NAT Gateway and configure private subnets to route through it
+ - Create a DB subnet group including all private subnets
 
 ## Required Inputs
 
@@ -20,6 +21,7 @@ be useful.
  - `vpc_default_sg_id` - The VPC default security group ID
  - `public_subnet_ids` - A list of the public subnet IDs
  - `private_subnet_ids` - A list of the private subnet IDs
+ - `db_subnet_group_name` - The name of the DB subnet group
 
 ## Example Usage
 
