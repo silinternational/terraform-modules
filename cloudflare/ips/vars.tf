@@ -1,6 +1,6 @@
 # Cloudflare IP addresses from https://www.cloudflare.com/ips/
 variable "cf_ipv4_cidrs" {
-  type "list"
+  type = "list"
   default = [
     "103.21.244.0/22",
     "103.22.200.0/22",
@@ -21,7 +21,7 @@ variable "cf_ipv4_cidrs" {
 }
 
 variable "cf_ipv6_cidrs" {
-  type "list"
+  type = "list"
   default = [
     "2400:cb00::/32",
     "2405:8100::/32",
