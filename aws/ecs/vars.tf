@@ -3,13 +3,14 @@
  */
 variable "tag_app_name" {
   type = "string"
-  default = "terraform"
 }
 variable "tag_app_env" {
   type = "string"
-  default = "testing"
 }
 
+/*
+ * Optional variables
+ */
 variable "ecsInstanceRoleAssumeRolePolicy" {
   type = "string"
   default = <<EOF
