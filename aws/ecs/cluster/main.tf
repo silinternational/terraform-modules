@@ -6,6 +6,18 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 }
 
 /*
+ * Deterimine most recent ECS optimized AMI
+ */
+data "aws_ami" "ecs_ami"{
+  most_recent = true
+  owners = ["amazon"]
+  filter {
+    name = "name"
+    values = ["amzn-ami-*-amazon-ecs-optimized"]
+  }
+}
+
+/*
  * Create ECS IAM Instance Role and Policy
  */
 resource "aws_iam_role" "ecsInstanceRole" {
@@ -19,15 +31,10 @@ resource "aws_iam_role_policy" "ecsInstanceRolePolicy" {
   policy = "${var.ecsInstancerolePolicy}"
 }
 
-resource "aws_iam_instance_profile" "ecsInstanceProfile" {
-  name = "ecsInstanceProfile"
-  roles = ["${aws_iam_role.ecsInstanceRole.name}"]
-}
-
 /*
  * Create ECS IAM Service Role and Policy
  */
-resource "aws_iam_role" "ecsServiceRole" {
+/*resource "aws_iam_role" "ecsServiceRole" {
   name = "ecsServiceRole"
   assume_role_policy = "${var.ecsServiceRoleAssumeRolePolicy}"
 }
@@ -36,16 +43,9 @@ resource "aws_iam_role_policy" "ecsServiceRolePolicy" {
   name = "ecsServiceRolePolicy"
   role = "${aws_iam_role.ecsServiceRole.id}"
   policy = "${var.ecsServiceRolePolicy}"
-}
+}*/
 
-/*
- * Deterimine most recent ECS optimized AMI
- */
-data "aws_ami" "ecs_ami"{
-  most_recent = true
-  owners = ["amazon"]
-  filter {
-    name = "name"
-    values = ["amzn-ami-*-amazon-ecs-optimized"]
-  }
+resource "aws_iam_instance_profile" "ecsInstanceProfile" {
+  name = "ecsInstanceProfile"
+  roles = ["${aws_iam_role.ecsInstanceRole.name}"]
 }

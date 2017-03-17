@@ -25,7 +25,7 @@
  */
 variable "port" {
   type = "string"
-  default = "80"
+  default = 80
 }
 variable "protocol" {
   type = "string"

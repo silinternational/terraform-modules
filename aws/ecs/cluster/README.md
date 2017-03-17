@@ -1,4 +1,4 @@
-# aws/ecs - EC2 Container Service
+# aws/ecs/cluster - EC2 Container Service Cluster
 This module is used to create an ECS cluster along with the necessary
 IAM roles to function.
 
@@ -23,8 +23,8 @@ IAM roles to function.
 ## Usage Example
 
 ```hcl
-module "ecs" {
-  source = "github.com/silinternational/terraform-modules//aws/ecs"
+module "ecscluster" {
+  source = "github.com/silinternational/terraform-modules//aws/ecs/cluster"
   tag_app_name = "${var.tag_app_name}"
   tag_app_env = "${var.tag_app_env}"
 }
