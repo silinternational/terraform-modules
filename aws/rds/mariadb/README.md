@@ -1,14 +1,9 @@
 # aws/rds/mariadb - Relational Database Service - MariaDB
-This module is used to create an RDS instance along with an extra application
-user for limited (non-root) access. This module expects to be provisioning a
-MariaDB or MySQL instance as it wants to create a separate user with less
-privileges for application use.
+This module is used to create an RDS instance.
 
 ## What this does
 
  - Create RDS instance named after `db_name`
- - Create an additional user with credentials from `db_app_user` and `db_app_pass`
-   that has limited privileges to the app db
 
 ## Required Inputs
 
@@ -17,8 +12,6 @@ privileges for application use.
  - `db_name` - Name of database to be created by default
  - `db_root_user` - Root database username
  - `db_root_pass` - Root database account password
- - `db_app_user` - Username for application specific user
- - `db_app_pass` - Password for application specific user
  - `subnet_group_name` - Name of DB subnet group to place instance in
  - `availability_zone` - Availability zone name to place instance in
  - `security_groups` - List of security group ids to assign instance to
@@ -51,8 +44,6 @@ module "rds" {
   db_name = "${var.db_name}"
   db_root_user = "${var.db_root_user}"
   db_root_pass = "${var.db_root_pass}"
-  db_app_user = "${var.db_app_user}"
-  db_app_pass = "${var.db_app_pass}"
   subnet_group_name = "${module.vpc.db_subnet_group_name}"
   availability_zone = "${var.aws_zones[0]}"
   security_groups = ["${module.vpc.vpc_default_sg_id}"]

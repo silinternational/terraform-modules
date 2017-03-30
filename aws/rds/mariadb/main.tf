@@ -20,30 +20,3 @@ resource "aws_db_instance" "db_instance" {
     app_env = "${var.tag_app_env}"
   }
 }
-
-/*
- * Create separate app user with limited access
- * mysql provider currently broke, see: https://github.com/hashicorp/terraform/issues/11799
- */
- /*provider "mysql" {
-    endpoint = "${aws_db_instance.db_instance.endpoint}"
-    username = "${aws_db_instance.db_instance.username}"
-    password = "${aws_db_instance.db_instance.password}"
- }
-
-resource "mysql_user" "appuser" {
-  user = "${var.db_app_user}"
-  password = "${var.db_app_pass}"
-  host = "%"
-  depends_on = ["aws_db_instance.db_instance"]
-}
-
-resource "mysql_grant" "appusergrant" {
-  user = "${mysql_user.appuser.user}"
-  host = "%"
-  database = "${var.db_name}"
-  privileges = [
-    "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP",
-    "INDEX", "ALTER", "CREATE TEMPORARY TABLES", "LOCK TABLES"
-  ]
-}*/
