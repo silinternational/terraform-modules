@@ -3,9 +3,9 @@ output "database" {
 }
 
 output "app_user" {
-  value = "${mysql_user.app_user.user}"
+  value = "${var.app_user}"
 }
 
 output "app_pass" {
-  value = "${mysql_user.app_user.password}"
+  value = "${var.app_pass}"
 }
