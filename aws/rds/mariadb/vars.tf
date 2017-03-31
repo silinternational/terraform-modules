@@ -57,3 +57,7 @@ variable "multi_az" {
   type = "string"
   default = false
 }
+variable "skip_final_snapshot" {
+  type = "string"
+  default = true
+}
