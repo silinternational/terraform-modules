@@ -16,12 +16,6 @@ variable "db_root_user" {
 variable "db_root_pass" {
   type = "string"
 }
-variable "db_app_user" {
-  type = "string"
-}
-variable "db_app_pass" {
-   type = "string"
-}
 variable "subnet_group_name" {
   type = "string"
 }
