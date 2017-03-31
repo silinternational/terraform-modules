@@ -22,8 +22,9 @@ resource "mysql_user" "appuser" {
 }
 
 resource "mysql_grant" "appusergrant" {
-  user = "${mysql_user.appuser.user}"
+  user = "${var.app_user}"
   host = "%"
   database = "${var.database}"
   privileges = ["${var.privileges}"]
+  depends_on = ["mysql_user.appuser"]
 }
