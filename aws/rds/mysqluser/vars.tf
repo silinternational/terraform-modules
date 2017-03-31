@@ -23,6 +23,10 @@ variable "database" {
 /*
  * Optional variables
  */
+ variable "create_database" {
+   type = "string"
+   default = false
+ }
 variable "privileges" {
   type = "list"
   default = [
