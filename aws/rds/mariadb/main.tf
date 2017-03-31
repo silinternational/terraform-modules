@@ -14,6 +14,7 @@ resource "aws_db_instance" "db_instance" {
   multi_az = "${var.multi_az}"
   publicly_accessible = false
   vpc_security_group_ids = ["${var.security_groups}"]
+  skip_final_snapshot = "${var.skip_final_snapshot}"
   tags {
     Name = "${var.tag_app_name}-${var.tag_app_env}"
     app_name = "${var.tag_app_name}"
