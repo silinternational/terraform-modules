@@ -12,8 +12,6 @@ This module is used to create an ECS service as well as task definition
  - `service_env` - Name of environment, used in naming task definition. Ex: `staging`
  - `container_def_json` - JSON for container definition.
  - `desired_count` - Number of tasks to run in service
- - `ecsServiceRole_arn` - ARN for IAM ecsServiceRole
- - `lb_target_group_arn` - ARN for app load balancer target group
  - `lb_container_name` - Container name from `container_def_json` that should be used with target group / alb
  - `lb_container_port` - Container port that should be used with target group / alb
 
@@ -24,6 +22,8 @@ This module is used to create an ECS service as well as task definition
  - `deployment_maximum_percent` - Upper limit of tasks that can run during a deployment. Default: `200`%
  - `deployment_minimum_healthy_percent` - Lower limit of tasks that must be running during a deployment. Default: `50`%
  - `lb_target_group_arn` - ARN for ALB target group
+ - `enable_https` - Defafult: true
+ - `enable_http` - Default: false
 
 ## Outputs
 
@@ -46,8 +46,6 @@ module "ecsservice" {
   service_env = "staging"
   container_def_json = "${file("task-definition.json")}"
   desired_count = 2
-  ecsServiceRole_arn = "${module.ecscluster.ecs_service_role_id}"
-  lb_target_group_arn = "${module.alb.alb_arn}"
   lb_container_name = "app"
   lb_container_port = 80
 }

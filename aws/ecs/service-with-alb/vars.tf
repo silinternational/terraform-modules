@@ -16,12 +16,6 @@ variable "container_def_json" {
 variable "desired_count" {
   type = "string"
 }
-/*variable "ecsServiceRole_arn" {
-  type = "string"
-}
-variable "lb_target_group_arn" {
-  type = "string"
-}*/
 variable "lb_container_name" {
   type = "string"
 }
