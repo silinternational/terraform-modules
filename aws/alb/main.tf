@@ -17,8 +17,8 @@ resource "aws_alb" "alb" {
 /*
  * Create target group for ALB
  */
-resource "aws_alb_target_group" "tg" {
-  name     = "alb-tg-${var.tag_app_name}-${var.tag_app_env}"
+resource "aws_alb_target_group" "default" {
+  name     = "tg-${var.tag_app_name}-${var.tag_app_env}"
   port     = "${var.port}"
   protocol = "${var.protocol}"
   vpc_id   = "${var.vpc_id}"
@@ -28,7 +28,6 @@ resource "aws_alb_target_group" "tg" {
  * Create listeners to connect ALB to target group
  */
 resource "aws_alb_listener" "https" {
-  count = "${var.enable_https}"
   load_balancer_arn = "${aws_alb.alb.arn}"
   port = "443"
   protocol = "HTTPS"
@@ -36,18 +35,7 @@ resource "aws_alb_listener" "https" {
   certificate_arn = "${var.certificate_arn}"
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.tg.arn}"
-    type = "forward"
-  }
-}
-resource "aws_alb_listener" "http" {
-  count = "${var.enable_http}"
-  load_balancer_arn = "${aws_alb.alb.arn}"
-  port = "80"
-  protocol = "HTTP"
-
-  default_action {
-    target_group_arn = "${aws_alb_target_group.tg.arn}"
+    target_group_arn = "${aws_alb_target_group.default.arn}"
     type = "forward"
   }
 }

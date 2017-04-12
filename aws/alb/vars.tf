@@ -43,11 +43,3 @@ variable "ssl_policy" {
   type = "string"
   default = "ELBSecurityPolicy-2015-05"
 }
-variable "enable_https" {
-  type = "string"
-  default = true
-}
-variable "enable_http" {
-  type = "string"
-  default = false
-}
