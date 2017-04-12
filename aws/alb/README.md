@@ -25,9 +25,9 @@ groups for traffic and a default target group.
 
 ## Outputs
 
- - `alb_id` - ID for ALB
- - `alb_arn` - ARN for ALB
- - `alb_dns_name` - DNS hostname for ALB
+ - `id` - ID for ALB
+ - `arn` - ARN for ALB
+ - `dns_name` - DNS hostname for ALB
  - `default_tg_id` - ID for Target Group
  - `default_tg_arn` - ARN for Target Group
 

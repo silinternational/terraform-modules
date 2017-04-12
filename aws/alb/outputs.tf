@@ -1,10 +1,10 @@
-output "alb_id" {
+output "id" {
   value = "${aws_alb.alb.id}"
 }
-output "alb_arn" {
+output "arn" {
   value = "${aws_alb.alb.arn}"
 }
-output "alb_dns_name" {
+output "dns_name" {
   value = "${aws_alb.alb.dns_name}"
 }
 output "default_tg_id" {
