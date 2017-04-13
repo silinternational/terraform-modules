@@ -34,7 +34,7 @@ resource "aws_iam_role_policy" "ecsInstanceRolePolicy" {
 /*
  * Create ECS IAM Service Role and Policy
  */
-/*resource "aws_iam_role" "ecsServiceRole" {
+resource "aws_iam_role" "ecsServiceRole" {
   name = "ecsServiceRole"
   assume_role_policy = "${var.ecsServiceRoleAssumeRolePolicy}"
 }
@@ -43,7 +43,7 @@ resource "aws_iam_role_policy" "ecsServiceRolePolicy" {
   name = "ecsServiceRolePolicy"
   role = "${aws_iam_role.ecsServiceRole.id}"
   policy = "${var.ecsServiceRolePolicy}"
-}*/
+}
 
 resource "aws_iam_instance_profile" "ecsInstanceProfile" {
   name = "ecsInstanceProfile"

@@ -14,9 +14,12 @@ output "ecs_instance_profile_id" {
   value = "${aws_iam_instance_profile.ecsInstanceProfile.id}"
 }
 
-/*output "ecs_service_role_arn" {
+output "ecsServiceRole_arn" {
   value = "${aws_iam_role.ecsServiceRole.arn}"
-}*/
+}
+output "ecsInstanceRole_arn" {
+  value = "${aws_iam_role.ecsInstanceRole.arn}"
+}
 
 output "ami_id" {
   value = "${data.aws_ami.ecs_ami.id}"
