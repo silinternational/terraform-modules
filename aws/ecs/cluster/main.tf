@@ -50,5 +50,5 @@ resource "aws_iam_role_policy" "ecsServiceRolePolicy" {
 
 resource "aws_iam_instance_profile" "ecsInstanceProfile" {
   name = "ecsInstanceProfile-${random_id.code.hex}"
-  roles = ["${aws_iam_role.ecsInstanceRole.name}"]
+  role = "${aws_iam_role.ecsInstanceRole.name}"
 }
