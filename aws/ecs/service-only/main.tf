@@ -1,17 +1,3 @@
- /*
-  * Create ECS IAM Service Role and Policy
-  */
-resource "aws_iam_role" "ecsServiceRole" {
-  name = "ecsServiceRole"
-  assume_role_policy = "${var.ecsServiceRoleAssumeRolePolicy}"
-}
-
-resource "aws_iam_role_policy" "ecsServiceRolePolicy" {
-  name = "ecsServiceRolePolicy"
-  role = "${aws_iam_role.ecsServiceRole.id}"
-  policy = "${var.ecsServiceRolePolicy}"
-}
-
 /*
  * Get task definition data
  */
@@ -36,8 +22,7 @@ resource "aws_ecs_task_definition" "td" {
    name = "${var.service_name}"
    cluster = "${var.cluster_id}"
    desired_count = "${var.desired_count}"
-   iam_role = "${aws_iam_role.ecsServiceRole.arn}"
-   depends_on = ["aws_iam_role_policy.ecsServiceRolePolicy"]
+   iam_role = "${var.ecsServiceRole_arn}"
    deployment_maximum_percent = "${var.deployment_maximum_percent}"
    deployment_minimum_healthy_percent = "${var.deployment_minimum_healthy_percent}"
 

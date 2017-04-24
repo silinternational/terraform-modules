@@ -17,6 +17,7 @@ This module is used to create an ECS service as well as task definition
  - `tg_arn` - Target Group ARN for ALB to register with
  - `lb_container_name` - Container name from `container_def_json` that should be used with target group / alb
  - `lb_container_port` - Container port that should be used with target group / alb
+ - `ecsServiceRole_arn` - ARN to IAM ecsServiceRole
 
 ### Optional Inputs
 
@@ -42,8 +43,8 @@ This module is used to create an ECS service as well as task definition
 module "ecsservice" {
   source = "github.com/silinternational/terraform-modules//aws/ecs/service-only"
   cluster_id = "${module.ecscluster.ecs_cluster_id}"
-  service_name = "doorman"
-  service_env = "staging"
+  service_name = "${var.tag_app_name}"
+  service_env = "${var.tag_app_env}"
   container_def_json = "${file("task-definition.json")}"
   desired_count = 2
   tg_arn = "${data.terraform_remote_state.cluster.alb_default_tg_arn}"
