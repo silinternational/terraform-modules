@@ -13,3 +13,6 @@ output "default_tg_id" {
 output "default_tg_arn" {
   value = "${aws_alb_target_group.default.arn}"
 }
+output "https_listener_arn" {
+  value = "${aws_alb_listener.https.arn}"
+}
