@@ -16,9 +16,6 @@ variable "container_def_json" {
 variable "desired_count" {
   type = "string"
 }
-variable "ecsServiceRole_arn" {
-  type = "string"
-}
 
 /*
  * Optional Variables

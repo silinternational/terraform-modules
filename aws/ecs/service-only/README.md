@@ -50,5 +50,6 @@ module "ecsservice" {
   tg_arn = "${data.terraform_remote_state.cluster.alb_default_tg_arn}"
   lb_container_name = "app"
   lb_container_port = 80
+  ecsServiceRole_arn = "${data.terraform_remote_state.core.ecsServiceRole_arn}"
 }
 ```

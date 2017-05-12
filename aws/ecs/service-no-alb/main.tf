@@ -22,7 +22,6 @@ resource "aws_ecs_task_definition" "td" {
    name = "${var.service_name}"
    cluster = "${var.cluster_id}"
    desired_count = "${var.desired_count}"
-   iam_role = "${var.ecsServiceRole_arn}"
    deployment_maximum_percent = "${var.deployment_maximum_percent}"
    deployment_minimum_healthy_percent = "${var.deployment_minimum_healthy_percent}"
 

@@ -3,7 +3,6 @@ This module is used to create an ECS service as well as task definition
 
 ## What this does
 
- - Create IAM role: `ecsServiceRole`
  - Create task definition
  - Create service
 
@@ -14,7 +13,6 @@ This module is used to create an ECS service as well as task definition
  - `service_env` - Name of environment, used in naming task definition. Ex: `staging`
  - `container_def_json` - JSON for container definition.
  - `desired_count` - Number of tasks to run in service
- - `ecsServiceRole_arn` - ARN to IAM ecsServiceRole
 
 ### Optional Inputs
 
