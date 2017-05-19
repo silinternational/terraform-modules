@@ -22,3 +22,7 @@ output "db_subnet_group_name" {
 output "aws_zones" {
   value = ["${var.aws_zones}"]
 }
+
+output "nat_gateway_ip" {
+  value = "${aws_nat_gateway.nat_gateway.public_ip}"
+}
