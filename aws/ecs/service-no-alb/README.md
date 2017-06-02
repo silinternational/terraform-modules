@@ -38,8 +38,8 @@ This module is used to create an ECS service as well as task definition
 module "ecsservice" {
   source = "github.com/silinternational/terraform-modules//aws/ecs/service-no-alb"
   cluster_id = "${module.ecscluster.ecs_cluster_id}"
-  service_name = "${var.tag_app_name}"
-  service_env = "${var.tag_app_env}"
+  service_name = "${var.app_name}"
+  service_env = "${var.app_env}"
   container_def_json = "${file("task-definition.json")}"
   desired_count = 2
 }

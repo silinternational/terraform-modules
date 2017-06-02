@@ -31,7 +31,7 @@ resource "aws_launch_configuration" "as_conf" {
  * Create Auto Scaling Group
  */
 resource "aws_autoscaling_group" "asg" {
-  name = "asg-${var.tag_app_name}-${var.tag_app_env}-${aws_launch_configuration.as_conf.name}"
+  name = "asg-${var.app_name}-${var.app_env}-${aws_launch_configuration.as_conf.name}"
   availability_zones = "${var.aws_zones}"
   vpc_zone_identifier = ["${var.private_subnet_ids}"]
   min_size = "${var.aws_instance["instance_count"]}"
@@ -48,13 +48,13 @@ resource "aws_autoscaling_group" "asg" {
 
   tag {
     key = "app_name"
-    value = "${var.tag_app_name}"
+    value = "${var.app_name}"
     propagate_at_launch = true
   }
 
   tag {
     key = "app_env"
-    value = "${var.tag_app_env}"
+    value = "${var.app_env}"
     propagate_at_launch = true
   }
 }

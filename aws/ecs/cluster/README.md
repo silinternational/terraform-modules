@@ -4,13 +4,13 @@ IAM roles to function.
 
 ## What this does
 
- - Create ECS cluster named after `tag_app_name` and `tag_app_env`
+ - Create ECS cluster named after `app_name` and `app_env`
  - Create IAM roles and policies for ECS services and instances
 
 ## Required Inputs
 
- - `tag_app_name` - Name of application, ex: Doorman, IdP, etc.
- - `tag_app_env` - Name of environment, ex: production, testing, etc.
+ - `app_name` - Name of application, ex: Doorman, IdP, etc.
+ - `app_env` - Name of environment, ex: production, testing, etc.
 
 ## Outputs
 
@@ -25,7 +25,7 @@ IAM roles to function.
 ```hcl
 module "ecscluster" {
   source = "github.com/silinternational/terraform-modules//aws/ecs/cluster"
-  tag_app_name = "${var.tag_app_name}"
-  tag_app_env = "${var.tag_app_env}"
+  app_name = "${var.app_name}"
+  app_env = "${var.app_env}"
 }
 ```

@@ -4,9 +4,9 @@
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
-    app_name = "${var.tag_app_name}"
-    app_env = "${var.tag_app_env}"
-    Name = "vpc-${var.tag_app_name}-${var.tag_app_env}"
+    app_name = "${var.app_name}"
+    app_env = "${var.app_env}"
+    Name = "vpc-${var.app_name}-${var.app_env}"
   }
 }
 
@@ -97,11 +97,11 @@ resource "aws_route_table_association" "public_route" {
  * Create DB Subnet Group for private subnets
  */
 resource "aws_db_subnet_group" "db_subnet_group" {
-  name = "db-subnet-${var.tag_app_name}-${var.tag_app_env}"
+  name = "db-subnet-${var.app_name}-${var.app_env}"
   subnet_ids = ["${aws_subnet.private_subnet.*.id}"]
   tags {
-    Name = "db-subnet-${var.tag_app_name}-${var.tag_app_env}",
-    app_name = "${var.tag_app_name}"
-    app_env = "${var.tag_app_env}"
+    Name = "db-subnet-${var.app_name}-${var.app_env}",
+    app_name = "${var.app_name}"
+    app_env = "${var.app_env}"
   }
 }

@@ -7,8 +7,8 @@ This module is used to create an RDS instance.
 
 ## Required Inputs
 
- - `tag_app_name` - Name of application, ex: Doorman, IdP, etc.
- - `tag_app_env` - Name of environment, ex: production, testing, etc.
+ - `app_name` - Name of application, ex: Doorman, IdP, etc.
+ - `app_env` - Name of environment, ex: production, testing, etc.
  - `db_name` - Name of database to be created by default
  - `db_root_user` - Root database username
  - `db_root_pass` - Root database account password
@@ -39,8 +39,8 @@ This module is used to create an RDS instance.
 ```hcl
 module "rds" {
   source = "github.com/silinternational/terraform-modules//aws/rds/mariadb"
-  tag_app_name = "${var.tag_app_name}"
-  tag_app_env = "${var.tag_app_env}"
+  app_name = "${var.app_name}"
+  app_env = "${var.app_env}"
   db_name = "${var.db_name}"
   db_root_user = "${var.db_root_user}"
   db_root_pass = "${var.db_root_pass}"

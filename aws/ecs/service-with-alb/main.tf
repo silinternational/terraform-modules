@@ -16,15 +16,15 @@ resource "aws_iam_role_policy" "ecsServiceRolePolicy" {
  * Create application load balancer
  */
 resource "aws_alb" "alb" {
-  name = "alb-${var.tag_app_name}-${var.tag_app_env}"
+  name = "alb-${var.app_name}-${var.app_env}"
   internal        = false
   security_groups = ["${var.security_groups}"]
   subnets         = ["${var.subnets}"]
 
   tags {
-    Name = "alb-${var.tag_app_name}-${var.tag_app_env}"
-    app_name = "${var.tag_app_name}"
-    app_env = "${var.tag_app_env}"
+    Name = "alb-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env = "${var.app_env}"
   }
 }
 

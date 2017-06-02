@@ -43,8 +43,8 @@ This module is used to create an ECS service as well as task definition
 module "ecsservice" {
   source = "github.com/silinternational/terraform-modules//aws/ecs/service-only"
   cluster_id = "${module.ecscluster.ecs_cluster_id}"
-  service_name = "${var.tag_app_name}"
-  service_env = "${var.tag_app_env}"
+  service_name = "${var.app_name}"
+  service_env = "${var.app_env}"
   container_def_json = "${file("task-definition.json")}"
   desired_count = 2
   tg_arn = "${data.terraform_remote_state.cluster.alb_default_tg_arn}"

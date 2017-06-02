@@ -16,10 +16,10 @@ variable "subnet_ids" {
 variable "availability_zones" {
   type = "list"
 }
-variable "tag_app_name" {
+variable "app_name" {
   type = "string"
 }
-variable "tag_app_env" {
+variable "app_env" {
   type = "string"
 }
 

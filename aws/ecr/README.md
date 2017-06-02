@@ -24,7 +24,7 @@ image.
 ```hcl
 module "ecr" {
   source = "github.com/silinternational/terraform-modules//aws/ecr"
-  repo_name = "${var.tag_app_name}-${var.tag_app_env}"
+  repo_name = "${var.app_name}-${var.app_env}"
   ecsInstanceRole_arn = "${data.terraform_remote_state.cluster.ecsInstanceRole_arn}"
   ecsServiceRole_arn = "${data.terraform_remote_state.cluster.ecsServiceRole_arn}"
   cd_user_arn = "${data.terraform_remote_state.cluster.cd_user_arn}"

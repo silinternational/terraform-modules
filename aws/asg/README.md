@@ -4,13 +4,13 @@ an auto scaling group that uses the configuration.
 
 ## What this does
 
- - Create launch configuration named after `tag_app_name` and `tag_app_env`
+ - Create launch configuration named after `app_name` and `app_env`
  - Create auto scaling group of defined size and distribute instances across `aws_zones`
 
 ## Required Inputs
 
- - `tag_app_name` - Name of application, ex: Doorman, IdP, etc.
- - `tag_app_env` - Name of environment, ex: production, testing, etc.
+ - `app_name` - Name of application, ex: Doorman, IdP, etc.
+ - `app_env` - Name of environment, ex: production, testing, etc.
  - `ami_id` - ID for AMI to be used.
  - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`
  - `aws_zones` - A list of availability zones to distribute instances across
@@ -31,8 +31,8 @@ an auto scaling group that uses the configuration.
 ```hcl
 module "asg" {
   source = "github.com/silinternational/terraform-modules//aws/asg"
-  tag_app_name = "${var.tag_app_name}"
-  tag_app_env = "${var.tag_app_env}"
+  app_name = "${var.app_name}"
+  app_env = "${var.app_env}"
   aws_instance = "${var.aws_instance}"
   aws_zones = "${var.aws_zones}"
   private_subnet_ids = ["${module.vpc.private_subnet_ids}"]

@@ -4,14 +4,14 @@ groups for traffic and a default target group.
 
 ## What this does
 
- - Create ALB named after `tag_app_name` and `tag_app_env`
+ - Create ALB named after `app_name` and `app_env`
  - Create ALB target group
  - Create HTTPS listener for ALB / Target Group
 
 ## Required Inputs
 
- - `tag_app_name` - Name of application, ex: Doorman, IdP, etc.
- - `tag_app_env` - Name of environment, ex: production, testing, etc.
+ - `app_name` - Name of application, ex: Doorman, IdP, etc.
+ - `app_env` - Name of environment, ex: production, testing, etc.
  - `vpc_id` - ID of VPC for target group.
  - `security_groups` - List of security groups to apply to ALB.
  - `subnets` - A list of public subnet ids for ALB placement
@@ -36,8 +36,8 @@ groups for traffic and a default target group.
 ```hcl
 module "asg" {
   source = "github.com/silinternational/terraform-modules//aws/asg"
-  tag_app_name = "${var.tag_app_name}"
-  tag_app_env = "${var.tag_app_env}"
+  app_name = "${var.app_name}"
+  app_env = "${var.app_env}"
   vpc_id = "${module.vpc.id}"
   security_groups = ["${module.vpc.vpc_default_sg_id}","${module.cloudflare-sg.id}"]
   subnets = ["${module.vpc.public_subnet_ids}"]

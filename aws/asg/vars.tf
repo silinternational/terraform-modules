@@ -1,11 +1,11 @@
 /*
  * Required variables
  */
-variable "tag_app_name" {
+variable "app_name" {
   type = "string"
   default = "terraform"
 }
-variable "tag_app_env" {
+variable "app_env" {
   type = "string"
   default = "testing"
 }

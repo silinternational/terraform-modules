@@ -20,7 +20,7 @@ resource "aws_elasticache_cluster" "memcache" {
   subnet_group_name    = "${aws_elasticache_subnet_group.memcache_subnet_group.name}"
   az_mode              = "${var.az_mode}"
   tags {
-    "app_name" = "${var.tag_app_name}"
-    "app_env"  = "${var.tag_app_env}"
+    "app_name" = "${var.app_name}"
+    "app_env"  = "${var.app_env}"
   }
 }

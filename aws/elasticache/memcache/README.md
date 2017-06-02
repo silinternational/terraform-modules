@@ -13,8 +13,8 @@ This module is used to create an Elasticache cluster of memcache servers
  - `subnet_group_name` - Name of subnet group to create and place cluster in.
  - `subnet_ids` - List of subnet ids for subnet group.
  - `availability_zones` - List of availability zones to place cluster in.
- - `tag_app_name` - Application name to be tagged to cluster as `app_name`.
- - `tag_app_env` - Application environment to be tagged to cluster as `app_env`.
+ - `app_name` - Application name to be tagged to cluster as `app_name`.
+ - `app_env` - Application environment to be tagged to cluster as `app_env`.
 
 ### Optional Inputs
 
@@ -40,7 +40,7 @@ module "memcache" {
   subnet_group_name = "doorman-cache-subnet"
   subnet_ids = ["${module.vpc.private_subnet_ids}"]
   availability_zones = ["${module.vpc.aws_zones}"]
-  tag_app_name = "doorman"
-  tag_app_env = "staging"
+  app_name = "doorman"
+  app_env = "staging"
 }
 ```

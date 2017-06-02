@@ -4,7 +4,7 @@ resource "aws_db_instance" "db_instance" {
   allocated_storage = "${var.allocated_storage}"
   instance_class = "${var.instance_class}"
   name = "${var.db_name}"
-  identifier = "${var.tag_app_name}-${var.tag_app_env}"
+  identifier = "${var.app_name}-${var.app_env}"
   username = "${var.db_root_user}"
   password = "${var.db_root_pass}"
   db_subnet_group_name = "${var.subnet_group_name}"
@@ -16,8 +16,8 @@ resource "aws_db_instance" "db_instance" {
   vpc_security_group_ids = ["${var.security_groups}"]
   skip_final_snapshot = "${var.skip_final_snapshot}"
   tags {
-    Name = "${var.tag_app_name}-${var.tag_app_env}"
-    app_name = "${var.tag_app_name}"
-    app_env = "${var.tag_app_env}"
+    Name = "${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env = "${var.app_env}"
   }
 }

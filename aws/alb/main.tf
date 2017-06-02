@@ -2,15 +2,15 @@
  * Create application load balancer
  */
 resource "aws_alb" "alb" {
-  name            = "alb-${var.tag_app_name}-${var.tag_app_env}"
+  name            = "alb-${var.app_name}-${var.app_env}"
   internal        = false
   security_groups = ["${var.security_groups}"]
   subnets         = ["${var.subnets}"]
 
   tags {
-    Name = "alb-${var.tag_app_name}-${var.tag_app_env}"
-    app_name = "${var.tag_app_name}"
-    app_env = "${var.tag_app_env}"
+    Name = "alb-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env = "${var.app_env}"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_alb" "alb" {
  * Create target group for ALB
  */
 resource "aws_alb_target_group" "default" {
-  name     = "tg-${var.tag_app_name}-${var.tag_app_env}"
+  name     = "tg-${var.app_name}-${var.app_env}"
   port     = "${var.port}"
   protocol = "${var.protocol}"
   vpc_id   = "${var.vpc_id}"

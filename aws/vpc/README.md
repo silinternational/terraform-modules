@@ -4,7 +4,7 @@ be useful.
 
 ## What this does
 
- - Create VPC named after `tag_app_name` and `tag_app_env`
+ - Create VPC named after `app_name` and `app_env`
  - Create public and private subnets for each `aws_zones` specified
  - Provision a Internet Gateway and configure public subnets to route through it
  - Provision a NAT Gateway and configure private subnets to route through it
@@ -12,8 +12,8 @@ be useful.
 
 ## Required Inputs
 
- - `tag_app_name` - Name of application, ex: Doorman, IdP, etc.
- - `tag_app_env` - Name of environment, ex: production, testing, etc.
+ - `app_name` - Name of application, ex: Doorman, IdP, etc.
+ - `app_env` - Name of environment, ex: production, testing, etc.
  - `aws_zones` - A list of zones to create subnets in, ex: `["us-east-1c", "us-east-1d", "us-east-1e"]`
 
 ## Outputs
@@ -28,8 +28,8 @@ be useful.
 ```hcl
 module "vpc" {
   source = "github.com/silinternational/terraform-modules//aws/vpc"
-  tag_app_name = "${var.tag_app_name}"
-  tag_app_env = "${var.tag_app_env}"
+  app_name = "${var.app_name}"
+  app_env = "${var.app_env}"
   aws_zones = "${var.aws_zones}"
 }
 ```
