@@ -9,7 +9,7 @@ resource "aws_db_instance" "db_instance" {
   password = "${var.db_root_pass}"
   db_subnet_group_name = "${var.subnet_group_name}"
   storage_type = "${var.storage_type}"
-  availability_zone = "${var.availability_zone}"
+  availability_zone = "${var.multi_az == "true" ? "" : var.availability_zone}"
   backup_retention_period = "${var.backup_retention_period}"
   multi_az = "${var.multi_az}"
   publicly_accessible = false

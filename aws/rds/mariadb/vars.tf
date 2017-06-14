@@ -21,6 +21,7 @@ variable "subnet_group_name" {
 }
 variable "availability_zone" {
   type = "string"
+  default = ""
 }
 variable "security_groups" {
   type = "list"
