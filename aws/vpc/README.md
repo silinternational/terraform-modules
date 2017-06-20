@@ -20,7 +20,9 @@ be useful.
 
  - `vpc_default_sg_id` - The VPC default security group ID
  - `public_subnet_ids` - A list of the public subnet IDs
+ - `public_subnet_cidr_blocks` - A list of public subnet CIDR blocks, ex: `["10.0.10.0/24","10.0.12.0/24"]`
  - `private_subnet_ids` - A list of the private subnet IDs
+ - `private_subnet_cidr_blocks` - A list of private subnet CIDR blocks, ex: `["10.0.11.0/24","10.0.22.0/24"]`
  - `db_subnet_group_name` - The name of the DB subnet group
 
 ## Example Usage
