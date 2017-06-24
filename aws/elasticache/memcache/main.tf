@@ -19,6 +19,7 @@ resource "aws_elasticache_cluster" "memcache" {
   security_group_ids   = ["${var.security_group_ids}"]
   subnet_group_name    = "${aws_elasticache_subnet_group.memcache_subnet_group.name}"
   az_mode              = "${var.az_mode}"
+
   tags {
     "app_name" = "${var.app_name}"
     "app_env"  = "${var.app_env}"

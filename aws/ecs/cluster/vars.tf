@@ -4,6 +4,7 @@
 variable "app_name" {
   type = "string"
 }
+
 variable "app_env" {
   type = "string"
 }
@@ -13,6 +14,7 @@ variable "app_env" {
  */
 variable "ecsInstanceRoleAssumeRolePolicy" {
   type = "string"
+
   default = <<EOF
 {
   "Version": "2008-10-17",
@@ -32,6 +34,7 @@ EOF
 
 variable "ecsInstancerolePolicy" {
   type = "string"
+
   default = <<EOF
 {
   "Version": "2012-10-17",
@@ -62,6 +65,7 @@ EOF
 
 variable "ecsServiceRoleAssumeRolePolicy" {
   type = "string"
+
   default = <<EOF
 {
   "Version": "2008-10-17",

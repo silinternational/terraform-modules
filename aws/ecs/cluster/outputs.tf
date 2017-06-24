@@ -17,6 +17,7 @@ output "ecs_instance_profile_id" {
 output "ecsServiceRole_arn" {
   value = "${aws_iam_role.ecsServiceRole.arn}"
 }
+
 output "ecsInstanceRole_arn" {
   value = "${aws_iam_role.ecsInstanceRole.arn}"
 }

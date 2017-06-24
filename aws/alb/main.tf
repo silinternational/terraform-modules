@@ -8,9 +8,9 @@ resource "aws_alb" "alb" {
   subnets         = ["${var.subnets}"]
 
   tags {
-    Name = "alb-${var.app_name}-${var.app_env}"
+    Name     = "alb-${var.app_name}-${var.app_env}"
     app_name = "${var.app_name}"
-    app_env = "${var.app_env}"
+    app_env  = "${var.app_env}"
   }
 }
 
@@ -29,13 +29,13 @@ resource "aws_alb_target_group" "default" {
  */
 resource "aws_alb_listener" "https" {
   load_balancer_arn = "${aws_alb.alb.arn}"
-  port = "443"
-  protocol = "HTTPS"
-  ssl_policy = "${var.ssl_policy}"
-  certificate_arn = "${var.certificate_arn}"
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "${var.ssl_policy}"
+  certificate_arn   = "${var.certificate_arn}"
 
   default_action {
     target_group_arn = "${aws_alb_target_group.default.arn}"
-    type = "forward"
+    type             = "forward"
   }
 }

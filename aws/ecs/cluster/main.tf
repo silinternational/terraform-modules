@@ -8,11 +8,12 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 /*
  * Deterimine most recent ECS optimized AMI
  */
-data "aws_ami" "ecs_ami"{
+data "aws_ami" "ecs_ami" {
   most_recent = true
-  owners = ["amazon"]
+  owners      = ["amazon"]
+
   filter {
-    name = "name"
+    name   = "name"
     values = ["amzn-ami-*-amazon-ecs-optimized"]
   }
 }
@@ -23,14 +24,15 @@ data "aws_ami" "ecs_ami"{
 resource "random_id" "code" {
   byte_length = 4
 }
+
 resource "aws_iam_role" "ecsInstanceRole" {
-  name = "ecsInstanceRole-${random_id.code.hex}"
+  name               = "ecsInstanceRole-${random_id.code.hex}"
   assume_role_policy = "${var.ecsInstanceRoleAssumeRolePolicy}"
 }
 
 resource "aws_iam_role_policy" "ecsInstanceRolePolicy" {
-  name = "ecsInstanceRolePolicy-${random_id.code.hex}"
-  role = "${aws_iam_role.ecsInstanceRole.id}"
+  name   = "ecsInstanceRolePolicy-${random_id.code.hex}"
+  role   = "${aws_iam_role.ecsInstanceRole.id}"
   policy = "${var.ecsInstancerolePolicy}"
 }
 
@@ -38,13 +40,13 @@ resource "aws_iam_role_policy" "ecsInstanceRolePolicy" {
  * Create ECS IAM Service Role and Policy
  */
 resource "aws_iam_role" "ecsServiceRole" {
-  name = "ecsServiceRole-${random_id.code.hex}"
+  name               = "ecsServiceRole-${random_id.code.hex}"
   assume_role_policy = "${var.ecsServiceRoleAssumeRolePolicy}"
 }
 
 resource "aws_iam_role_policy" "ecsServiceRolePolicy" {
-  name = "ecsServiceRolePolicy-${random_id.code.hex}"
-  role = "${aws_iam_role.ecsServiceRole.id}"
+  name   = "ecsServiceRolePolicy-${random_id.code.hex}"
+  role   = "${aws_iam_role.ecsServiceRole.id}"
   policy = "${var.ecsServiceRolePolicy}"
 }
 
