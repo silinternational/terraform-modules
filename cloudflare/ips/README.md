@@ -1,6 +1,5 @@
 # cloudflare/ips - Cloudflare IP Addresses
-This module is used to maintain a list of Cloudflare IP ranges based on
-https://www.cloudflare.com/ips/
+This module is used to pull the current list of IP ranges for Cloudflare for IPv4 and IPv6
 
 ## What this does
 
@@ -23,17 +22,17 @@ module "cf_ips" {
 }
 
 resource "aws_security_group" "cloudflare_https" {
-  name = "cloudflare-https"
+  name        = "cloudflare-https"
   description = "Allow HTTPS traffic from Cloudflare"
-  vpc_id = "${var.vpc_id}"
+  vpc_id      = "${var.vpc_id}"
 }
 
 resource "aws_security_group_rule" "cloudflare_ipv4" {
-  type = "ingress"
-  from_port = 443
-  to_port = 443
-  protocol = "tcp"
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
   security_group_id = "${aws_security_group.cloudflare_https.id}"
-  cidr_blocks = ["${module.cf_ips.ipv4_cidrs}"]
+  cidr_blocks       = ["${module.cf_ips.ipv4_cidrs}"]
 }
 ```

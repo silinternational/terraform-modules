@@ -1,7 +1,7 @@
 output "ipv4_cidrs" {
-  value = ["${var.cf_ipv4_cidrs}"]
+  value = ["${split("\n",trimspace(data.http.cloudflare_ipv4.body))}"]
 }
 
 output "ipv6_cidrs" {
-  value = ["${var.cf_ipv6_cidrs}"]
+  value = ["${split("\n",trimspace(data.http.cloudflare_ipv6.body))}"]
 }
