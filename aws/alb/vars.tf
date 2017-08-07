@@ -63,3 +63,9 @@ variable "ssl_policy" {
   type    = "string"
   default = "ELBSecurityPolicy-2015-05"
 }
+
+variable "tg_name" {
+  type    = "string"
+  default = ""
+  description = "Manual override for ALB Target Group name (which is otherwise assembled from other given data)"
+}

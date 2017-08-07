@@ -18,7 +18,7 @@ resource "aws_alb" "alb" {
  * Create target group for ALB
  */
 resource "aws_alb_target_group" "default" {
-  name     = "tg-${var.app_name}-${var.app_env}"
+  name     = "${coalesce(var.tg_name, "tg-${var.app_name}-${var.app_env}")}"
   port     = "${var.port}"
   protocol = "${var.protocol}"
   vpc_id   = "${var.vpc_id}"
