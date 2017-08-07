@@ -2,13 +2,13 @@
  * Create application load balancer
  */
 resource "aws_alb" "alb" {
-  name            = "alb-${var.app_name}-${var.app_env}"
+  name            = "${coalesce(var.alb_name, "alb-${var.app_name}-${var.app_env}")}"
   internal        = "${var.internal}"
   security_groups = ["${var.security_groups}"]
   subnets         = ["${var.subnets}"]
 
   tags {
-    Name     = "alb-${var.app_name}-${var.app_env}"
+    Name     = "${coalesce(var.alb_name, "alb-${var.app_name}-${var.app_env}")}"
     app_name = "${var.app_name}"
     app_env  = "${var.app_env}"
   }

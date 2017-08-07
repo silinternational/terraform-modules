@@ -48,6 +48,12 @@ variable "access_logs_bucket" {
   default = ""
 }
 
+variable "alb_name" {
+  type    = "string"
+  default = ""
+  description = "Manual override for ALB name (which is otherwise assembled from other given data)"
+}
+
 variable "internal" {
   type    = "string"
   default = "false"
