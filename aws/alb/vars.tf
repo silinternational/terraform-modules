@@ -48,6 +48,11 @@ variable "access_logs_bucket" {
   default = ""
 }
 
+variable "internal" {
+  type    = "string"
+  default = "false"
+}
+
 variable "ssl_policy" {
   type    = "string"
   default = "ELBSecurityPolicy-2015-05"

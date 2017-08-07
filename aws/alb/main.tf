@@ -3,7 +3,7 @@
  */
 resource "aws_alb" "alb" {
   name            = "alb-${var.app_name}-${var.app_env}"
-  internal        = false
+  internal        = "${var.internal}"
   security_groups = ["${var.security_groups}"]
   subnets         = ["${var.subnets}"]
 
