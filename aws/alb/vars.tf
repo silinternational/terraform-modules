@@ -48,7 +48,24 @@ variable "access_logs_bucket" {
   default = ""
 }
 
+variable "alb_name" {
+  type    = "string"
+  default = ""
+  description = "Manual override for ALB name (which is otherwise assembled from other given data)"
+}
+
+variable "internal" {
+  type    = "string"
+  default = "false"
+}
+
 variable "ssl_policy" {
   type    = "string"
   default = "ELBSecurityPolicy-2015-05"
+}
+
+variable "tg_name" {
+  type    = "string"
+  default = ""
+  description = "Manual override for ALB Target Group name (which is otherwise assembled from other given data)"
 }
