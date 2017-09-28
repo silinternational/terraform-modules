@@ -25,16 +25,6 @@ variable "aws_instance" {
   }
 }
 
-variable "aws_zones" {
-  type = "list"
-
-  default = [
-    "us-east-1c",
-    "us-east-1d",
-    "us-east-1e",
-  ]
-}
-
 variable "private_subnet_ids" {
   type = "list"
 }
