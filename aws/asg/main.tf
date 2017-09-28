@@ -34,7 +34,6 @@ resource "aws_launch_configuration" "as_conf" {
  */
 resource "aws_autoscaling_group" "asg" {
   name                      = "asg-${var.app_name}-${var.app_env}-${aws_launch_configuration.as_conf.name}"
-  availability_zones        = "${var.aws_zones}"
   vpc_zone_identifier       = ["${var.private_subnet_ids}"]
   min_size                  = "${var.aws_instance["instance_count"]}"
   max_size                  = "${var.aws_instance["instance_count"]}"
