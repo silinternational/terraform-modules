@@ -49,8 +49,8 @@ variable "access_logs_bucket" {
 }
 
 variable "alb_name" {
-  type    = "string"
-  default = ""
+  type        = "string"
+  default     = ""
   description = "Manual override for ALB name (which is otherwise assembled from other given data)"
 }
 
@@ -65,7 +65,39 @@ variable "ssl_policy" {
 }
 
 variable "tg_name" {
-  type    = "string"
-  default = ""
+  type        = "string"
+  default     = ""
   description = "Manual override for ALB Target Group name (which is otherwise assembled from other given data)"
+}
+
+variable "health_check_interval" {
+  default = "30"
+}
+
+variable "health_check_path" {
+  default = "/"
+}
+
+variable "health_check_port" {
+  default = "traffic-port"
+}
+
+variable "health_check_protocol" {
+  default = "HTTP"
+}
+
+variable "health_check_timeout" {
+  default = "5"
+}
+
+variable "healthy_threshold" {
+  default = "5"
+}
+
+variable "unhealthy_threshold" {
+  default = "2"
+}
+
+variable "health_check_status_codes" {
+  default = "200"
 }

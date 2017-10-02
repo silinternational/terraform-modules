@@ -22,6 +22,14 @@ groups for traffic and a default target group.
  - `protocol` - Target group listening protocol. Default: `http`
  - `access_logs_enabled` - Whether or not to enable logging. Default: `false`
  - `access_logs_bucket` - S3 bucket to store logs. Default: `""`
+ - `health_check_interval` - Default: `30`
+ - `health_check_path` - Default: `/`
+ - `health_check_port` - Default: `traffic-port`
+ - `health_check_protocol` - Default: `HTTP`
+ - `health_check_timeout` - Default: `5`
+ - `healthy_threshold` - Default: `5`
+ - `unhealthy_threshold` - Default: `2`
+ - `health_check_status_codes` - Default: `200`, separate multiple values with comma, ex: `200,204`
 
 ## Outputs
 
