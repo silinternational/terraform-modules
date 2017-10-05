@@ -16,6 +16,10 @@ be useful.
  - `app_env` - Name of environment, ex: production, testing, etc.
  - `aws_zones` - A list of zones to create subnets in, ex: `["us-east-1c", "us-east-1d", "us-east-1e"]`
 
+## Optional Inputs
+
+ - `enable_dns_hostnames` - default `false`
+
 ## Outputs
 
  - `vpc_default_sg_id` - The VPC default security group ID

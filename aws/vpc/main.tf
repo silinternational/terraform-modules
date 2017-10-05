@@ -2,7 +2,8 @@
  * Create VPC using app name and env to name it
  */
 resource "aws_vpc" "vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_hostnames = "${var.enable_dns_hostnames}"
 
   tags = {
     app_name = "${var.app_name}"
