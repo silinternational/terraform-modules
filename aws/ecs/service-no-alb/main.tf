@@ -3,6 +3,7 @@
  */
 data "aws_ecs_task_definition" "td" {
   task_definition = "${aws_ecs_task_definition.td.family}"
+  depends_on      = ["aws_ecs_task_definition.td"]
 }
 
 /*
