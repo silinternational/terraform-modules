@@ -32,10 +32,6 @@ output "service_cluster" {
   value = "${aws_ecs_service.service.cluster}"
 }
 
-output "service_role" {
-  value = "${aws_ecs_service.service.iam_role}"
-}
-
 output "service_desired_count" {
   value = "${aws_ecs_service.service.desired_count}"
 }
