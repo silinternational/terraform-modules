@@ -30,6 +30,7 @@ groups for traffic and a default target group.
  - `healthy_threshold` - Default: `5`
  - `unhealthy_threshold` - Default: `2`
  - `health_check_status_codes` - Default: `200`, separate multiple values with comma, ex: `200,204`
+ - `load_balancer_type` - Options: `application` or `network`. Default: `application`
 
 ## Outputs
 

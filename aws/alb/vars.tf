@@ -101,3 +101,7 @@ variable "unhealthy_threshold" {
 variable "health_check_status_codes" {
   default = "200"
 }
+
+variable "load_balancer_type" {
+  default = "application"
+}
