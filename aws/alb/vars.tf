@@ -61,7 +61,7 @@ variable "internal" {
 
 variable "ssl_policy" {
   type    = "string"
-  default = "ELBSecurityPolicy-2015-05"
+  default = "ELBSecurityPolicy-2016-08"
 }
 
 variable "tg_name" {
