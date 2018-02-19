@@ -15,6 +15,7 @@ resource "aws_db_instance" "db_instance" {
   publicly_accessible     = false
   vpc_security_group_ids  = ["${var.security_groups}"]
   skip_final_snapshot     = "${var.skip_final_snapshot}"
+  parameter_group_name    = "${var.parameter_group_name}"
 
   tags {
     Name     = "${var.app_name}-${var.app_env}"
