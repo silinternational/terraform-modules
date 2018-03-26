@@ -40,3 +40,8 @@ variable "ecs_instance_profile_id" {
 variable "ecs_cluster_name" {
   type = "string"
 }
+
+variable "key_name" {
+  type    = "string"
+  default = ""
+}
