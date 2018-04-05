@@ -48,30 +48,6 @@ variable "volume_host_path" {
 /*
  * Optional Variables
  */
-variable "port" {
-  type    = "string"
-  default = 80
-}
-
-variable "protocol" {
-  type    = "string"
-  default = "HTTP"
-}
-
-variable "access_logs_enabled" {
-  type    = "string"
-  default = "false"
-}
-
-variable "access_logs_bucket" {
-  type    = "string"
-  default = ""
-}
-
-variable "ssl_policy" {
-  type    = "string"
-  default = "ELBSecurityPolicy-2015-05"
-}
 
 variable "task_role_arn" {
   type    = "string"
