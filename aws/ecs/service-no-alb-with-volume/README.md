@@ -1,4 +1,4 @@
-# aws/ecs/service-no-alb - EC2 Container Service Service/Task without load balancer
+# aws/ecs/service-no-alb-with-volume - EC2 Container Service Service/Task without load balancer with volume
 This module is used to create an ECS service as well as task definition
 
 ## What this does

@@ -26,21 +26,21 @@ This module is used to create an ECS service as well as task definition
  - `task_def_arn` - ARN for task definition.
  - `task_def_family` - Family name of task definition.
  - `task_def_revision` - Revision number of task definition.
+ - `task_def_revision_via_data` - Revision number of task def via data resource
  - `service_id` - ID/ARN for service
  - `service_name` - Name of service
  - `service_cluster` - Name of ECS cluster service was placed in
- - `service_role` - IAM role for service
  - `service_desired_count` - Desired task count for service
 
 ## Usage Example
 
 ```hcl
 module "ecsservice" {
-  source = "github.com/silinternational/terraform-modules//aws/ecs/service-no-alb"
-  cluster_id = "${module.ecscluster.ecs_cluster_id}"
-  service_name = "${var.app_name}"
-  service_env = "${var.app_env}"
+  source             = "github.com/silinternational/terraform-modules//aws/ecs/service-no-alb"
+  cluster_id         = "${module.ecscluster.ecs_cluster_id}"
+  service_name       = "${var.app_name}"
+  service_env        = "${var.app_env}"
   container_def_json = "${file("task-definition.json")}"
-  desired_count = 2
+  desired_count      = 2
 }
 ```
