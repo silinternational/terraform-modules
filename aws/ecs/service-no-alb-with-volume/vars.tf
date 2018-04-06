@@ -21,6 +21,14 @@ variable "desired_count" {
   type = "string"
 }
 
+variable "volume_name" {
+  type = "string"
+}
+
+variable "volume_host_path" {
+  type = "string"
+}
+
 /*
  * Optional Variables
  */

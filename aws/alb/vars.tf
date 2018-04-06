@@ -61,7 +61,7 @@ variable "internal" {
 
 variable "ssl_policy" {
   type    = "string"
-  default = "ELBSecurityPolicy-2015-05"
+  default = "ELBSecurityPolicy-2016-08"
 }
 
 variable "tg_name" {
@@ -100,4 +100,8 @@ variable "unhealthy_threshold" {
 
 variable "health_check_status_codes" {
   default = "200"
+}
+
+variable "load_balancer_type" {
+  default = "application"
 }

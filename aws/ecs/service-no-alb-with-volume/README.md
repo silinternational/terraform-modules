@@ -1,4 +1,4 @@
-# aws/ecs/service-no-alb - EC2 Container Service Service/Task without load balancer
+# aws/ecs/service-no-alb-with-volume - EC2 Container Service Service/Task without load balancer with volume
 This module is used to create an ECS service as well as task definition
 
 ## What this does
@@ -13,6 +13,8 @@ This module is used to create an ECS service as well as task definition
  - `service_env` - Name of environment, used in naming task definition. Ex: `staging`
  - `container_def_json` - JSON for container definition.
  - `desired_count` - Number of tasks to run in service
+ - `volume_name` - Name for volume
+ - `volume_host_path` - Path on host EC2 instance to mount volume
 
 ### Optional Inputs
 
@@ -36,11 +38,13 @@ This module is used to create an ECS service as well as task definition
 
 ```hcl
 module "ecsservice" {
-  source             = "github.com/silinternational/terraform-modules//aws/ecs/service-no-alb"
+  source             = "github.com/silinternational/terraform-modules//aws/ecs/service-no-alb-with-volume"
   cluster_id         = "${module.ecscluster.ecs_cluster_id}"
   service_name       = "${var.app_name}"
   service_env        = "${var.app_env}"
   container_def_json = "${file("task-definition.json")}"
   desired_count      = 2
+  volume_name        = "${var.volume_name}"
+  volume_host_path   = "${var.volume_host_path}"
 }
 ```

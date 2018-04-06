@@ -21,9 +21,34 @@ variable "desired_count" {
   type = "string"
 }
 
+variable "lb_container_name" {
+  type = "string"
+}
+
+variable "lb_container_port" {
+  type = "string"
+}
+
+variable "tg_arn" {
+  type = "string"
+}
+
+variable "ecsServiceRole_arn" {
+  type = "string"
+}
+
+variable "volume_name" {
+  type = "string"
+}
+
+variable "volume_host_path" {
+  type = "string"
+}
+
 /*
  * Optional Variables
  */
+
 variable "task_role_arn" {
   type    = "string"
   default = ""

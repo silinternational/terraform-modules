@@ -76,3 +76,8 @@ variable "skip_final_snapshot" {
   type    = "string"
   default = true
 }
+
+variable "parameter_group_name" {
+  type    = "string"
+  default = ""
+}

@@ -18,6 +18,10 @@ an auto scaling group that uses the configuration.
  - `ecs_instance_profile_id` - IAM profile ID for ecsInstanceProfile
  - `ecs_cluster_name` - ECS cluster name for registering instances
 
+## Optional Inputs
+
+ - `key_name` - Name of the AWS key pair to allow ssh access, default is ""
+
 ## Outputs
 
  - `ecs_cluster_name` - The ECS cluster name

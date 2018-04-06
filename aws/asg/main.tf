@@ -17,6 +17,7 @@ resource "aws_launch_configuration" "as_conf" {
   instance_type        = "${var.aws_instance["instance_type"]}"
   security_groups      = ["${var.default_sg_id}"]
   iam_instance_profile = "${var.ecs_instance_profile_id}"
+  key_name             = "${var.key_name}"
 
   root_block_device {
     volume_size = "${var.aws_instance["volume_size"]}"
