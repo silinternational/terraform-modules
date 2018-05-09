@@ -45,3 +45,9 @@ variable "key_name" {
   type    = "string"
   default = ""
 }
+
+variable "additional_security_groups" {
+  type        = "list"
+  description = "A list of additional security groups to place instances into"
+  default     = []
+}

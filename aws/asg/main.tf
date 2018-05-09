@@ -15,7 +15,7 @@ data "template_file" "user_data" {
 resource "aws_launch_configuration" "as_conf" {
   image_id             = "${var.ami_id}"
   instance_type        = "${var.aws_instance["instance_type"]}"
-  security_groups      = ["${var.default_sg_id}"]
+  security_groups      = ["${concat(var.default_sg_id, var.additional_security_groups)}"]
   iam_instance_profile = "${var.ecs_instance_profile_id}"
   key_name             = "${var.key_name}"
 
