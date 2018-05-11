@@ -1,10 +1,10 @@
 /*
  * Get task definition data
  */
-data "aws_ecs_task_definition" "td" {
-  task_definition = "${aws_ecs_task_definition.td.family}"
-  depends_on      = ["aws_ecs_task_definition.td"]
-}
+//data "aws_ecs_task_definition" "td" {
+//  task_definition = "${aws_ecs_task_definition.td.family}"
+//  depends_on      = ["aws_ecs_task_definition.td"]
+//}
 
 /*
  * Create task definition
@@ -39,5 +39,6 @@ resource "aws_ecs_service" "service" {
   }
 
   # Track the latest ACTIVE revision
-  task_definition = "${aws_ecs_task_definition.td.family}:${max("${aws_ecs_task_definition.td.revision}", "${data.aws_ecs_task_definition.td.revision}")}"
+  //task_definition = "${aws_ecs_task_definition.td.family}:${max("${aws_ecs_task_definition.td.revision}", "${data.aws_ecs_task_definition.td.revision}")}"
+  task_definition = "${aws_ecs_task_definition.td.family}:${aws_ecs_task_definition.td.revision}"
 }
