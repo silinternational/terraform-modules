@@ -15,6 +15,11 @@ variable "ami_id" {
   type = "string"
 }
 
+variable "associate_public_ip_address" {
+  type    = "string"
+  default = "false"
+}
+
 variable "aws_instance" {
   type = "map"
 
