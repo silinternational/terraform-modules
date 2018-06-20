@@ -13,11 +13,13 @@ data "template_file" "user_data" {
  * Create Launch Configuration
  */
 resource "aws_launch_configuration" "as_conf" {
-  image_id             = "${var.ami_id}"
-  instance_type        = "${var.aws_instance["instance_type"]}"
-  security_groups      = ["${var.default_sg_id}"]
-  iam_instance_profile = "${var.ecs_instance_profile_id}"
-  key_name             = "${var.key_name}"
+  name_prefix                 = "${var.app_name}-${var.app_env}-"
+  image_id                    = "${var.ami_id}"
+  instance_type               = "${var.aws_instance["instance_type"]}"
+  security_groups             = ["${concat(list(var.default_sg_id), var.additional_security_groups)}"]
+  iam_instance_profile        = "${var.ecs_instance_profile_id}"
+  key_name                    = "${var.key_name}"
+  associate_public_ip_address = "${var.associate_public_ip_address}"
 
   root_block_device {
     volume_size = "${var.aws_instance["volume_size"]}"
@@ -46,6 +48,12 @@ resource "aws_autoscaling_group" "asg" {
 
   lifecycle {
     create_before_destroy = true
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "${var.app_name}-${var.app_env}"
+    propagate_at_launch = true
   }
 
   tag {

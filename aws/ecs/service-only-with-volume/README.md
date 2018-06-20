@@ -33,7 +33,6 @@ This module is used to create an ECS service as well as task definition
  - `task_def_arn` - ARN for task definition.
  - `task_def_family` - Family name of task definition.
  - `task_def_revision` - Revision number of task definition.
- - `task_def_revision_via_data` - Task def revision from data resource
  - `service_id` - ID/ARN for service
  - `service_name` - Name of service
  - `service_cluster` - Name of ECS cluster service was placed in
