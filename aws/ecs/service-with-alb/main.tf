@@ -94,7 +94,7 @@ resource "aws_ecs_service" "service" {
   iam_role      = "${aws_iam_role.ecsServiceRole.arn}"
   depends_on    = ["aws_iam_role_policy.ecsServiceRolePolicy", "aws_alb_listener.https"]
 
-  placement_strategy {
+  ordered_placement_strategy {
     type  = "spread"
     field = "instanceId"
   }
