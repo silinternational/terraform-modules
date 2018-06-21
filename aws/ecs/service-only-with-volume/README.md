@@ -3,7 +3,6 @@ This module is used to create an ECS service as well as task definition
 
 ## What this does
 
- - Create IAM role: `ecsServiceRole`
  - Create task definition
  - Create service
 

@@ -10,7 +10,7 @@ an auto scaling group that uses the configuration.
 ## Required Inputs
 
  - `app_name` - Name of application, ex: Doorman, IdP, etc.
- - `app_env` - Name of environment, ex: production, testing, etc.
+ - `app_env` - Name of environment, ex: prod, test, etc.
  - `ami_id` - ID for AMI to be used.
  - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`
  - `private_subnet_ids` - A list of private subnet ids to identify VPC subnets for placement

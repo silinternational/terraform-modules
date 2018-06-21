@@ -13,7 +13,7 @@ be useful.
 ## Required Inputs
 
  - `app_name` - Name of application, ex: Doorman, IdP, etc.
- - `app_env` - Name of environment, ex: production, testing, etc.
+ - `app_env` - Name of environment, ex: prod, test, etc.
  - `aws_zones` - A list of zones to create subnets in, ex: `["us-east-1c", "us-east-1d", "us-east-1e"]`
 
 ## Optional Inputs
