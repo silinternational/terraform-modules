@@ -17,14 +17,16 @@ be useful.
 
 ## Optional Inputs
 
- - `enable_dns_hostnames` - default `false`
+ - `enable_dns_hostnames` - default `true`
 
 ## Outputs
 
+ - `id` - The VPC ID
  - `vpc_default_sg_id` - The VPC default security group ID
  - `public_subnet_ids` - A list of the public subnet IDs
  - `public_subnet_cidr_blocks` - A list of public subnet CIDR blocks, ex: `["10.0.10.0/24","10.0.12.0/24"]`
  - `db_subnet_group_name` - The name of the DB subnet group
+ - `aws_zones` - List of availability zones this VPC is in
 
 ## Example Usage
 
