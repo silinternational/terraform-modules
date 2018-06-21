@@ -12,7 +12,7 @@ resource "aws_db_instance" "db_instance" {
   availability_zone       = "${var.multi_az == "true" ? "" : var.availability_zone}"
   backup_retention_period = "${var.backup_retention_period}"
   multi_az                = "${var.multi_az}"
-  publicly_accessible     = false
+  publicly_accessible     = "${var.publicly_accessible}"
   vpc_security_group_ids  = ["${var.security_groups}"]
   skip_final_snapshot     = "${var.skip_final_snapshot}"
   parameter_group_name    = "${var.parameter_group_name}"

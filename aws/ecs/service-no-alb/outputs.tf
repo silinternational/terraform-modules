@@ -13,10 +13,6 @@ output "task_def_revision" {
   value = "${aws_ecs_task_definition.td.revision}"
 }
 
-output "task_def_revision_via_data" {
-  value = "${data.aws_ecs_task_definition.td.revision}"
-}
-
 /*
  * Service outputs
  */

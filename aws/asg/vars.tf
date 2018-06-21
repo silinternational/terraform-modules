@@ -15,6 +15,11 @@ variable "ami_id" {
   type = "string"
 }
 
+variable "associate_public_ip_address" {
+  type    = "string"
+  default = "false"
+}
+
 variable "aws_instance" {
   type = "map"
 
@@ -44,4 +49,10 @@ variable "ecs_cluster_name" {
 variable "key_name" {
   type    = "string"
   default = ""
+}
+
+variable "additional_security_groups" {
+  type        = "list"
+  description = "A list of additional security groups to place instances into"
+  default     = []
 }

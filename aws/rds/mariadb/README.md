@@ -8,7 +8,7 @@ This module is used to create an RDS instance.
 ## Required Inputs
 
  - `app_name` - Name of application, ex: Doorman, IdP, etc.
- - `app_env` - Name of environment, ex: production, testing, etc.
+ - `app_env` - Name of environment, ex: prod, test, etc.
  - `db_name` - Name of database to be created by default
  - `db_root_user` - Root database username
  - `db_root_pass` - Root database account password
@@ -25,6 +25,9 @@ This module is used to create an RDS instance.
  - `instance_class` - Default: `db.t2.micro`
  - `backup_retention_period` - Default: `14` days
  - `multi_az` - Default: `false`
+ - `publicly_accessible` - Default: false
+ - `skip_final_snapshot` - Default: true
+ - `parameter_group_name` - Default: ""
 
 ## Outputs
 

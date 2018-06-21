@@ -67,6 +67,11 @@ variable "backup_retention_period" {
   default = "14"
 }
 
+variable "publicly_accessible" {
+  type    = "string"
+  default = "false"
+}
+
 variable "multi_az" {
   type    = "string"
   default = false

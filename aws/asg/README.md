@@ -10,7 +10,7 @@ an auto scaling group that uses the configuration.
 ## Required Inputs
 
  - `app_name` - Name of application, ex: Doorman, IdP, etc.
- - `app_env` - Name of environment, ex: production, testing, etc.
+ - `app_env` - Name of environment, ex: prod, test, etc.
  - `ami_id` - ID for AMI to be used.
  - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`
  - `private_subnet_ids` - A list of private subnet ids to identify VPC subnets for placement
@@ -21,13 +21,13 @@ an auto scaling group that uses the configuration.
 ## Optional Inputs
 
  - `key_name` - Name of the AWS key pair to allow ssh access, default is ""
+ - `additional_security_groups` - List of additional security groups (in addition to default vpc security group)
+ - `associate_public_ip_address` - true/false - Whether or not to associate public ip addresses with instances. Default: false
 
 ## Outputs
 
- - `ecs_cluster_name` - The ECS cluster name
- - `ecs_instance_role_id` - The ID for created IAM role `ecsInstanceRole`
- - `ecs_instance_profile_id` - The ID for created IAM profile `ecsInstanceProfile`
- - `ecs_service_role_id` - The ID for created IAM role `ecsServiceRole`
+ - `launch_configuration_id` - The launch configuration ID
+ - `auto_scaling_group_id` - ASG ID
 
 ## Example Usage
 
