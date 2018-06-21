@@ -11,12 +11,6 @@ variable "app_env" {
 
 variable "aws_zones" {
   type = "list"
-
-  default = [
-    "us-east-1c",
-    "us-east-1d",
-    "us-east-1e",
-  ]
 }
 
 variable "enable_dns_hostnames" {

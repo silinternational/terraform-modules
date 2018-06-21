@@ -21,7 +21,7 @@ data "aws_security_group" "vpc_default_sg" {
 }
 
 /*
- * Create public and private subnets for each availability zone
+ * Create public subnets for each availability zone
  */
 resource "aws_subnet" "public_subnet" {
   count             = "${length(var.aws_zones)}"
