@@ -65,7 +65,14 @@ resource "aws_internet_gateway" "internet_gateway" {
 /*
  * Create NAT gateway and allocate Elastic IP for it
  */
-resource "aws_eip" "gateway_eip" {}
+resource "aws_eip" "gateway_eip" {
+
+  tags {
+    Name     = "EIP-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
+  }
+}
 
 resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = "${aws_eip.gateway_eip.id}"
