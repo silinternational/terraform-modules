@@ -6,9 +6,9 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = "${var.enable_dns_hostnames}"
 
   tags = {
+    Name     = "vpc-${var.app_name}-${var.app_env}"
     app_name = "${var.app_name}"
     app_env  = "${var.app_env}"
-    Name     = "vpc-${var.app_name}-${var.app_env}"
   }
 }
 
@@ -30,7 +30,9 @@ resource "aws_subnet" "public_subnet" {
   cidr_block        = "10.0.${(count.index + 1) * 10}.0/24"
 
   tags {
-    Name = "public-${element(var.aws_zones, count.index)}"
+    Name     = "public-${element(var.aws_zones, count.index)}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
   }
 }
 
@@ -41,7 +43,9 @@ resource "aws_subnet" "private_subnet" {
   cidr_block        = "10.0.${(count.index + 1) * 11}.0/24"
 
   tags {
-    Name = "private-${element(var.aws_zones, count.index)}"
+    Name     = "private-${element(var.aws_zones, count.index)}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
   }
 }
 
@@ -50,6 +54,12 @@ resource "aws_subnet" "private_subnet" {
  */
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = "${aws_vpc.vpc.id}"
+
+  tags {
+    Name     = "IGW-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
+  }
 }
 
 /*
@@ -61,6 +71,12 @@ resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = "${aws_eip.gateway_eip.id}"
   subnet_id     = "${aws_subnet.public_subnet.0.id}"
   depends_on    = ["aws_internet_gateway.internet_gateway"]
+
+  tags {
+    Name     = "NAT-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
+  }
 }
 
 /*
@@ -68,6 +84,12 @@ resource "aws_nat_gateway" "nat_gateway" {
  */
 resource "aws_route_table" "nat_route_table" {
   vpc_id = "${aws_vpc.vpc.id}"
+
+  tags {
+    Name     = "RT-private-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
+  }
 }
 
 resource "aws_route" "nat_route" {
@@ -87,6 +109,12 @@ resource "aws_route_table_association" "private_route" {
  */
 resource "aws_route_table" "igw_route_table" {
   vpc_id = "${aws_vpc.vpc.id}"
+
+  tags {
+    Name     = "RT-public-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
+  }
 }
 
 resource "aws_route" "igw_route" {
