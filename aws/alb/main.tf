@@ -7,6 +7,7 @@ resource "aws_alb" "alb" {
   security_groups    = ["${var.security_groups}"]
   subnets            = ["${var.subnets}"]
   load_balancer_type = "${var.load_balancer_type}"
+  idle_timeout       = "${var.idle_timeout}"
 
   tags {
     Name     = "${coalesce(var.alb_name, "alb-${var.app_name}-${var.app_env}")}"

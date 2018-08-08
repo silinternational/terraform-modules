@@ -6,9 +6,9 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = "${var.enable_dns_hostnames}"
 
   tags = {
+    Name     = "vpc-${var.app_name}-${var.app_env}"
     app_name = "${var.app_name}"
     app_env  = "${var.app_env}"
-    Name     = "vpc-${var.app_name}-${var.app_env}"
   }
 }
 
@@ -30,7 +30,9 @@ resource "aws_subnet" "public_subnet" {
   cidr_block        = "10.0.${(count.index + 1) * 10}.0/24"
 
   tags {
-    Name = "public-${element(var.aws_zones, count.index)}"
+    Name     = "public-${element(var.aws_zones, count.index)}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
   }
 }
 
@@ -39,6 +41,12 @@ resource "aws_subnet" "public_subnet" {
  */
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = "${aws_vpc.vpc.id}"
+
+  tags {
+    Name     = "IGW-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
+  }
 }
 
 /*
@@ -46,6 +54,12 @@ resource "aws_internet_gateway" "internet_gateway" {
  */
 resource "aws_route_table" "igw_route_table" {
   vpc_id = "${aws_vpc.vpc.id}"
+
+  tags {
+    Name     = "RT-public-${var.app_name}-${var.app_env}"
+    app_name = "${var.app_name}"
+    app_env  = "${var.app_env}"
+  }
 }
 
 resource "aws_route" "igw_route" {
@@ -61,7 +75,7 @@ resource "aws_route_table_association" "public_route" {
 }
 
 /*
- * Create DB Subnet Group for private subnets
+ * Create DB Subnet Group for public subnets
  */
 resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "db-subnet-${var.app_name}-${var.app_env}"
