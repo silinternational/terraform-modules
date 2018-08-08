@@ -102,6 +102,10 @@ variable "health_check_status_codes" {
   default = "200"
 }
 
+variable "idle_timeout" {
+  default = "60"
+}
+
 variable "load_balancer_type" {
   default = "application"
 }
