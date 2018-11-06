@@ -38,10 +38,6 @@ resource "aws_iam_user" "cloudtrail-s3" {
   name = "cloudtrail-s3-${var.s3_bucket_name}"
 }
 
-resource "aws_iam_access_key" "cloudtrail-s3" {
-  user = "${aws_iam_user.cloudtrail-s3.name}"
-}
-
 resource "aws_iam_user_policy" "cloudtrail-s3" {
   name = "cloudtrail-s3"
   user = "${aws_iam_user.cloudtrail-s3.name}"
