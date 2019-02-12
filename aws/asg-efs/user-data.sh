@@ -1,6 +1,8 @@
 #!/bin/bash
 echo ECS_CLUSTER=${ecs_cluster_name} >> /etc/ecs/ecs.config
 
+sleep ${startup_delay}
+
 # Install the NFS client utilities
 yum install -y nfs-utils
 
