@@ -66,8 +66,3 @@ variable "mount_point" {
   type    = "string"
   default = ""
 }
-
-variable "startup_delay" {
-  type    = "string"
-  default = "1"
-}

@@ -8,7 +8,6 @@ data "template_file" "user_data" {
     ecs_cluster_name = "${var.ecs_cluster_name}"
     efs_dns_name     = "${var.efs_dns_name}"
     mount_point      = "${var.mount_point}"
-    startup_delay    = "${var.startup_delay}"
   }
 }
 
