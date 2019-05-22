@@ -5,9 +5,10 @@ data "template_file" "user_data" {
   template = "${file("${path.module}/user-data.sh")}"
 
   vars {
-    ecs_cluster_name = "${var.ecs_cluster_name}"
-    efs_dns_name     = "${var.efs_dns_name}"
-    mount_point      = "${var.mount_point}"
+    ecs_cluster_name     = "${var.ecs_cluster_name}"
+    efs_dns_name         = "${var.efs_dns_name}"
+    mount_point          = "${var.mount_point}"
+    additional_user_data = "${var.additional_user_data}"
   }
 }
 
