@@ -56,3 +56,9 @@ variable "additional_security_groups" {
   description = "A list of additional security groups to place instances into"
   default     = []
 }
+
+variable "additional_user_data" {
+  type        = "string"
+  description = "Shell command to append to the EC2 user_data"
+  default     = ""
+}

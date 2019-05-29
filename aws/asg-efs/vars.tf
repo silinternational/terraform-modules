@@ -66,3 +66,9 @@ variable "mount_point" {
   type    = "string"
   default = ""
 }
+
+variable "additional_user_data" {
+  type        = "string"
+  description = "Shell command to append to the EC2 user_data"
+  default     = ""
+}

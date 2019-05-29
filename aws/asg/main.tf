@@ -6,6 +6,7 @@ data "template_file" "user_data" {
 
   vars {
     ecs_cluster_name = "${var.ecs_cluster_name}"
+    additional_user_data = "${var.additional_user_data}"
   }
 }
 
