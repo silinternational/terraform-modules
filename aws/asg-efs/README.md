@@ -25,6 +25,7 @@ an auto scaling group that uses the configuration.  An EFS file system is mounte
  - `key_name` - Name of the AWS key pair to allow ssh access, default is ""
  - `additional_security_groups` - List of additional security groups (in addition to default vpc security group)
  - `associate_public_ip_address` - true/false - Whether or not to associate public ip addresses with instances. Default: false
+ - `additional_user_data` - command to append to the EC2 user\_data, default is ""
 
 ## Outputs
 
@@ -46,5 +47,6 @@ module "asg" {
   ami_id = "${module.ecs.ami_id}"
   efs_dns_name = "${aws_efs_file_system.myfiles.dns_name}"
   mount_point = "/mnt/efs"
+  additional_user_data = "yum install -y something-interesting"
 }
 ```
