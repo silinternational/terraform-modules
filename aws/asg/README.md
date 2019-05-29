@@ -23,6 +23,7 @@ an auto scaling group that uses the configuration.
  - `key_name` - Name of the AWS key pair to allow ssh access, default is ""
  - `additional_security_groups` - List of additional security groups (in addition to default vpc security group)
  - `associate_public_ip_address` - true/false - Whether or not to associate public ip addresses with instances. Default: false
+ - `additional_user_data` - command to append to the EC2 user\_data, default is ""
 
 ## Outputs
 
@@ -42,5 +43,6 @@ module "asg" {
   ecs_instance_profile_id = "${module.ecs.ecs_instance_profile_id}"
   ecs_cluster_name = "${module.ecs.ecs_cluster_name}"
   ami_id = "${module.ecs.ami_id}"
+  additional_user_data = "yum install -y something-interesting"
 }
 ```
