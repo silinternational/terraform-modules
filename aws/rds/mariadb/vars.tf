@@ -21,6 +21,11 @@ variable "db_root_pass" {
   type = "string"
 }
 
+variable "deletion_protection" {
+  type    = "string"
+  default = "false"
+}
+
 variable "subnet_group_name" {
   type = "string"
 }
@@ -55,6 +60,16 @@ variable "allocated_storage" {
 variable "storage_type" {
   type    = "string"
   default = "gp2"
+}
+
+variable "storage_encrypted" {
+  type    = "string"
+  default = false
+}
+
+variable "kms_key_id" {
+  type    = "string"
+  default = ""
 }
 
 variable "instance_class" {

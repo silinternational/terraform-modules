@@ -22,12 +22,15 @@ This module is used to create an RDS instance.
  - `engine_version` - Default: `<empty>`
  - `allocated_storage` - Default: `8`G
  - `storage_type` - Default: `gp2`
+ - `storage_encrypted` - Default: `false`
+ - `kms_key_id` - Default: `"""`
  - `instance_class` - Default: `db.t2.micro`
  - `backup_retention_period` - Default: `14` days
  - `multi_az` - Default: `false`
- - `publicly_accessible` - Default: false
- - `skip_final_snapshot` - Default: true
- - `parameter_group_name` - Default: ""
+ - `publicly_accessible` - Default: `false`
+ - `skip_final_snapshot` - Default: `true`
+ - `parameter_group_name` - Default: `""`
+ - `deletion_protection` - Default: `false`
 
 ## Outputs
 
