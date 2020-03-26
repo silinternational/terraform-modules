@@ -2,39 +2,39 @@
  * Required variables
  */
 variable "endpoint" {
-  type = "string"
+  type = string
 }
 
 variable "username" {
-  type = "string"
+  type = string
 }
 
 variable "password" {
-  type = "string"
+  type = string
 }
 
 variable "app_user" {
-  type = "string"
+  type = string
 }
 
 variable "app_pass" {
-  type = "string"
+  type = string
 }
 
 variable "database" {
-  type = "string"
+  type = string
 }
 
 /*
  * Optional variables
  */
 variable "create_database" {
-  type    = "string"
+  type    = string
   default = false
 }
 
 variable "privileges" {
-  type = "list"
+  type = list(string)
 
   default = [
     "SELECT",
@@ -49,3 +49,4 @@ variable "privileges" {
     "LOCK TABLES",
   ]
 }
+
