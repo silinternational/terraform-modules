@@ -2,18 +2,19 @@
  * Required variables
  */
 variable "app_name" {
-  type = "string"
+  type = string
 }
 
 variable "app_env" {
-  type = "string"
+  type = string
 }
 
 variable "aws_zones" {
-  type = "list"
+  type = list(string)
 }
 
 variable "enable_dns_hostnames" {
-  type    = "string"
+  type    = string
   default = "true"
 }
+
