@@ -1,19 +1,20 @@
 output "id" {
-  value = "${aws_db_instance.db_instance.id}"
+  value = aws_db_instance.db_instance.id
 }
 
 output "arn" {
-  value = "${aws_db_instance.db_instance.arn}"
+  value = aws_db_instance.db_instance.arn
 }
 
 output "address" {
-  value = "${aws_db_instance.db_instance.address}"
+  value = aws_db_instance.db_instance.address
 }
 
 output "port" {
-  value = "${aws_db_instance.db_instance.port}"
+  value = aws_db_instance.db_instance.port
 }
 
 output "endpoint" {
-  value = "${aws_db_instance.db_instance.endpoint}"
+  value = aws_db_instance.db_instance.endpoint
 }
+
