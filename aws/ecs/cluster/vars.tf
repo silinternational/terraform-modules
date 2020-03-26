@@ -2,18 +2,18 @@
  * Required variables
  */
 variable "app_name" {
-  type = "string"
+  type = string
 }
 
 variable "app_env" {
-  type = "string"
+  type = string
 }
 
 /*
  * Optional variables
  */
 variable "ecsInstanceRoleAssumeRolePolicy" {
-  type = "string"
+  type = string
 
   default = <<EOF
 {
@@ -30,10 +30,11 @@ variable "ecsInstanceRoleAssumeRolePolicy" {
   ]
 }
 EOF
+
 }
 
 variable "ecsInstancerolePolicy" {
-  type = "string"
+  type = string
 
   default = <<EOF
 {
@@ -61,10 +62,11 @@ variable "ecsInstancerolePolicy" {
   ]
 }
 EOF
+
 }
 
 variable "ecsServiceRoleAssumeRolePolicy" {
-  type = "string"
+  type = string
 
   default = <<EOF
 {
@@ -81,6 +83,7 @@ variable "ecsServiceRoleAssumeRolePolicy" {
   ]
 }
 EOF
+
 }
 
 variable "ecsServiceRolePolicy" {
@@ -104,4 +107,6 @@ variable "ecsServiceRolePolicy" {
   ]
 }
 EOF
+
 }
+
