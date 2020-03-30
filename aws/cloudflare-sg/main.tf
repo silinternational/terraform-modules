@@ -1,5 +1,6 @@
 module "cf_ips" {
-  source = "github.com/silinternational/terraform-modules//cloudflare/ips"
+  #source = "github.com/silinternational/terraform-modules//cloudflare/ips"
+  source = "github.com/silinternational/terraform-modules//cloudflare/ips?ref=feat-tf12upgrade"
 }
 
 resource "aws_security_group" "cloudflare_https" {
