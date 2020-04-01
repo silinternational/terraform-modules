@@ -7,11 +7,11 @@ output "vpc_default_sg_id" {
 }
 
 output "public_subnet_ids" {
-  value = [aws_subnet.public_subnet.*.id]
+  value = aws_subnet.public_subnet.*.id
 }
 
 output "public_subnet_cidr_blocks" {
-  value = [aws_subnet.public_subnet.*.cidr_block]
+  value = aws_subnet.public_subnet.*.cidr_block
 }
 
 output "db_subnet_group_name" {
