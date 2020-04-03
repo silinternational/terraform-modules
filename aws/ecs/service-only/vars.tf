@@ -50,16 +50,6 @@ variable "protocol" {
   default = "HTTP"
 }
 
-variable "access_logs_enabled" {
-  type    = string
-  default = "false"
-}
-
-variable "access_logs_bucket" {
-  type    = string
-  default = ""
-}
-
 variable "ssl_policy" {
   type    = string
   default = "ELBSecurityPolicy-2016-08"
