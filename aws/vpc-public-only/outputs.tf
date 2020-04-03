@@ -19,6 +19,6 @@ output "db_subnet_group_name" {
 }
 
 output "aws_zones" {
-  value = [var.aws_zones]
+  value = var.aws_zones
 }
 
