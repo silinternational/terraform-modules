@@ -14,7 +14,7 @@ variable "aws_zones" {
 }
 
 variable "enable_dns_hostnames" {
-  type    = string
-  default = "true"
+  type    = bool
+  default = true
 }
 

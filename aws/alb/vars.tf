@@ -39,8 +39,8 @@ variable "protocol" {
 }
 
 variable "access_logs_enabled" {
-  type    = string
-  default = "false"
+  type    = bool
+  default = false
 }
 
 variable "access_logs_bucket" {
@@ -55,8 +55,8 @@ variable "alb_name" {
 }
 
 variable "internal" {
-  type    = string
-  default = "false"
+  type    = bool
+  default = false
 }
 
 variable "ssl_policy" {

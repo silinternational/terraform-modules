@@ -16,8 +16,8 @@ variable "ami_id" {
 }
 
 variable "associate_public_ip_address" {
-  type    = string
-  default = "false"
+  type    = bool
+  default = false
 }
 
 variable "aws_instance" {

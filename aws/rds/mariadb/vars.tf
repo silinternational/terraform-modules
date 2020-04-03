@@ -22,8 +22,8 @@ variable "db_root_pass" {
 }
 
 variable "deletion_protection" {
-  type    = string
-  default = "false"
+  type    = bool
+  default = false
 }
 
 variable "subnet_group_name" {
@@ -63,7 +63,7 @@ variable "storage_type" {
 }
 
 variable "storage_encrypted" {
-  type    = string
+  type    = bool
   default = false
 }
 
@@ -83,17 +83,17 @@ variable "backup_retention_period" {
 }
 
 variable "publicly_accessible" {
-  type    = string
-  default = "false"
+  type    = bool
+  default = false
 }
 
 variable "multi_az" {
-  type    = string
+  type    = bool
   default = false
 }
 
 variable "skip_final_snapshot" {
-  type    = string
+  type    = bool
   default = true
 }
 
