@@ -20,8 +20,6 @@ groups for traffic and a default target group.
 ### Optional Inputs
  - `port` - Target group listening port. Default: `80`
  - `protocol` - Target group listening protocol. Default: `http`
- - `access_logs_enabled` - Whether or not to enable logging. Default: `false`
- - `access_logs_bucket` - S3 bucket to store logs. Default: `""`
  - `health_check_interval` - Default: `30`
  - `health_check_path` - Default: `/`
  - `health_check_port` - Default: `traffic-port`

@@ -38,16 +38,6 @@ variable "protocol" {
   default = "HTTP"
 }
 
-variable "access_logs_enabled" {
-  type    = bool
-  default = false
-}
-
-variable "access_logs_bucket" {
-  type    = string
-  default = ""
-}
-
 variable "alb_name" {
   type        = string
   default     = ""
