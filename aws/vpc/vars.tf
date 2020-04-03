@@ -2,17 +2,17 @@
  * Required variables
  */
 variable "app_name" {
-  type    = "string"
+  type    = string
   default = "terraform"
 }
 
 variable "app_env" {
-  type    = "string"
+  type    = string
   default = "testing"
 }
 
 variable "aws_zones" {
-  type = "list"
+  type = list(string)
 
   default = [
     "us-east-1c",
@@ -22,6 +22,7 @@ variable "aws_zones" {
 }
 
 variable "enable_dns_hostnames" {
-  type    = "string"
-  default = "false"
+  type    = bool
+  default = false
 }
+

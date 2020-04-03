@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "cloudtrail" {
-  bucket        = "${var.s3_bucket_name}"
+  bucket        = var.s3_bucket_name
   force_destroy = true
 
   policy = <<POLICY
@@ -32,6 +32,7 @@ resource "aws_s3_bucket" "cloudtrail" {
     ]
 }
 POLICY
+
 }
 
 resource "aws_iam_user" "cloudtrail-s3" {
@@ -40,7 +41,7 @@ resource "aws_iam_user" "cloudtrail-s3" {
 
 resource "aws_iam_user_policy" "cloudtrail-s3" {
   name = "cloudtrail-s3"
-  user = "${aws_iam_user.cloudtrail-s3.name}"
+  user = aws_iam_user.cloudtrail-s3.name
 
   policy = <<EOF
 {
@@ -61,11 +62,13 @@ resource "aws_iam_user_policy" "cloudtrail-s3" {
   ]
 }
 EOF
+
 }
 
 resource "aws_cloudtrail" "cloudtrail" {
   count                         = 1
-  name                          = "${var.cloudtrail_name}"
-  s3_bucket_name                = "${aws_s3_bucket.cloudtrail.id}"
+  name                          = var.cloudtrail_name
+  s3_bucket_name                = aws_s3_bucket.cloudtrail.id
   include_global_service_events = true
 }
+
