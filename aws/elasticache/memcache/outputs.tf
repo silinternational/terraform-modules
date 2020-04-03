@@ -2,7 +2,7 @@
  * Cluster outputs
  */
 output "cache_nodes" {
-  value = [aws_elasticache_cluster.memcache.cache_nodes]
+  value = aws_elasticache_cluster.memcache.cache_nodes
 }
 
 output "configuration_endpoint" {
