@@ -2,26 +2,26 @@
  * Required variables
  */
 variable "app_name" {
-  type    = "string"
+  type    = string
   default = "terraform"
 }
 
 variable "app_env" {
-  type    = "string"
+  type    = string
   default = "testing"
 }
 
 variable "ami_id" {
-  type = "string"
+  type = string
 }
 
 variable "associate_public_ip_address" {
-  type    = "string"
-  default = "false"
+  type    = bool
+  default = false
 }
 
 variable "aws_instance" {
-  type = "map"
+  type = map(string)
 
   default = {
     instance_type  = "t2.micro"
@@ -31,34 +31,35 @@ variable "aws_instance" {
 }
 
 variable "private_subnet_ids" {
-  type = "list"
+  type = list(string)
 }
 
 variable "default_sg_id" {
-  type = "string"
+  type = string
 }
 
 variable "ecs_instance_profile_id" {
-  type = "string"
+  type = string
 }
 
 variable "ecs_cluster_name" {
-  type = "string"
+  type = string
 }
 
 variable "key_name" {
-  type    = "string"
+  type    = string
   default = ""
 }
 
 variable "additional_security_groups" {
-  type        = "list"
+  type        = list(string)
   description = "A list of additional security groups to place instances into"
   default     = []
 }
 
 variable "additional_user_data" {
-  type        = "string"
+  type        = string
   description = "Shell command to append to the EC2 user_data"
   default     = ""
 }
+
