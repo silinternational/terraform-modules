@@ -1,5 +1,5 @@
 module "cf_ips" {
-  source = "github.com/silinternational/terraform-modules//cloudflare/ips"
+  source = "github.com/silinternational/terraform-modules//cloudflare/ips?ref=2.7.0"
 }
 
 resource "aws_security_group" "cloudflare_https" {
