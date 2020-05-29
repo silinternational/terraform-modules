@@ -17,6 +17,7 @@ This module is used to create an ECS service as well as task definition
  - `lb_container_name` - Container name from `container_def_json` that should be used with target group / alb
  - `lb_container_port` - Container port that should be used with target group / alb
  - `ecsServiceRole_arn` - ARN to IAM ecsServiceRole
+ - `volumes` - A list of volume definitions in JSON format that containers in your task may use
 
 ### Optional Inputs
 
@@ -40,15 +41,27 @@ This module is used to create an ECS service as well as task definition
 
 ```hcl
 module "ecsservice" {
-  source = "github.com/silinternational/terraform-modules//aws/ecs/service-only"
-  cluster_id = "${module.ecscluster.ecs_cluster_id}"
-  service_name = "${var.app_name}"
-  service_env = "${var.app_env}"
+  source             = "github.com/silinternational/terraform-modules//aws/ecs/service-only"
+  cluster_id         = "${module.ecscluster.ecs_cluster_id}"
+  service_name       = "${var.app_name}"
+  service_env        = "${var.app_env}"
   container_def_json = "${file("task-definition.json")}"
-  desired_count = 2
-  tg_arn = "${data.terraform_remote_state.cluster.alb_default_tg_arn}"
-  lb_container_name = "app"
-  lb_container_port = 80
+  desired_count      = 2
+  tg_arn             = "${data.terraform_remote_state.cluster.alb_default_tg_arn}"
+  lb_container_name  = "app"
+  lb_container_port  = 80
   ecsServiceRole_arn = "${data.terraform_remote_state.core.ecsServiceRole_arn}"
+
+  volumes = [
+    {
+      name                        = "vol_name"
+      efs_volume_configuration = [
+        {
+          file_system_id = aws_efs_file_system.vol_name.id
+          root_directory = "/"
+        },
+      ]
+    },
+  ]
 }
 ```
