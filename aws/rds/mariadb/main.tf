@@ -20,10 +20,10 @@ resource "aws_db_instance" "db_instance" {
   parameter_group_name    = var.parameter_group_name
   deletion_protection     = var.deletion_protection
 
-  tags = {
+  tags = merge({
     Name     = "${var.app_name}-${var.app_env}"
     app_name = var.app_name
     app_env  = var.app_env
-  }
+  }, var.tags)
 }
 
