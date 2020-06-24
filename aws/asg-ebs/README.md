@@ -14,6 +14,9 @@ During transition from EFS to EBS, an EFS file system is also mounted.
  - `app_env` - Name of environment, ex: prod, test, etc.
  - `ami_id` - ID for AMI to be used.
  - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`
+ - `aws_region` - Default AWS region
+ - `aws_access_key` - Access key to allow access via the AWS CLI
+ - `aws_secret_key` - Secret access key to allow access via the AWS CLI
  - `private_subnet_ids` - A list of private subnet ids to identify VPC subnets for placement
  - `default_sg_id` - VPC default security group ID to add instances to
  - `ecs_instance_profile_id` - IAM profile ID for ecsInstanceProfile
