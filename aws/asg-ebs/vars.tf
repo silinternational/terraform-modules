@@ -98,3 +98,28 @@ variable "ebs_vol_id" {
   default     = ""
   description = "EBS volume ID"
 }
+
+variable "ebs_mkfs_label" {
+  default     = "Data"
+  description = "Filesystem label"
+}
+
+variable "ebs_mkfs_labelflag" {
+  default     = "-L"
+  description = "Flag to specify before the label name on the mkfs command"
+}
+
+variable "ebs_mkfs_extraopts" {
+  default     = ""
+  description = "Extra options for the mkfs command"
+}
+
+variable "ebs_mountopts" {
+  default     = "defaults,noatime"
+  description = "Mount options to include in /etc/fstab"
+}
+
+variable "ebs_fs_type" {
+  default     = "ext4"
+  description = "Filesystem type"
+}

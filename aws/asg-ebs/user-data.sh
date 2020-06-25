@@ -56,9 +56,9 @@ while (true) do
         fi
 done
 
-# Our filesystem is created on the unpartitioned volume.  The
-# filesystem has the label "Data".  If the volume doesn't have
-# a filesystem, create one.
+# Create the filesystem on the unpartitioned volume.  If the volume
+# doesn't have a filesystem, create one with the filesystem label
+# ${ebs_mkfs_label}.
 
 # Create file system on EBS volume if one doesn't exist
 echo "user_data.sh: Looking for existing file system on EBS volume"
@@ -66,7 +66,7 @@ udevadm settle
 FSEXISTS=`file --special-files --dereference ${ebs_device} | grep "filesystem data"`
 if [ "$FSEXISTS" == "" ]; then
 	echo "user_data.sh: Creating file system on EBS volume"
-	mkfs --type ext4 -L Data ${ebs_device}
+	mkfs --type ${ebs_fs_type} ${ebs_mkfs_labelflag} ${ebs_mkfs_label} ${ebs_mkfs_extraopts} ${ebs_device}
 fi
 
 # Create file system mount point
@@ -77,7 +77,7 @@ fi
 
 # Mount the EBS volume's file system
 echo "user_data.sh: Mounting file system on EBS volume at ${ebs_mount_point}"
-echo "LABEL=Data ${ebs_mount_point} ext4 defaults,noatime 0 0" >> /etc/fstab
+echo "LABEL=${ebs_mkfs_label} ${ebs_mount_point} ${ebs_fs_type} ${ebs_mountopts} 0 0" >> /etc/fstab
 mount -a
 
 # Execute optional command supplied by user.

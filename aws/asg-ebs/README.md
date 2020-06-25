@@ -29,6 +29,10 @@ During transition from EFS to EBS, an EFS file system is also mounted.
  - `ebs_device` - Device name for EBS volume, e.g., "/dev/sdh"
  - `ebs_mount_point` - Full path to directory on which to mount the file system contained in the EBS volume
  - `ebs_vol_id` - EBS volume ID
+ - `ebs_mkfs_label` - Label for filesystem. Default: `Data`
+ - `ebs_mkfs_labelflag` - Flag preceding the label name in the mkfs command. Default: `-L`
+ - `ebs_mkfs_extraopts` - Extra options to pass to the mkfs command. Default: ""
+ - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
 
 ## Optional Inputs
 
@@ -61,5 +65,7 @@ module "asg" {
   ebs_device = "/dev/sdh"
   ebs_mount_point = "/mnt/EBS"
   ebs_vol_id = aws_ebs_volume.bigvol.id
+  ebs_mkfs_label = "MyBigFS"
+  ebs_mkfs_extraopts = "-m 2 -i 32768"
 }
 ```

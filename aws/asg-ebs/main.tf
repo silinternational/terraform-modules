@@ -15,6 +15,11 @@ data "template_file" "user_data" {
     ebs_device           = var.ebs_device
     ebs_mount_point      = var.ebs_mount_point
     ebs_vol_id           = var.ebs_vol_id
+    ebs_mkfs_label       = var.ebs_mkfs_label
+    ebs_mkfs_labelflag   = var.ebs_mkfs_labelflag
+    ebs_mkfs_extraopts   = var.ebs_mkfs_extraopts
+    ebs_fs_type          = var.ebs_fs_type
+    ebs_mountopts        = var.ebs_mountopts
   }
 }
 
