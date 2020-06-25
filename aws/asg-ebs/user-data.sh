@@ -16,7 +16,7 @@ mount -a
 echo "user_data.sh: Installing the AWS CLI"
 yum install -y unzip
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
+unzip -q awscliv2.zip
 ./aws/install
 
 # Configure the AWS CLI
