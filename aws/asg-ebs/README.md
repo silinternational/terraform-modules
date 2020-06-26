@@ -33,6 +33,7 @@ During transition from EFS to EBS, an EFS file system is also mounted.
  - `ebs_mkfs_labelflag` - Flag preceding the label name in the mkfs command. Default: `-L`
  - `ebs_mkfs_extraopts` - Extra options to pass to the mkfs command. Default: ""
  - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
+ - `ebs_mountopts` - Mount options to include in /etc/fstab, default is "defaults,noatime"
 
 ## Optional Inputs
 
