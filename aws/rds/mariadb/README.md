@@ -31,6 +31,7 @@ This module is used to create an RDS instance.
  - `skip_final_snapshot` - Default: `true`
  - `parameter_group_name` - Default: `""`
  - `deletion_protection` - Default: `false`
+ - `tags` - Default `{}`
 
 ## Outputs
 
@@ -53,5 +54,9 @@ module "rds" {
   subnet_group_name = "${module.vpc.db_subnet_group_name}"
   availability_zone = "${var.aws_zones[0]}"
   security_groups = ["${module.vpc.vpc_default_sg_id}"]
+
+  tags = {
+    foo = "bar"
+  }
 }
 ```

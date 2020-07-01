@@ -63,3 +63,8 @@ variable "additional_user_data" {
   default     = ""
 }
 
+variable "tags" {
+  type        = list(any)
+  description = "Additional tags to add to asg."
+  default     = []
+}
