@@ -31,8 +31,6 @@ echo "aws_secret_access_key = ${aws_secret_key}" >> ~/.aws/credentials
 
 
 # Get my EC2 instance ID
-# From https://stackoverflow.com/questions/625644/how-to-get-the-instance-id-from-within-an-ec2-instance
-# INSTANCE_ID=`curl http://169.254.169.254/latest/meta-data/instance-id`
 echo "user_data.sh: Getting EC2 instance ID"
 INSTANCE_ID=`ec2-metadata --instance-id | sed -e 's/.* //' | tr -d \\n`
 echo "user_data.sh: EC2 instance ID is $INSTANCE_ID"
