@@ -6,8 +6,6 @@ data "template_file" "user_data" {
 
   vars = {
     ecs_cluster_name     = var.ecs_cluster_name
-    efs_dns_name         = var.efs_dns_name
-    mount_point          = var.mount_point
     additional_user_data = var.additional_user_data
     aws_region           = var.aws_region
     aws_access_key       = var.aws_access_key
