@@ -1,17 +1,6 @@
 #!/bin/bash
 echo ECS_CLUSTER=${ecs_cluster_name} >> /etc/ecs/ecs.config
 
-# Install the NFS client utilities
-echo "user_data.sh: Installing nfs-utils"
-yum install -y nfs-utils
-
-# Mount the EFS file system
-echo "user_data.sh: Mounting EFS file system at ${mount_point}"
-mkdir -p ${mount_point}
-echo "${efs_dns_name}:/ ${mount_point} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,auto 0 0" >> /etc/fstab
-mount -a
-
-
 # Install the AWS CLI (needed to enable attaching the EBS volume)
 echo "user_data.sh: Installing the AWS CLI"
 yum install -y unzip
