@@ -1,7 +1,6 @@
 # aws/asg-ebs - Auto Scaling Group with EBS mount
 This module is used to create an auto scaling group launch configuration and
 an auto scaling group that uses the configuration.  An EBS file system is mounted.
-During transition from EFS to EBS, an EFS file system is also mounted.
 
 ## What this does
 
@@ -21,19 +20,9 @@ During transition from EFS to EBS, an EFS file system is also mounted.
  - `default_sg_id` - VPC default security group ID to add instances to
  - `ecs_instance_profile_id` - IAM profile ID for ecsInstanceProfile
  - `ecs_cluster_name` - ECS cluster name for registering instances
- - `efs_dns_name` - DNS name of the EFS file system to be mounted
- - `mount_point` - Full path to directory on which to mount the EFS file system
-
-## Transitional Inputs
-
  - `ebs_device` - Device name for EBS volume, e.g., "/dev/sdh"
  - `ebs_mount_point` - Full path to directory on which to mount the file system contained in the EBS volume
  - `ebs_vol_id` - EBS volume ID
- - `ebs_mkfs_label` - Label for filesystem. Default: `Data`
- - `ebs_mkfs_labelflag` - Flag preceding the label name in the mkfs command. Default: `-L`
- - `ebs_mkfs_extraopts` - Extra options to pass to the mkfs command. Default: ""
- - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
- - `ebs_mountopts` - Mount options to include in /etc/fstab, default is "defaults,noatime"
 
 ## Optional Inputs
 
@@ -41,6 +30,11 @@ During transition from EFS to EBS, an EFS file system is also mounted.
  - `additional_security_groups` - List of additional security groups (in addition to default vpc security group)
  - `associate_public_ip_address` - true/false - Whether or not to associate public ip addresses with instances. Default: false
  - `additional_user_data` - command to append to the EC2 user\_data, default is ""
+ - `ebs_mkfs_label` - Label for filesystem. Default: `Data`
+ - `ebs_mkfs_labelflag` - Flag preceding the label name in the mkfs command. Default: `-L`
+ - `ebs_mkfs_extraopts` - Extra options to pass to the mkfs command. Default: ""
+ - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
+ - `ebs_mountopts` - Mount options to include in /etc/fstab, default is "defaults,noatime"
 
 ## Outputs
 
@@ -54,14 +48,15 @@ module "asg" {
   source = "github.com/silinternational/terraform-modules//aws/asg-ebs"
   app_name = var.app_name
   app_env = var.app_env
+  ami_id = module.ecs.ami_id
   aws_instance = var.aws_instance
+  aws_region = var.aws_region
+  aws_access_key = var.aws_access_key
+  aws_secret_key = var.aws_secret_key
   private_subnet_ids = [module.vpc.private_subnet_ids]
   default_sg_id = module.vpc.vpc_default_sg_id
   ecs_instance_profile_id = module.ecs.ecs_instance_profile_id
   ecs_cluster_name = module.ecs.ecs_cluster_name
-  ami_id = module.ecs.ami_id
-  efs_dns_name = aws_efs_file_system.myfiles.dns_name
-  mount_point = "/mnt/efs"
   additional_user_data = "yum install -y something-interesting"
   ebs_device = "/dev/sdh"
   ebs_mount_point = "/mnt/EBS"
