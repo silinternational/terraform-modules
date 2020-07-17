@@ -24,18 +24,31 @@ echo "user_data.sh: Getting EC2 instance ID"
 INSTANCE_ID=`ec2-metadata --instance-id | sed -e 's/.* //' | tr -d \\n`
 echo "user_data.sh: EC2 instance ID is $INSTANCE_ID"
 
+# Verify the EBS volume isn't already attached
+# It may take some time for the volume to be detached from an EC2
+# instance that has died.  Wait until the volume is not attached
+# before attempting to attach it to this EC2 instance.
+echo "user_data.sh Verify EBS volume ${ebs_vol_id} is available"
+while (true) do
+	ATTSTATE=`aws ec2 describe-volumes --volume-ids ${ebs_vol_id} --query "Volumes[0].Attachments[0].{attstate:State}" | grep attstate | sed -e 's/.* "//' -e 's/"//'`
+	if [[ "$ATTSTATE" == "" ]]; then
+		break;
+	else
+		echo "user_data.sh: Waiting for volume to become available"
+		sleep 2
+	fi
+done
+
 # Attach the EBS volume
 echo "user_data.sh: Attaching EBS volume ${ebs_vol_id} as device ${ebs_device}"
 aws ec2 attach-volume --device ${ebs_device} --instance-id $INSTANCE_ID --volume-id ${ebs_vol_id}
 
-# Wait until volume is "attached" and "in-use"
-# Two "State" entries are returned. One refers to the state of the
-# attachment (we want "attached"). The other refers to the state of
-# the attached volume (we want "in-use"). We'll sit in a loop until
-# we get both states returned.
+# Wait until volume's attachment state is "attached" and volume's state is "in-use"
+# We'll sit in a loop until we get both states returned.
 while (true) do
-        STATE=`aws ec2 describe-volumes --volume-ids ${ebs_vol_id} | grep State | sed -e 's/.* "//' -e 's/",//'`
-        if [[ "$STATE" =~ attached.*in-use ]]; then
+	ATTSTATE=`aws ec2 describe-volumes --volume-ids ${ebs_vol_id} --query "Volumes[0].Attachments[0].{attstate:State}" | grep attstate | sed -e 's/.* "//' -e 's/"//'`
+	VOLSTATE=`aws ec2 describe-volumes --volume-ids ${ebs_vol_id} --query "Volumes[*].{volstate:State}" | grep volstate | sed -e 's/.* "//' -e 's/"//'`
+        if [[ "$ATTSTATE" =~ attached ]] && [[ "$VOLSTATE" =~ in-use ]]; then
                 break;
         else
                 echo "user_data.sh: Waiting for volume to become ready"
