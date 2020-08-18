@@ -11,6 +11,12 @@ variable "app_env" {
   default = "testing"
 }
 
+variable "aws_access_key" {
+}
+
+variable "aws_secret_key" {
+}
+
 variable "ami_id" {
   type = string
 }
@@ -28,6 +34,9 @@ variable "aws_instance" {
     volume_size    = "8"
     instance_count = "3"
   }
+}
+
+variable "aws_region" {
 }
 
 variable "private_subnet_ids" {
@@ -63,8 +72,44 @@ variable "additional_user_data" {
   default     = ""
 }
 
-variable "tags" {
-  type        = list(any)
-  description = "Additional tags to add to asg."
-  default     = []
+variable "ebs_device" {
+  type        = string
+  default     = ""
+  description = "Device name in EC2 instance for EBS volume"
+}
+
+variable "ebs_mount_point" {
+  type        = string
+  default     = ""
+  description = "Mount point for file system on EBS volume"
+}
+
+variable "ebs_vol_id" {
+  default     = ""
+  description = "EBS volume ID"
+}
+
+variable "ebs_mkfs_label" {
+  default     = "Data"
+  description = "Filesystem label"
+}
+
+variable "ebs_mkfs_labelflag" {
+  default     = "-L"
+  description = "Flag to specify before the label name on the mkfs command"
+}
+
+variable "ebs_mkfs_extraopts" {
+  default     = ""
+  description = "Extra options for the mkfs command"
+}
+
+variable "ebs_mountopts" {
+  default     = "defaults,noatime"
+  description = "Mount options to include in /etc/fstab"
+}
+
+variable "ebs_fs_type" {
+  default     = "ext4"
+  description = "Filesystem type"
 }
