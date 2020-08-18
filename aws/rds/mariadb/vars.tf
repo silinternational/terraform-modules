@@ -102,3 +102,8 @@ variable "parameter_group_name" {
   default = ""
 }
 
+variable "tags" {
+  type        = map(any)
+  description = "Map of tags to add to the rds instance. Duplicate tags will be overridden."
+  default     = {}
+}

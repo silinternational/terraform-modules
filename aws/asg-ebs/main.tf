@@ -7,6 +7,17 @@ data "template_file" "user_data" {
   vars = {
     ecs_cluster_name     = var.ecs_cluster_name
     additional_user_data = var.additional_user_data
+    aws_region           = var.aws_region
+    aws_access_key       = var.aws_access_key
+    aws_secret_key       = var.aws_secret_key
+    ebs_device           = var.ebs_device
+    ebs_mount_point      = var.ebs_mount_point
+    ebs_vol_id           = var.ebs_vol_id
+    ebs_mkfs_label       = var.ebs_mkfs_label
+    ebs_mkfs_labelflag   = var.ebs_mkfs_labelflag
+    ebs_mkfs_extraopts   = var.ebs_mkfs_extraopts
+    ebs_fs_type          = var.ebs_fs_type
+    ebs_mountopts        = var.ebs_mountopts
   }
 }
 
@@ -67,16 +78,6 @@ resource "aws_autoscaling_group" "asg" {
     key                 = "app_env"
     value               = var.app_env
     propagate_at_launch = true
-  }
-
-  dynamic "tag" {
-    for_each = var.tags
-
-    content {
-      key                 = tag.value.key
-      value               = tag.value.value
-      propagate_at_launch = tag.value.propagate_at_launch
-    }
   }
 }
 
