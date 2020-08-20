@@ -42,6 +42,11 @@ variable "security_groups" {
 /*
  * Optional variables
  */
+variable "copy_tags_to_snapshot" {
+  type    = bool
+  default = true
+}
+
 variable "engine" {
   type    = string
   default = "mariadb"

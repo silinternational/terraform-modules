@@ -2,6 +2,7 @@ resource "aws_db_instance" "db_instance" {
   engine                  = var.engine
   engine_version          = var.engine_version
   allocated_storage       = var.allocated_storage
+  copy_tags_to_snapshot   = var.copy_tags_to_snapshot
   instance_class          = var.instance_class
   name                    = var.db_name
   identifier              = "${var.app_name}-${var.app_env}"
