@@ -1,0 +1,16 @@
+{
+  "rules": [
+    {
+      "rulePriority": 1,
+      "description": "Keep ${lifecycle_count} Lastest",
+      "selection": {
+        "tagStatus": "any",
+        "countType": "imageCountMoreThan",
+        "countNumber": ${lifecycle_count}
+      },
+      "action": {
+        "type": "expire"
+      }
+    }
+  ]
+}
