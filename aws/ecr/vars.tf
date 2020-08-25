@@ -14,3 +14,7 @@ variable "cd_user_arn" {
   type = string
 }
 
+variable "lifecycle_count" {
+  type = string
+}
+

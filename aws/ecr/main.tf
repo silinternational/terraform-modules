@@ -20,3 +20,15 @@ resource "aws_ecr_repository_policy" "policy" {
   policy     = data.template_file.repo_policy.rendered
 }
 
+data "template_file" "lifecycle" {
+  template = file("${path.module}/ecr-lifecycle.json")
+
+  vars = {
+    lifecycle_count = var.lifecycle_count
+  }
+}
+
+resource "aws_ecr_lifecycle_policy" "lifecycle" {
+   repository = aws_ecr_repository.repo.name
+   policy     = data.template_file.lifcycle.rendered
+}
