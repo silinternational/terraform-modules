@@ -18,6 +18,7 @@ This module is used to create an RDS instance.
 
 ### Optional Inputs
 
+ - `copy_tags_to_snapshot` - Default: `true`
  - `engine` - Default: `mariadb`
  - `engine_version` - Default: `<empty>`
  - `allocated_storage` - Default: `8`G
