@@ -65,6 +65,16 @@ resource "aws_ecs_service" "service" {
     container_port   = var.lb_container_port
   }
 
+  dynamic "service_registries" {
+    for_each = var.service_registries
+    content {
+      registry_arn   = service_registries.registry_arn
+      port           = service_registries.port
+      container_port = service_registries.container_port
+      container_name = service_registries.container_name
+    }
+  }
+
   # Track the latest ACTIVE revision
   task_definition = "${aws_ecs_task_definition.td.family}:${max(
     aws_ecs_task_definition.td.revision,

@@ -81,3 +81,12 @@ variable "deployment_minimum_healthy_percent" {
   default = 50
 }
 
+variable "service_registries" {
+  type = object({
+    registry_arn   = string
+    port           = string
+    container_port = string
+    container_name = string
+  })
+  default = null
+}
