@@ -34,7 +34,8 @@ variable "tg_arn" {
 }
 
 variable "ecsServiceRole_arn" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "volumes" {
