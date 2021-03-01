@@ -85,7 +85,6 @@ variable "deployment_minimum_healthy_percent" {
 variable "service_registries" {
   type = list(object({
     registry_arn   = string
-    port           = string
     container_port = string
     container_name = string
   }))
