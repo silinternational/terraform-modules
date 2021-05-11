@@ -113,7 +113,7 @@ variable "tags" {
   default     = {}
 }
 
-variable "identifier" {
+variable "db_identifier" {
   type        = string
   description = "Name of the RDS instance"
   default     = ""

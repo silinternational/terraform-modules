@@ -5,7 +5,8 @@ resource "aws_db_instance" "db_instance" {
   copy_tags_to_snapshot   = var.copy_tags_to_snapshot
   instance_class          = var.instance_class
   name                    = var.db_name
-  identifier              = var.identifier == "" ? "${var.app_name}-${var.app_env}" : var.identifier
+  #identifier              = var.identifier == "" ? "${var.app_name}-${var.app_env}" : var.identifier
+  identifier              = var.db_identifier == "" ? format("%s-%s", var.app_name, var.app_env) : var.db_identifier
   username                = var.db_root_user
   password                = var.db_root_pass
   db_subnet_group_name    = var.subnet_group_name
