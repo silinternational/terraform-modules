@@ -33,6 +33,7 @@ This module is used to create an RDS instance.
  - `parameter_group_name` - Default: `""`
  - `deletion_protection` - Default: `false`
  - `tags` - Default `{}`
+ - `identifier` - Default: `${var.app_name}-${var.app_env}`
 
 ## Outputs
 

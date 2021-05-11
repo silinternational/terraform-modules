@@ -112,3 +112,9 @@ variable "tags" {
   description = "Map of tags to add to the rds instance. Duplicate tags will be overridden."
   default     = {}
 }
+
+variable "identifier" {
+  type        = string
+  description = "Name of the RDS instance"
+  default     = ""
+}
