@@ -39,21 +39,14 @@ variable "node_type" {
 
 variable "port" {
   type    = string
-  default = "11211"
-}
-
-variable "num_cache_nodes" {
-  type    = string
-  default = 2
+  default = "6379"
 }
 
 variable "parameter_group_name" {
   type    = string
-  default = "default.memcached1.4"
+  default = "default.redis6.x"
 }
 
-variable "az_mode" {
-  type    = string
-  default = "cross-az"
+variable "engine_version" {
+  default = "6.x"
 }
-
