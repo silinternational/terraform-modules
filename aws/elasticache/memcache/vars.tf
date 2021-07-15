@@ -57,3 +57,10 @@ variable "az_mode" {
   default = "cross-az"
 }
 
+variable "engine" {
+  default = "memcached"
+}
+
+variable "engine_version" {
+  type = string
+}

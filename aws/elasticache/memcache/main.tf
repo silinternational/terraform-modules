@@ -11,7 +11,8 @@ resource "aws_elasticache_subnet_group" "memcache_subnet_group" {
  */
 resource "aws_elasticache_cluster" "memcache" {
   cluster_id           = replace(var.cluster_id, "/(.{0,20})(.*)/", "$1")
-  engine               = "memcached"
+  engine               = var.engine
+  engine_version = var.engine_version
   node_type            = var.node_type
   port                 = var.port
   num_cache_nodes      = var.num_cache_nodes
