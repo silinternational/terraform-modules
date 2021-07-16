@@ -8,7 +8,7 @@ This module is used to create an Elasticache cluster of memcache servers
 
 ## Required Inputs
 
- - `cluster_id` - ID/Name for Elasticache Cluster
+ - `cluster_id` - ID/Name for Elasticache Cluster. Max 20 characters.
  - `security_group_ids` - List of security group IDs to place cluster in
  - `subnet_group_name` - Name of subnet group to create and place cluster in.
  - `subnet_ids` - List of subnet ids for subnet group.

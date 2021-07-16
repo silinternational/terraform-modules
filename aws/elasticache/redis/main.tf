@@ -10,7 +10,7 @@ resource "aws_elasticache_subnet_group" "redis_subnet_group" {
  * Create Cluster
  */
 resource "aws_elasticache_cluster" "redis" {
-  cluster_id           = replace(var.cluster_id, "/(.{0,20})(.*)/", "$1")
+  cluster_id           = replace(var.cluster_id, "/(.{0,20})(.*)/", "$1") // truncates to maximum of 20 characters
   engine               = "redis"
   engine_version       = var.engine_version
   node_type            = var.node_type

@@ -10,7 +10,7 @@ resource "aws_elasticache_subnet_group" "memcache_subnet_group" {
  * Create Cluster
  */
 resource "aws_elasticache_cluster" "memcache" {
-  cluster_id           = replace(var.cluster_id, "/(.{0,20})(.*)/", "$1")
+  cluster_id           = replace(var.cluster_id, "/(.{0,20})(.*)/", "$1") // truncates to maximum of 20 characters
   engine               = "memcached"
   node_type            = var.node_type
   port                 = var.port
