@@ -13,6 +13,7 @@ This module is used to create an ECS service as well as task definition
  - `service_env` - Name of environment, used in naming task definition. Ex: `staging`
  - `container_def_json` - JSON for container definition.
  - `desired_count` - Number of tasks to run in service
+ - `volumes` - A list of volume definitions in JSON format that containers in your task may use
 
 ### Optional Inputs
 
@@ -41,5 +42,17 @@ module "ecsservice" {
   service_env        = "${var.app_env}"
   container_def_json = "${file("task-definition.json")}"
   desired_count      = 2
+
+  volumes = [
+    {
+      name                     = "vol_name"
+      efs_volume_configuration = [
+        {
+          file_system_id = aws_efs_file_system.vol_name.id
+          root_directory = "/"
+        },
+      ]
+    },
+  ]
 }
 ```

@@ -14,6 +14,33 @@ resource "aws_ecs_task_definition" "td" {
   container_definitions = var.container_def_json
   task_role_arn         = var.task_role_arn
   network_mode          = var.network_mode
+
+  dynamic "volume" {
+    for_each = var.volumes
+    content {
+      host_path = lookup(volume.value, "host_path", null)
+      name      = volume.value.name
+
+      dynamic "docker_volume_configuration" {
+        for_each = lookup(volume.value, "docker_volume_configuration", [])
+        content {
+          autoprovision = lookup(docker_volume_configuration.value, "autoprovision", null)
+          driver        = lookup(docker_volume_configuration.value, "driver", null)
+          driver_opts   = lookup(docker_volume_configuration.value, "driver_opts", null)
+          labels        = lookup(docker_volume_configuration.value, "labels", null)
+          scope         = lookup(docker_volume_configuration.value, "scope", null)
+        }
+      }
+
+      dynamic "efs_volume_configuration" {
+        for_each = lookup(volume.value, "efs_volume_configuration", [])
+        content {
+          file_system_id = lookup(efs_volume_configuration.value, "file_system_id", null)
+          root_directory = lookup(efs_volume_configuration.value, "root_directory", null)
+        }
+      }
+    }
+  }
 }
 
 /*
