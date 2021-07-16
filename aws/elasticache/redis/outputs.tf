@@ -10,6 +10,6 @@ output "configuration_endpoint" {
 }
 
 output "cluster_address" {
-  value = aws_elasticache_cluster.redis.cluster_address
+  value = aws_elasticache_cluster.redis.cache_nodes[0].address
 }
 
