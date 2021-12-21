@@ -6,7 +6,7 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 }
 
 /*
- * Deterimine most recent ECS optimized AMI
+ * Determine most recent ECS optimized AMI
  */
 data "aws_ami" "ecs_ami" {
   most_recent = true
@@ -14,7 +14,7 @@ data "aws_ami" "ecs_ami" {
 
   filter {
     name   = "name"
-    values = ["amzn-ami-*-amazon-ecs-optimized"]
+    values = [var.amiFilter]
   }
 }
 

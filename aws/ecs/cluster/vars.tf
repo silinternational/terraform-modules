@@ -12,6 +12,11 @@ variable "app_env" {
 /*
  * Optional variables
  */
+variable "amiFilter" {
+  type    = string
+  default = "amzn2-ami-ecs-hvm-*-x86_64-ebs"
+}
+
 variable "ecsInstanceRoleAssumeRolePolicy" {
   type = string
 
