@@ -1,6 +1,10 @@
 resource "aws_s3_bucket" "cloudtrail" {
   bucket        = var.s3_bucket_name
   force_destroy = true
+}
+
+resource "aws_s3_bucket_policy" "cloudtrail" {
+  bucket = aws_s3_bucket.cloudtrail.id
 
   policy = jsonencode(
     {
