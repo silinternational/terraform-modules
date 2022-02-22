@@ -1,15 +1,13 @@
 /*
  * Generate user_data from template file
  */
-data "template_file" "user_data" {
-  template = file("${path.module}/user-data.sh")
-
-  vars = {
+locals {
+  user_data = templatefile("${path.module}/user-data.sh", {
     ecs_cluster_name     = var.ecs_cluster_name
     efs_dns_name         = var.efs_dns_name
     mount_point          = var.mount_point
     additional_user_data = var.additional_user_data
-  }
+  })
 }
 
 /*
@@ -28,7 +26,7 @@ resource "aws_launch_configuration" "as_conf" {
     volume_size = var.aws_instance["volume_size"]
   }
 
-  user_data = data.template_file.user_data.rendered
+  user_data = local.user_data
 
   lifecycle {
     create_before_destroy = true
