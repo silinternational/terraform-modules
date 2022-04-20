@@ -1,4 +1,4 @@
-# aws/backup/rds - AWSBackup of an RDS instance
+# aws/backup/rds - AWSBackup of databases
 This module is used to create scheduled backups of AWS databases.
 
 
