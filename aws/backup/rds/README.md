@@ -27,8 +27,19 @@ This module is used to create scheduled backups of AWS databases.
 
 ## Example Usage
 
+*vars.tf* (in addition to `app_name`, `app_env`, ...)
+```hcl
+variable "enable_db_backup" {
+  type    = bool
+  default = false
+}
+```
+
+
+*main.tf*
 ```hcl
 module "backup_rds" {
+  count = var.enable_db_backup ? 1 : 0
   source = "github.com/silinternational/terraform-modules//aws/backup/rds"
   app_name = var.app_name
   app_env = var.app_env
@@ -37,5 +48,12 @@ module "backup_rds" {
   source_arns = ["arn:aws:rds:us-east-1:123456789012:db:my-db"]
   backup_cron_schedule = "11 1 * * ? *"
   notification_events = ["BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_FAILED", "RESTORE_JOB_COMPLETED"]
+}
+```
+
+*outputs.tf*
+```hcl
+output "bkup_key_id" {
+  value = var.enable_db_backup ? module.backup_rds[0].bkup_key_id : "backup disabled"
 }
 ```
