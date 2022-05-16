@@ -26,10 +26,10 @@ resource "aws_backup_vault_policy" "bkup_vault_policy" {
   policy = jsonencode(
     {
       Version = "2012-10-17"
-      Id = "default"
+      Id      = "default"
       Statement = [
         {
-          Sid = "default"
+          Sid    = "default"
           Effect = "Allow"
           Principal = {
             AWS = "*"
@@ -47,7 +47,7 @@ resource "aws_backup_vault_policy" "bkup_vault_policy" {
           Resource = aws_backup_vault.bkup_vault.arn
         }
       ]
-    })
+  })
 }
 
 # Create the Backup plan
@@ -55,13 +55,13 @@ resource "aws_backup_plan" "bkup_plan" {
   name = "${var.app_name}-${var.app_env}-db-backup-plan"
 
   rule {
-    rule_name           = "${var.app_name}-${var.app_env}-db-backup-rule"
-    target_vault_name   = aws_backup_vault.bkup_vault.name
-    schedule            = "cron(${var.backup_cron_schedule})"
-    completion_window   = 120 # 2 hours (in minutes)
+    rule_name         = "${var.app_name}-${var.app_env}-db-backup-rule"
+    target_vault_name = aws_backup_vault.bkup_vault.name
+    schedule          = "cron(${var.backup_cron_schedule})"
+    completion_window = 120 # 2 hours (in minutes)
 
     lifecycle {
-      cold_storage_after = 7 # a week in days
+      cold_storage_after = 7   # a week in days
       delete_after       = 100 # must be at least 90 days more than cold_storage_after
     }
 
@@ -82,12 +82,12 @@ resource "aws_backup_selection" "bkup_selection" {
   name         = "${var.app_name}-${var.app_env}-db-backup-selection"
   plan_id      = aws_backup_plan.bkup_plan.id
   iam_role_arn = aws_iam_role.bkup_role.arn
-  resources = var.source_arns
+  resources    = var.source_arns
 }
 
 # Create the IAM role for backups
 resource "aws_iam_role" "bkup_role" {
-  name               = "${var.app_name}-${var.app_env}-db-backup-role"
+  name = "${var.app_name}-${var.app_env}-db-backup-role"
   assume_role_policy = jsonencode(
     {
       Version = "2012-10-17"
@@ -100,7 +100,7 @@ resource "aws_iam_role" "bkup_role" {
           }
         }
       ]
-    })
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "bkup_policy_attachment" {
