@@ -4,7 +4,7 @@ resource "aws_db_instance" "db_instance" {
   allocated_storage       = var.allocated_storage
   copy_tags_to_snapshot   = var.copy_tags_to_snapshot
   instance_class          = var.instance_class
-  db_name                 = var.db_name
+  name                    = var.db_name
   identifier              = "${var.app_name}-${var.app_env}"
   username                = var.db_root_user
   password                = var.db_root_pass
