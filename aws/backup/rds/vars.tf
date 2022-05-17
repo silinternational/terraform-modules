@@ -19,7 +19,7 @@ variable "aws_secret_key" {
 
 variable "source_arns" {
   description = "The arn's of the source databases"
-  type = list(string)
+  type        = list(string)
 }
 
 
@@ -28,12 +28,12 @@ variable "source_arns" {
  */
 
 variable "backup_cron_schedule" {
-  default = "11 1 * * ? *"		# Every day at 01:11 UTC
+  default = "11 1 * * ? *" # Every day at 01:11 UTC
 }
 
 variable "notification_events" {
   description = "The arn's of the source databases"
-  type = list(string)
-  default = ["BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_FAILED", "RESTORE_JOB_COMPLETED"]
+  type        = list(string)
+  default     = ["BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_FAILED", "RESTORE_JOB_COMPLETED"]
 }
 
