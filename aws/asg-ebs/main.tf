@@ -24,7 +24,7 @@ locals {
  */
 resource "aws_launch_template" "asg_lt" {
   default_version = 1
-  ebs_optimized   = "false"
+  ebs_optimized   = false
   name            = "lt-${var.app_name}-${var.app_env}"
   image_id        = var.ami_id
   instance_type   = var.aws_instance["instance_type"]
@@ -34,8 +34,8 @@ resource "aws_launch_template" "asg_lt" {
   block_device_mappings {
     device_name = var.root_device_name
     ebs {
-      delete_on_termination = "true"
-      volume_size = var.aws_instance["volume_size"]
+      delete_on_termination = true
+      volume_size           = var.aws_instance["volume_size"]
     }
   }
 
