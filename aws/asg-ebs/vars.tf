@@ -36,6 +36,11 @@ variable "aws_instance" {
   }
 }
 
+variable "root_device_name" {
+  type    = string
+  default = "/dev/xvda"
+}
+
 variable "aws_region" {
 }
 

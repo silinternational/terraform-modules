@@ -1,5 +1,5 @@
-output "launch_configuration_id" {
-  value = aws_launch_configuration.as_conf.id
+output "launch_template_id" {
+  value = aws_launch_template.asg_lt.id
 }
 
 output "auto_scaling_group_id" {

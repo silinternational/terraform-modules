@@ -30,6 +30,11 @@ variable "aws_instance" {
   }
 }
 
+variable "root_device_name" {
+  type    = string
+  default = "/dev/xvda"
+}
+
 variable "private_subnet_ids" {
   type = list(string)
 }
