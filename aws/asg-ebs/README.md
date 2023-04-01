@@ -36,6 +36,7 @@ an auto scaling group that uses the template.  An EBS file system is mounted.
  - `ebs_mkfs_extraopts` - Extra options to pass to the mkfs command. Default: ""
  - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
  - `ebs_mountopts` - Mount options to include in /etc/fstab, default is "defaults,noatime"
+ - `tags` - A list of tag definitions in JSON format to be applied to the asg.
 
 ## Outputs
 
@@ -64,5 +65,13 @@ module "asg" {
   ebs_vol_id = aws_ebs_volume.bigvol.id
   ebs_mkfs_label = "MyBigFS"
   ebs_mkfs_extraopts = "-m 2 -i 32768"
+
+  tags = [
+    {
+      key                 = "foo"
+      value               = "bar"
+      propagate_at_launch = true
+    },
+  ]
 }
 ```
