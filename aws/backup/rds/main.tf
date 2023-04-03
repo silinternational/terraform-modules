@@ -64,11 +64,6 @@ resource "aws_backup_plan" "bkup_plan" {
       cold_storage_after = 7   # a week in days
       delete_after       = 100 # must be at least 90 days more than cold_storage_after
     }
-
-    # Metadata you assign to help organize the resources that you create
-    recovery_point_tags = {
-      datetime = timestamp()
-    }
   }
 
   tags = {
