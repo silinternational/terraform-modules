@@ -1,10 +1,10 @@
 # aws/asg-efs - Auto Scaling Group with EFS mount
-This module is used to create an auto scaling group launch configuration and
-an auto scaling group that uses the configuration.  An EFS file system is mounted.
+This module is used to create an auto scaling group launch template and
+an auto scaling group that uses the template.  An EFS file system is mounted.
 
 ## What this does
 
- - Create launch configuration named after `app_name` and `app_env`
+ - Create launch template named after `app_name` and `app_env`
  - Create auto scaling group of defined size and distribute instances across `aws_zones`
 
 ## Required Inputs
@@ -23,13 +23,15 @@ an auto scaling group that uses the configuration.  An EFS file system is mounte
 ## Optional Inputs
 
  - `key_name` - Name of the AWS key pair to allow ssh access, default is ""
+ - `root_device_name` - Name of the root device for the EC2 instance. Default: `/dev/xvda`
  - `additional_security_groups` - List of additional security groups (in addition to default vpc security group)
  - `associate_public_ip_address` - true/false - Whether or not to associate public ip addresses with instances. Default: false
  - `additional_user_data` - command to append to the EC2 user\_data, default is ""
+ - `tags` - A list of tag definitions in JSON format to be applied to the asg.
 
 ## Outputs
 
- - `launch_configuration_id` - The launch configuration ID
+ - `launch_template_id` - The launch template ID
  - `auto_scaling_group_id` - ASG ID
 
 ## Example Usage
@@ -48,5 +50,13 @@ module "asg" {
   efs_dns_name = "${aws_efs_file_system.myfiles.dns_name}"
   mount_point = "/mnt/efs"
   additional_user_data = "yum install -y something-interesting"
+
+  tags = [
+    {
+      key                 = "foo"
+      value               = "bar"
+      propagate_at_launch = true
+    },
+  ]
 }
 ```

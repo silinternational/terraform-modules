@@ -36,6 +36,11 @@ variable "aws_instance" {
   }
 }
 
+variable "root_device_name" {
+  type    = string
+  default = "/dev/xvda"
+}
+
 variable "aws_region" {
 }
 
@@ -70,6 +75,12 @@ variable "additional_user_data" {
   type        = string
   description = "Shell command to append to the EC2 user_data"
   default     = ""
+}
+
+variable "tags" {
+  type        = list(any)
+  description = "Additional tags to add to asg."
+  default     = []
 }
 
 variable "ebs_device" {

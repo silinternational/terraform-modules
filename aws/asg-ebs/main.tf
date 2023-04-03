@@ -20,25 +20,36 @@ locals {
 }
 
 /*
- * Create Launch Configuration
+ * Create Launch Template
  */
-resource "aws_launch_configuration" "as_conf" {
-  name_prefix                 = "${var.app_name}-${var.app_env}-"
-  image_id                    = var.ami_id
-  instance_type               = var.aws_instance["instance_type"]
-  security_groups             = concat([var.default_sg_id], var.additional_security_groups)
-  iam_instance_profile        = var.ecs_instance_profile_id
-  key_name                    = var.key_name
-  associate_public_ip_address = var.associate_public_ip_address
+resource "aws_launch_template" "asg_lt" {
+  default_version = 1
+  ebs_optimized   = false
+  name            = "lt-${var.app_name}-${var.app_env}"
+  image_id        = var.ami_id
+  instance_type   = var.aws_instance["instance_type"]
+  key_name        = var.key_name
+  user_data       = base64encode(local.user_data)
 
-  root_block_device {
-    volume_size = var.aws_instance["volume_size"]
+  block_device_mappings {
+    device_name = var.root_device_name
+    ebs {
+      delete_on_termination = true
+      volume_size           = var.aws_instance["volume_size"]
+    }
   }
 
-  user_data = local.user_data
+  network_interfaces {
+    associate_public_ip_address = var.associate_public_ip_address
+    security_groups             = concat([var.default_sg_id], var.additional_security_groups)
+  }
 
-  lifecycle {
-    create_before_destroy = true
+  iam_instance_profile {
+    name = var.ecs_instance_profile_id
+  }
+
+  monitoring {
+    enabled = true
   }
 }
 
@@ -51,13 +62,13 @@ resource "aws_autoscaling_group" "asg" {
   min_size                  = var.aws_instance["instance_count"]
   max_size                  = var.aws_instance["instance_count"]
   desired_capacity          = var.aws_instance["instance_count"]
-  launch_configuration      = aws_launch_configuration.as_conf.id
   health_check_type         = "EC2"
   health_check_grace_period = "120"
   default_cooldown          = "30"
 
-  lifecycle {
-    create_before_destroy = true
+  launch_template {
+    id      = aws_launch_template.asg_lt.id
+    version = "$Latest"
   }
 
   tag {
@@ -76,6 +87,16 @@ resource "aws_autoscaling_group" "asg" {
     key                 = "app_env"
     value               = var.app_env
     propagate_at_launch = true
+  }
+
+  dynamic "tag" {
+    for_each = var.tags
+
+    content {
+      key                 = tag.value.key
+      value               = tag.value.value
+      propagate_at_launch = tag.value.propagate_at_launch
+    }
   }
 }
 

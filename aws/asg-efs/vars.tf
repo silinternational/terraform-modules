@@ -30,6 +30,11 @@ variable "aws_instance" {
   }
 }
 
+variable "root_device_name" {
+  type    = string
+  default = "/dev/xvda"
+}
+
 variable "private_subnet_ids" {
   type = list(string)
 }
@@ -73,3 +78,8 @@ variable "additional_user_data" {
   default     = ""
 }
 
+variable "tags" {
+  type        = list(any)
+  description = "Additional tags to add to asg."
+  default     = []
+}
