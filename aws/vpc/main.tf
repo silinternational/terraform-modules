@@ -71,6 +71,7 @@ resource "aws_eip" "gateway_eip" {
     app_name = var.app_name
     app_env  = var.app_env
   }
+  vpc = true
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
