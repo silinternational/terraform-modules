@@ -17,6 +17,7 @@ image.
 
 ## Optional Inputs
 
+ - `repository_lifecycle_policy` - The lifecycle policy
  - `tags` - A map of tags to add to the repository
 
 ## Outputs

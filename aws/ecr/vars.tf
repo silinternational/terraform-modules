@@ -14,6 +14,9 @@ variable "cd_user_arn" {
   type = string
 }
 
+variable "repository_lifecycle_policy" {
+  default = ""
+}
 
 variable "tags" {
   type    = map(string)
