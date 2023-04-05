@@ -49,6 +49,23 @@ locals {
       }
     ]
   })
+
+  lifecycle_policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1,
+        description  = "Keep only image_retention_count images",
+        selection = {
+          tagStatus   = "tagged",
+          countType   = "imageCountMoreThan",
+          countNumber = var.image_retention_count,
+        },
+        action = {
+          type = "expire",
+        }
+      },
+    ]
+  })
 }
 
 resource "aws_ecr_repository_policy" "policy" {
@@ -57,8 +74,8 @@ resource "aws_ecr_repository_policy" "policy" {
 }
 
 resource "aws_ecr_lifecycle_policy" "policy" {
-  count = length(var.repository_lifecycle_policy) > 0 ? 1 : 0
+  count = var.image_retention_count > 0 ? 1 : 0
 
   repository = aws_ecr_repository.repo
-  policy     = var.repository_lifecycle_policy
+  policy     = var.image_retention_count
 }

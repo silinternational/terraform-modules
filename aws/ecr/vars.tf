@@ -14,8 +14,8 @@ variable "cd_user_arn" {
   type = string
 }
 
-variable "repository_lifecycle_policy" {
-  default = ""
+variable "image_retention_count" {
+  default = 0
 }
 
 variable "tags" {
