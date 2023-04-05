@@ -15,6 +15,10 @@ image.
  - `cd_user_arn` - ARN for an IAM user used by a Continuous Delivery service
     for pushing Docker images
 
+## Optional Inputs
+
+ - `tags` - A map of tags to add to the repository
+
 ## Outputs
 
  - `repo_url` - The repository url. Ex: `1234567890.dkr.ecr.us-east-1.amazonaws.com/repo-name`
