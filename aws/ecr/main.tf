@@ -56,7 +56,7 @@ locals {
         rulePriority = 1,
         description  = "Keep only image_retention_count images",
         selection = {
-          tagStatus   = "tagged",
+          tagStatus   = "any",
           countType   = "imageCountMoreThan",
           countNumber = var.image_retention_count,
         },
