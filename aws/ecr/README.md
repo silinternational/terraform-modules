@@ -17,7 +17,8 @@ image.
 
 ## Optional Inputs
 
- - `image_retention_count` - The number of images to retain
+ - `image_retention_count` - The number of images to retain, inclusive of any images identified by `image_retention_tags`. The images are sorted by the push time and the newest images are retained. If omitted or set to 0, no lifecycle rule will be created.
+ - `image_retention_tags` - A list of image tags to always retain, regardless of the age of the image. No more than 999 tags may be specified in this list.
  - `tags` - A map of tags to add to the repository
 
 ## Outputs
@@ -33,5 +34,7 @@ module "ecr" {
   ecsInstanceRole_arn = "${data.terraform_remote_state.cluster.ecsInstanceRole_arn}"
   ecsServiceRole_arn = "${data.terraform_remote_state.cluster.ecsServiceRole_arn}"
   cd_user_arn = "${data.terraform_remote_state.cluster.cd_user_arn}"
+  image_retention_count = 10
+  image_retention_tags = ["latest", "main", "develop"]
 }
 ```

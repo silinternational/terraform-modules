@@ -51,20 +51,37 @@ locals {
   })
 
   lifecycle_policy = jsonencode({
-    rules = [
-      {
-        rulePriority = 1,
-        description  = "Keep only image_retention_count images",
-        selection = {
-          tagStatus   = "any",
-          countType   = "imageCountMoreThan",
-          countNumber = var.image_retention_count,
-        },
-        action = {
-          type = "expire",
+    rules = concat(
+      [
+        for i, tag in var.image_retention_tags : {
+          rulePriority = i + 1
+          description  = "Keep specified images"
+          selection = {
+            tagStatus     = "tagged"
+            tagPrefixList = [tag]
+            countType     = "imageCountMoreThan"
+            countNumber   = 1
+          },
+          action = {
+            type = "expire"
+          }
         }
-      },
-    ]
+      ],
+      [
+        {
+          rulePriority = 1000,
+          description  = "Keep only image_retention_count images"
+          selection = {
+            tagStatus   = "any"
+            countType   = "imageCountMoreThan"
+            countNumber = var.image_retention_count
+          },
+          action = {
+            type = "expire"
+          }
+        }
+      ]
+    )
   })
 }
 
