@@ -50,6 +50,11 @@ locals {
     ]
   })
 
+  /*
+   This lifecycle policy expires images older than the `var.image_retention_count` newest images and not matched by
+   any of the tags given in `var.image_retention_tags`. Each tag in `var.image_retention_tags` must be added as a
+   separate rule because the list of tags within a rule must all be present on an image for it to match the rule.
+ */
   lifecycle_policy = jsonencode({
     rules = concat(
       [
