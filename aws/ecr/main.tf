@@ -3,13 +3,6 @@
  */
 resource "aws_ecr_repository" "repo" {
   name = var.repo_name
-
-  tags = merge({
-    managed_by = "terraform"
-    file       = path.module
-    repository = "github.com/silinternational/terraform-modules"
-    workspace  = path.workspace
-  }, var.tags)
 }
 
 locals {

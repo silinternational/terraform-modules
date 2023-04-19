@@ -22,8 +22,3 @@ variable "image_retention_tags" {
   type    = list(string)
   default = ["latest"]
 }
-
-variable "tags" {
-  type    = map(string)
-  default = {}
-}
