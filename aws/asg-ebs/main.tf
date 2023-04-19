@@ -17,6 +17,7 @@ locals {
     ebs_fs_type          = var.ebs_fs_type
     ebs_mountopts        = var.ebs_mountopts
   })
+  tag_this = ["network-interface", "volume"]
 }
 
 /*
@@ -51,6 +52,57 @@ resource "aws_launch_template" "asg_lt" {
   monitoring {
     enabled = true
   }
+
+  dynamic "tag_specifications" {
+    for_each = toset(local.tag_this)
+    content {
+      resource_type = tag_specifications.key
+
+      /*
+      tags = {
+        managed_by        = "terraform"
+        workspace         = terraform.workspace
+        itse_app_name     = var.itse_app_name
+        itse_app_env      = var.itse_app_env
+        itse_app_customer = var.itse_app_customer
+      }
+      */
+
+      dynamic "tags" {
+      for_each = var.lt_tags
+
+      content {
+        key   = tags.value.key
+        value = tags.value.value
+      }
+    }
+  }
+
+/*
+  tag_specifications {
+    resource_type = "network-interface"
+
+    tags = {
+      managed_by        = "terraform"
+      workspace         = terraform.workspace
+      itse_app_name     = var.itse_app_name
+      itse_app_env      = var.itse_app_env
+      itse_app_customer = var.itse_app_customer
+    }
+  }
+
+  tag_specifications {
+    resource_type = "volume"
+
+    tags = {
+      managed_by        = "terraform"
+      workspace         = terraform.workspace
+      itse_app_name     = var.itse_app_name
+      itse_app_env      = var.itse_app_env
+      itse_app_customer = var.itse_app_customer
+    }
+  }
+*/
 }
 
 /*
