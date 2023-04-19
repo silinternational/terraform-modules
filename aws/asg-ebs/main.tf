@@ -69,11 +69,12 @@ resource "aws_launch_template" "asg_lt" {
       */
 
       dynamic "tags" {
-      for_each = var.lt_tags
+        for_each = var.lt_tags
 
-      content {
-        key   = tags.value.key
-        value = tags.value.value
+        content {
+          key   = tags.value.key
+          value = tags.value.value
+        }
       }
     }
   }
