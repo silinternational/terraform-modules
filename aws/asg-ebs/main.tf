@@ -53,6 +53,33 @@ resource "aws_launch_template" "asg_lt" {
     enabled = true
   }
 
+  tag_specifications (
+    resource_type = "network-interface"
+
+    dynamic "tags" {
+      for_each = var.lt_tags
+
+      content {
+        key   = tags.value.key
+        value = tags.value.value
+      }
+    }
+  }
+
+  tag_specifications (
+    resource_type = "volume"
+
+    dynamic "tags" {
+      for_each = var.lt_tags
+
+      content {
+        key   = tags.value.key
+        value = tags.value.value
+      }
+    }
+  }
+
+/*
   dynamic "tag_specifications" {
     for_each = toset(local.tag_this)
     content {
@@ -78,6 +105,7 @@ resource "aws_launch_template" "asg_lt" {
       }
     }
   }
+*/
 
 /*
   tag_specifications {
