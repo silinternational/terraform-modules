@@ -53,7 +53,7 @@ resource "aws_launch_template" "asg_lt" {
     enabled = true
   }
 
-  tag_specifications (
+  tag_specifications {
     resource_type = "network-interface"
 
     dynamic "tags" {
@@ -66,7 +66,7 @@ resource "aws_launch_template" "asg_lt" {
     }
   }
 
-  tag_specifications (
+  tag_specifications {
     resource_type = "volume"
 
     dynamic "tags" {
