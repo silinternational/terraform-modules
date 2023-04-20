@@ -28,6 +28,7 @@ an auto scaling group that uses the template.  An EFS file system is mounted.
  - `associate_public_ip_address` - true/false - Whether or not to associate public ip addresses with instances. Default: false
  - `additional_user_data` - command to append to the EC2 user\_data, default is ""
  - `tags` - A list of tag definitions to be applied to the asg. See example below.
+ - `lt_tags` - A map of tag definitions to be applied to the network interfaces and volumes created by the launch template. See example below.
 
 ## Outputs
 
@@ -58,5 +59,10 @@ module "asg" {
       propagate_at_launch = true
     },
   ]
+
+  lt_tags = {
+    tagname1 = "value1"
+    tagname2 = "value2"
+  }
 }
 ```

@@ -83,6 +83,12 @@ variable "tags" {
   default     = []
 }
 
+variable "lt_tags" {
+  type        = map(string)
+  description = "Map of tags to be added to network-interface and volume created by the launch template"
+  default     = {}
+}
+
 variable "ebs_device" {
   type        = string
   default     = ""

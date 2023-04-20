@@ -40,6 +40,17 @@ resource "aws_launch_template" "asg_lt" {
   monitoring {
     enabled = true
   }
+
+  dynamic "tag_specifications" {
+    for_each = ["network-interface", "volume"]
+    iterator = resource
+
+    content {
+      resource_type = resource.value
+
+      tags = var.lt_tags
+    }
+  }
 }
 
 /*
