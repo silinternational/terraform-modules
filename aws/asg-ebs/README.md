@@ -37,7 +37,7 @@ an auto scaling group that uses the template.  An EBS file system is mounted.
  - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
  - `ebs_mountopts` - Mount options to include in /etc/fstab, default is "defaults,noatime"
  - `tags` - A list of tag definitions in JSON format to be applied to the asg.
- - `lt_tags` - A list of tag definitions in JSON format to be applied to the network interfaces and volumes created by the launch template.
+ - `lt_tags` - A map of tag definitions to be applied to the network interfaces and volumes created by the launch template.
 
 ## Outputs
 
@@ -75,11 +75,9 @@ module "asg" {
     },
   ]
 
-  lt_tags = [
-    {
-      key   = "foo"
-      value = "bar"
-    },
-  ]
+  lt_tags = {
+    tagname1 = "value1"
+    tagname2 = "value2"
+  }
 }
 ```
