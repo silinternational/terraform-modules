@@ -17,7 +17,7 @@ locals {
     ebs_fs_type          = var.ebs_fs_type
     ebs_mountopts        = var.ebs_mountopts
   })
-  tag_this = ["network-interface", "volume"]
+  #  tag_this = ["network-interface", "volume"]
 }
 
 /*
@@ -53,31 +53,42 @@ resource "aws_launch_template" "asg_lt" {
     enabled = true
   }
 
-  tag_specifications {
-    resource_type = "network-interface"
+  dynamic "tag_specifications" {
+    for_each = ["network-interface", "volume"]
+    iterator = resource
 
-    dynamic "tags" {
-      for_each = var.lt_tags
+    content {
+      resource_type = resource.value
 
-      content {
-        key   = tags.value.key
-        value = tags.value.value
-      }
+      tags = var.lt_tags
     }
   }
 
-  tag_specifications {
-    resource_type = "volume"
-
-    dynamic "tags" {
-      for_each = var.lt_tags
-
-      content {
-        key   = tags.value.key
-        value = tags.value.value
-      }
-    }
-  }
+#  tag_specifications {
+#    resource_type = "network-interface"
+#
+#    dynamic "tags" {
+#      for_each = var.lt_tags
+#
+#      content {
+#        key   = tags.value.key
+#        value = tags.value.value
+#      }
+#    }
+#  }
+#
+#  tag_specifications {
+#    resource_type = "volume"
+#
+#    dynamic "tags" {
+#      for_each = var.lt_tags
+#
+#      content {
+#        key   = tags.value.key
+#        value = tags.value.value
+#      }
+#    }
+#  }
 
 #/*
 #  dynamic "tag_specifications" {

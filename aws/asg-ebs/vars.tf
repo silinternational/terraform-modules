@@ -84,9 +84,12 @@ variable "tags" {
 }
 
 variable "lt_tags" {
-  type        = list(object({ key = string, value = string }))
-  description = "List of maps with keys 'key' and 'value' to be added to network-interface and volume created by the launch template"
-  default     = []
+  #  type        = list(object({ key = string, value = string }))
+  #  description = "List of maps with keys 'key' and 'value' to be added to network-interface and volume created by the launch template"
+  #  default     = []
+  type        = map(string)
+  description = "Map of tags to be added to network-interface and volume created by the launch template"
+  default     = {}
 }
 
 variable "ebs_device" {
