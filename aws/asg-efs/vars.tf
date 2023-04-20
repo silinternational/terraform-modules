@@ -83,3 +83,9 @@ variable "tags" {
   description = "Additional tags to add to asg."
   default     = []
 }
+
+variable "lt_tags" {
+  type        = map(string)
+  description = "Map of tags to be added to network-interface and volume created by the launch template"
+  default     = {}
+}
