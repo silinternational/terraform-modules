@@ -37,3 +37,8 @@ variable "notification_events" {
   default     = ["BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_FAILED", "RESTORE_JOB_COMPLETED"]
 }
 
+variable "sns_topic_arn" {
+  description = "The SNS topic to use for notifications. Leave blank to disable notifications."
+  type        = string
+  default     = ""
+}
