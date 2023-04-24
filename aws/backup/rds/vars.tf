@@ -38,7 +38,7 @@ variable "notification_events" {
 }
 
 variable "sns_topic_arn" {
-  description = "The SNS topic to use for notifications. Leave blank to disable notifications."
+  description = "The SNS topic to use for notifications. Leave blank to create a topic named backup-vault-events."
   type        = string
   default     = ""
 }
