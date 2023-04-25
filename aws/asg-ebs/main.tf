@@ -59,7 +59,7 @@ resource "aws_launch_template" "asg_lt" {
     content {
       resource_type = resource.value
 
-      tags = var.lt_tags
+      tags = var.tags
     }
   }
 }
@@ -104,10 +104,9 @@ resource "aws_autoscaling_group" "asg" {
     for_each = var.tags
 
     content {
-      key                 = tag.value.key
-      value               = tag.value.value
-      propagate_at_launch = tag.value.propagate_at_launch
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
     }
   }
 }
-
