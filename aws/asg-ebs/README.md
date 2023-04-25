@@ -36,8 +36,7 @@ an auto scaling group that uses the template.  An EBS file system is mounted.
  - `ebs_mkfs_extraopts` - Extra options to pass to the mkfs command. Default: ""
  - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
  - `ebs_mountopts` - Mount options to include in /etc/fstab, default is "defaults,noatime"
- - `tags` - A list of tag definitions to be applied to the asg. See example below.
- - `lt_tags` - A map of tag definitions to be applied to the network interfaces and volumes created by the launch template. See example below.
+ - `tags` - Map of tags to be added to all resources, including the network-interface and volume created by the launch template. The `propagate_at_launch` flag will be set true for all tags.
 
 ## Outputs
 
@@ -67,17 +66,8 @@ module "asg" {
   ebs_mkfs_label = "MyBigFS"
   ebs_mkfs_extraopts = "-m 2 -i 32768"
 
-  tags = [
-    {
-      key                 = "foo"
-      value               = "bar"
-      propagate_at_launch = true
-    },
-  ]
-
-  lt_tags = {
-    tagname1 = "value1"
-    tagname2 = "value2"
+  tags = {
+    foo = bar
   }
 }
 ```
