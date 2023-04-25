@@ -91,6 +91,6 @@ resource "aws_ecr_repository_policy" "policy" {
 resource "aws_ecr_lifecycle_policy" "policy" {
   count = var.image_retention_count > 0 ? 1 : 0
 
-  repository = aws_ecr_repository.repo
+  repository = aws_ecr_repository.repo.name
   policy     = local.lifecycle_policy
 }

@@ -25,7 +25,7 @@ an auto scaling group that uses the template.
  - `additional_security_groups` - List of additional security groups (in addition to default vpc security group)
  - `associate_public_ip_address` - true/false - Whether or not to associate public ip addresses with instances. Default: false
  - `additional_user_data` - command to append to the EC2 user\_data, default is ""
- - `tags` - A list of tag definitions to be applied to the asg. See example below.
+ - `tags` - Map of tags to be added to all resources, including the network-interface and volume created by the launch template. The `propagate_at_launch` flag will be set true for all tags.
 
 ## Outputs
 
@@ -47,12 +47,8 @@ module "asg" {
   ami_id = "${module.ecs.ami_id}"
   additional_user_data = "yum install -y something-interesting"
 
-  tags = [
-    {
-      key                 = "foo"
-      value               = "bar"
-      propagate_at_launch = true
-    },
-  ]
+  tags = {
+    foo = bar
+  }
 }
 ```

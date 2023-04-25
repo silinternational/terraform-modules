@@ -69,7 +69,7 @@ variable "additional_user_data" {
 }
 
 variable "tags" {
-  type        = list(map(any))
-  description = "Additional tags to add to asg."
-  default     = []
+  type        = map(string)
+  description = "Map of tags to be added to all resources, including the network-interface and volume created by the launch template"
+  default     = {}
 }
