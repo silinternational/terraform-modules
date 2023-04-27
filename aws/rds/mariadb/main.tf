@@ -12,7 +12,7 @@ resource "aws_db_instance" "db_instance" {
   storage_type            = var.storage_type
   storage_encrypted       = var.storage_encrypted
   kms_key_id              = var.kms_key_id
-  availability_zone       = var.multi_az == "true" ? "" : var.availability_zone
+  availability_zone       = var.multi_az ? "" : var.availability_zone
   backup_retention_period = var.backup_retention_period
   multi_az                = var.multi_az
   publicly_accessible     = var.publicly_accessible
@@ -27,4 +27,3 @@ resource "aws_db_instance" "db_instance" {
     app_env  = var.app_env
   }, var.tags)
 }
-
