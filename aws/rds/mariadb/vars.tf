@@ -21,18 +21,8 @@ variable "db_root_pass" {
   type = string
 }
 
-variable "deletion_protection" {
-  type    = bool
-  default = false
-}
-
 variable "subnet_group_name" {
   type = string
-}
-
-variable "availability_zone" {
-  type    = string
-  default = ""
 }
 
 variable "security_groups" {
@@ -42,9 +32,20 @@ variable "security_groups" {
 /*
  * Optional variables
  */
+
+variable "availability_zone" {
+  type    = string
+  default = ""
+}
+
 variable "copy_tags_to_snapshot" {
   type    = bool
   default = true
+}
+
+variable "deletion_protection" {
+  type    = bool
+  default = false
 }
 
 variable "engine" {
