@@ -2,7 +2,7 @@
  * Create ECS cluster
  */
 resource "aws_ecs_cluster" "ecs_cluster" {
-  name = "${var.app_name}-${var.app_env}"
+  name = var.cluster_name == "" ? "${var.app_name}-${var.app_env}" : var.cluster_name
 }
 
 /*
