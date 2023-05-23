@@ -4,10 +4,10 @@ resource "aws_db_instance" "db_instance" {
   allocated_storage       = var.allocated_storage
   copy_tags_to_snapshot   = var.copy_tags_to_snapshot
   instance_class          = var.instance_class
-  db_name                 = var.db_name
+  db_name                 = var.replicate_source_db == "" ? var.db_name : ""
   identifier              = "${var.app_name}-${var.app_env}"
-  username                = var.db_root_user
-  password                = var.db_root_pass
+  username                = var.replicate_source_db == "" ? var.db_root_user : ""
+  password                = var.replicate_source_db == "" ? var.db_root_pass : ""
   db_subnet_group_name    = var.subnet_group_name
   storage_type            = var.storage_type
   storage_encrypted       = var.storage_encrypted
@@ -20,6 +20,8 @@ resource "aws_db_instance" "db_instance" {
   skip_final_snapshot     = var.skip_final_snapshot
   parameter_group_name    = var.parameter_group_name
   deletion_protection     = var.deletion_protection
+  replicate_source_db     = var.replicate_source_db
+  replica_mode            = var.replica_mode
 
   tags = merge({
     Name     = "${var.app_name}-${var.app_env}"

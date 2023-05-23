@@ -113,3 +113,15 @@ variable "tags" {
   description = "Map of tags to add to the rds instance. Duplicate tags will be overridden."
   default     = {}
 }
+
+variable "replicate_source_db" {
+  type        = string
+  description = "To create a replica DB, specify the source database"
+  default     = ""
+}
+
+variable "replica_mode" {
+  type        = string
+  description = "Specifies whether the replica is in either \"mounted\" or \"open-read-only\" mode. This attribute is only supported by Oracle instances."
+  default     = ""
+}
