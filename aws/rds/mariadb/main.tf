@@ -4,10 +4,10 @@ resource "aws_db_instance" "db_instance" {
   allocated_storage       = var.allocated_storage
   copy_tags_to_snapshot   = var.copy_tags_to_snapshot
   instance_class          = var.instance_class
-  db_name                 = var.replicate_source_db == "" ? var.db_name : ""
+  db_name                 = var.replicate_source_db == null ? var.db_name : null
   identifier              = "${var.app_name}-${var.app_env}"
-  username                = var.replicate_source_db == "" ? var.db_root_user : ""
-  password                = var.replicate_source_db == "" ? var.db_root_pass : ""
+  username                = var.replicate_source_db == null ? var.db_root_user : null
+  password                = var.replicate_source_db == null ? var.db_root_pass : null
   db_subnet_group_name    = var.subnet_group_name
   storage_type            = var.storage_type
   storage_encrypted       = var.storage_encrypted

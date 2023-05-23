@@ -117,11 +117,11 @@ variable "tags" {
 variable "replicate_source_db" {
   type        = string
   description = "To create a replica DB, specify the source database"
-  default     = ""
+  default     = null
 }
 
 variable "replica_mode" {
   type        = string
   description = "Specifies whether the replica is in either \"mounted\" or \"open-read-only\" mode. This attribute is only supported by Oracle instances."
-  default     = ""
+  default     = null
 }
