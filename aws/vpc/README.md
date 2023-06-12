@@ -19,6 +19,7 @@ be useful.
 ## Optional Inputs
 
  - `enable_dns_hostnames` - default `false`
+ - `create_nat_gateway` - default `true`
 
 ## Outputs
 

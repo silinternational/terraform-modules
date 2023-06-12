@@ -26,3 +26,8 @@ variable "enable_dns_hostnames" {
   default = false
 }
 
+variable "create_nat_gateway" {
+  description = "Set to false to remove NAT gateway and associated route"
+  type        = bool
+  default     = true
+}

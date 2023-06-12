@@ -75,6 +75,8 @@ resource "aws_eip" "gateway_eip" {
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
+  count = var.create_nat_gateway ? 1 : 0
+
   allocation_id = aws_eip.gateway_eip.id
   subnet_id     = aws_subnet.public_subnet[0].id
   depends_on    = [aws_internet_gateway.internet_gateway]
@@ -100,9 +102,11 @@ resource "aws_route_table" "nat_route_table" {
 }
 
 resource "aws_route" "nat_route" {
+  count = var.create_nat_gateway ? 1 : 0
+
   route_table_id         = aws_route_table.nat_route_table.id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.nat_gateway.id
+  nat_gateway_id         = one(aws_nat_gateway.nat_gateway[*].id)
 }
 
 resource "aws_route_table_association" "private_route" {
