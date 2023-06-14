@@ -12,7 +12,7 @@ an auto scaling group that uses the template.
  - `app_name` - Name of application, ex: Doorman, IdP, etc.
  - `app_env` - Name of environment, ex: prod, test, etc.
  - `ami_id` - ID for AMI to be used.
- - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`
+ - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`, `cpu_credits`
  - `private_subnet_ids` - A list of private subnet ids to identify VPC subnets for placement
  - `default_sg_id` - VPC default security group ID to add instances to
  - `ecs_instance_profile_id` - IAM profile ID for ecsInstanceProfile

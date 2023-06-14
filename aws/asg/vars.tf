@@ -27,6 +27,7 @@ variable "aws_instance" {
     instance_type  = "t2.micro"
     volume_size    = "8"
     instance_count = "3"
+    cpu_credits    = "standard"
   }
 }
 

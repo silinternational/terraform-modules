@@ -12,7 +12,7 @@ an auto scaling group that uses the template.  An EBS file system is mounted.
  - `app_name` - Name of application, ex: Doorman, IdP, etc.
  - `app_env` - Name of environment, ex: prod, test, etc.
  - `ami_id` - ID for AMI to be used.
- - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`
+ - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`, `cpu_credits`
  - `aws_region` - Default AWS region
  - `aws_access_key` - Access key to allow access via the AWS CLI
  - `aws_secret_key` - Secret access key to allow access via the AWS CLI

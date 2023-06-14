@@ -28,6 +28,10 @@ resource "aws_launch_template" "asg_lt" {
     }
   }
 
+  credit_specification {
+    cpu_credits = var.aws_instance["cpu_credits"]
+  }
+
   network_interfaces {
     associate_public_ip_address = var.associate_public_ip_address
     security_groups             = concat([var.default_sg_id], var.additional_security_groups)
