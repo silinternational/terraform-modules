@@ -12,7 +12,7 @@ an auto scaling group that uses the template.  An EBS file system is mounted.
  - `app_name` - Name of application, ex: Doorman, IdP, etc.
  - `app_env` - Name of environment, ex: prod, test, etc.
  - `ami_id` - ID for AMI to be used.
- - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`, `cpu_credits`
+ - `aws_instance` - A map containing keys for `instance_type`, `volume_size`, `instance_count`
  - `aws_region` - Default AWS region
  - `aws_access_key` - Access key to allow access via the AWS CLI
  - `aws_secret_key` - Secret access key to allow access via the AWS CLI
@@ -37,6 +37,7 @@ an auto scaling group that uses the template.  An EBS file system is mounted.
  - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
  - `ebs_mountopts` - Mount options to include in /etc/fstab, default is "defaults,noatime"
  - `tags` - Map of tags to be added to all resources, including the network-interface and volume created by the launch template. The `propagate_at_launch` flag will be set true for all tags.
+ - `cpu_credits` - Value for the `credit_specification` if you want to override the AWS default for `aws_launch_template`.
 
 ## Outputs
 

@@ -29,7 +29,7 @@ resource "aws_launch_template" "asg_lt" {
   }
 
   credit_specification {
-    cpu_credits = var.aws_instance["cpu_credits"]
+    cpu_credits = var.cpu_credits
   }
 
   network_interfaces {
