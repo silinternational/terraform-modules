@@ -36,6 +36,12 @@ variable "aws_instance" {
   }
 }
 
+variable "cpu_credits" {
+  description = "One of 'standard', 'unlimited'"
+  type        = string
+  default     = null
+}
+
 variable "root_device_name" {
   type    = string
   default = "/dev/xvda"

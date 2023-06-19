@@ -37,6 +37,7 @@ an auto scaling group that uses the template.  An EBS file system is mounted.
  - `ebs_fs_type` - Type of filesystem to create. Default: `ext4`
  - `ebs_mountopts` - Mount options to include in /etc/fstab, default is "defaults,noatime"
  - `tags` - Map of tags to be added to all resources, including the network-interface and volume created by the launch template. The `propagate_at_launch` flag will be set true for all tags.
+ - `cpu_credits` - Value for the `credit_specification` if you want to override the AWS default for `aws_launch_template`.
 
 ## Outputs
 
