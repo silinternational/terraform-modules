@@ -17,6 +17,7 @@ locals {
     ebs_fs_type          = var.ebs_fs_type
     ebs_mountopts        = var.ebs_mountopts
   })
+  credits = var.cpu_credits == "" ? [] : [var.cpu_credits]
 }
 
 /*
@@ -36,6 +37,14 @@ resource "aws_launch_template" "asg_lt" {
     ebs {
       delete_on_termination = true
       volume_size           = var.aws_instance["volume_size"]
+    }
+  }
+
+  dynamic "credit_specification" {
+    iterator = ii
+    for_each = local.credits
+    content {
+      cpu_credits = ii.value
     }
   }
 

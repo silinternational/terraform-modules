@@ -6,6 +6,7 @@ locals {
     ecs_cluster_name     = var.ecs_cluster_name
     additional_user_data = var.additional_user_data
   })
+  credits = var.cpu_credits == "" ? [] : [var.cpu_credits]
 }
 
 /*
@@ -25,6 +26,14 @@ resource "aws_launch_template" "asg_lt" {
     ebs {
       delete_on_termination = true
       volume_size           = var.aws_instance["volume_size"]
+    }
+  }
+
+  dynamic "credit_specification" {
+    iterator = ii
+    for_each = local.credits
+    content {
+      cpu_credits = ii.value
     }
   }
 
