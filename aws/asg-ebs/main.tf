@@ -17,6 +17,7 @@ locals {
     ebs_fs_type          = var.ebs_fs_type
     ebs_mountopts        = var.ebs_mountopts
   })
+  credits = [var.cpu_credits]
 }
 
 /*
@@ -39,8 +40,12 @@ resource "aws_launch_template" "asg_lt" {
     }
   }
 
-  credit_specification {
-    cpu_credits = var.cpu_credits
+  dynamic "credit_specification" {
+    iterator = ii
+    for_each = local.credits
+    content {
+      cpu_credits = ii.value
+    }
   }
 
   network_interfaces {

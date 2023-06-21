@@ -33,7 +33,7 @@ variable "aws_instance" {
 variable "cpu_credits" {
   description = "One of 'standard', 'unlimited'"
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "root_device_name" {
