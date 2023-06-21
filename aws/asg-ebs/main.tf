@@ -17,7 +17,7 @@ locals {
     ebs_fs_type          = var.ebs_fs_type
     ebs_mountopts        = var.ebs_mountopts
   })
-  credits = [var.cpu_credits]
+  credits = var.cpu_credits == "" ? [] : [var.cpu_credits]
 }
 
 /*

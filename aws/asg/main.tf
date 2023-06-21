@@ -6,7 +6,7 @@ locals {
     ecs_cluster_name     = var.ecs_cluster_name
     additional_user_data = var.additional_user_data
   })
-  credits = [var.cpu_credits]
+  credits = var.cpu_credits == "" ? [] : [var.cpu_credits]
 }
 
 /*
