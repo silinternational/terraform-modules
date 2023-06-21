@@ -6,6 +6,7 @@ locals {
     ecs_cluster_name     = var.ecs_cluster_name
     additional_user_data = var.additional_user_data
   })
+  credits = var.cpu_credits == "" ? [] : [var.cpu_credits]
 }
 
 /*
@@ -28,8 +29,12 @@ resource "aws_launch_template" "asg_lt" {
     }
   }
 
-  credit_specification {
-    cpu_credits = var.cpu_credits
+  dynamic "credit_specification" {
+    iterator = ii
+    for_each = local.credits
+    content {
+      cpu_credits = ii.value
+    }
   }
 
   network_interfaces {
