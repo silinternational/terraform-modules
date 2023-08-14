@@ -20,6 +20,9 @@ be useful.
 
  - `enable_dns_hostnames` - default `false`
  - `create_nat_gateway` - default `true`
+ - `private_subnet_cidr_blocks`
+ - `public_subnet_cidr_blocks`
+ - `vpc_cidr_block`
 
 ## Outputs
 
