@@ -31,3 +31,9 @@ variable "create_nat_gateway" {
   type        = bool
   default     = true
 }
+
+variable "vpc_cidr_block" {
+  description = "The block of IP addresses (as a CIDR) the VPC should use"
+  type        = string
+  default     = "10.0.0.0/16"
+}
