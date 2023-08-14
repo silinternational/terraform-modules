@@ -32,6 +32,12 @@ variable "create_nat_gateway" {
   default     = true
 }
 
+variable "private_subnet_cidr_blocks" {
+  description = "The CIDR blocks for the private subnets (one per AZ, in order). There must be at least as many private CIDRs as AZs, and they must not overlap the public CIDRs."
+  type        = list(string)
+  default     = ["10.0.11.0/24", "10.0.22.0/24", "10.0.33.0/24", "10.0.44.0/24"]
+}
+
 variable "public_subnet_cidr_blocks" {
   description = "The CIDR blocks for the public subnets (one per AZ, in order). There must be at least as many public CIDRs as AZs, and they must not overlap the private CIDRs."
   type        = list(string)
