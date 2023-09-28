@@ -20,36 +20,6 @@ resource "aws_backup_vault" "bkup_vault" {
   }
 }
 
-resource "aws_backup_vault_policy" "bkup_vault_policy" {
-  backup_vault_name = aws_backup_vault.bkup_vault.name
-
-  policy = jsonencode(
-    {
-      Version = "2012-10-17"
-      Id      = "default"
-      Statement = [
-        {
-          Sid    = "default"
-          Effect = "Allow"
-          Principal = {
-            AWS = "*"
-          }
-          Action = [
-            "backup:DescribeBackupVault",
-            "backup:DeleteBackupVault",
-            "backup:PutBackupVaultAccessPolicy",
-            "backup:DeleteBackupVaultAccessPolicy",
-            "backup:GetBackupVaultAccessPolicy",
-            "backup:StartBackupJob",
-            "backup:GetBackupVaultNotifications",
-            "backup:PutBackupVaultNotifications",
-          ]
-          Resource = aws_backup_vault.bkup_vault.arn
-        }
-      ]
-  })
-}
-
 # Create the Backup plan
 resource "aws_backup_plan" "bkup_plan" {
   name = "${var.app_name}-${var.app_env}-db-backup-plan"
