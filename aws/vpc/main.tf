@@ -2,7 +2,7 @@
  * Create VPC using app name and env to name it
  */
 resource "aws_vpc" "vpc" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = var.vpc_cidr_block
   enable_dns_hostnames = var.enable_dns_hostnames
 
   tags = {
@@ -27,7 +27,7 @@ resource "aws_subnet" "public_subnet" {
   count             = length(var.aws_zones)
   vpc_id            = aws_vpc.vpc.id
   availability_zone = element(var.aws_zones, count.index)
-  cidr_block        = "10.0.${(count.index + 1) * 10}.0/24"
+  cidr_block        = element(var.public_subnet_cidr_blocks, count.index)
 
   tags = {
     Name     = "public-${element(var.aws_zones, count.index)}"
@@ -40,7 +40,7 @@ resource "aws_subnet" "private_subnet" {
   count             = length(var.aws_zones)
   vpc_id            = aws_vpc.vpc.id
   availability_zone = element(var.aws_zones, count.index)
-  cidr_block        = "10.0.${(count.index + 1) * 11}.0/24"
+  cidr_block        = element(var.private_subnet_cidr_blocks, count.index)
 
   tags = {
     Name     = "private-${element(var.aws_zones, count.index)}"
@@ -71,9 +71,12 @@ resource "aws_eip" "gateway_eip" {
     app_name = var.app_name
     app_env  = var.app_env
   }
+  vpc = true
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
+  count = var.create_nat_gateway ? 1 : 0
+
   allocation_id = aws_eip.gateway_eip.id
   subnet_id     = aws_subnet.public_subnet[0].id
   depends_on    = [aws_internet_gateway.internet_gateway]
@@ -99,9 +102,11 @@ resource "aws_route_table" "nat_route_table" {
 }
 
 resource "aws_route" "nat_route" {
+  count = var.create_nat_gateway ? 1 : 0
+
   route_table_id         = aws_route_table.nat_route_table.id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.nat_gateway.id
+  nat_gateway_id         = one(aws_nat_gateway.nat_gateway[*].id)
 }
 
 resource "aws_route_table_association" "private_route" {

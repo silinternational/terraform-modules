@@ -18,3 +18,6 @@ output "endpoint" {
   value = aws_db_instance.db_instance.endpoint
 }
 
+output "availability_zone" {
+  value = aws_db_instance.db_instance.availability_zone
+}

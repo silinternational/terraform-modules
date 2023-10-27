@@ -32,6 +32,6 @@ output "aws_zones" {
 }
 
 output "nat_gateway_ip" {
-  value = aws_nat_gateway.nat_gateway.public_ip
+  value = one(aws_nat_gateway.nat_gateway[*].public_ip)
 }
 

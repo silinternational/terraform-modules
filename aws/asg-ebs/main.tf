@@ -17,6 +17,7 @@ locals {
     ebs_fs_type          = var.ebs_fs_type
     ebs_mountopts        = var.ebs_mountopts
   })
+  credits = var.cpu_credits == "" ? [] : [var.cpu_credits]
 }
 
 /*
@@ -39,6 +40,14 @@ resource "aws_launch_template" "asg_lt" {
     }
   }
 
+  dynamic "credit_specification" {
+    iterator = ii
+    for_each = local.credits
+    content {
+      cpu_credits = ii.value
+    }
+  }
+
   network_interfaces {
     associate_public_ip_address = var.associate_public_ip_address
     security_groups             = concat([var.default_sg_id], var.additional_security_groups)
@@ -50,6 +59,17 @@ resource "aws_launch_template" "asg_lt" {
 
   monitoring {
     enabled = true
+  }
+
+  dynamic "tag_specifications" {
+    for_each = ["network-interface", "volume"]
+    iterator = resource
+
+    content {
+      resource_type = resource.value
+
+      tags = var.tags
+    }
   }
 }
 
@@ -88,5 +108,14 @@ resource "aws_autoscaling_group" "asg" {
     value               = var.app_env
     propagate_at_launch = true
   }
-}
 
+  dynamic "tag" {
+    for_each = var.tags
+
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+  }
+}

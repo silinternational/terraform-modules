@@ -4,15 +4,15 @@ resource "aws_db_instance" "db_instance" {
   allocated_storage       = var.allocated_storage
   copy_tags_to_snapshot   = var.copy_tags_to_snapshot
   instance_class          = var.instance_class
-  db_name                 = var.db_name
+  db_name                 = var.replicate_source_db == null ? var.db_name : null
   identifier              = "${var.app_name}-${var.app_env}"
-  username                = var.db_root_user
-  password                = var.db_root_pass
+  username                = var.replicate_source_db == null ? var.db_root_user : null
+  password                = var.replicate_source_db == null ? var.db_root_pass : null
   db_subnet_group_name    = var.subnet_group_name
   storage_type            = var.storage_type
   storage_encrypted       = var.storage_encrypted
   kms_key_id              = var.kms_key_id
-  availability_zone       = var.multi_az == "true" ? "" : var.availability_zone
+  availability_zone       = var.multi_az ? "" : var.availability_zone
   backup_retention_period = var.backup_retention_period
   multi_az                = var.multi_az
   publicly_accessible     = var.publicly_accessible
@@ -20,6 +20,8 @@ resource "aws_db_instance" "db_instance" {
   skip_final_snapshot     = var.skip_final_snapshot
   parameter_group_name    = var.parameter_group_name
   deletion_protection     = var.deletion_protection
+  replicate_source_db     = var.replicate_source_db
+  replica_mode            = var.replica_mode
 
   tags = merge({
     Name     = "${var.app_name}-${var.app_env}"
@@ -27,4 +29,3 @@ resource "aws_db_instance" "db_instance" {
     app_env  = var.app_env
   }, var.tags)
 }
-

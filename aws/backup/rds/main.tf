@@ -20,36 +20,6 @@ resource "aws_backup_vault" "bkup_vault" {
   }
 }
 
-resource "aws_backup_vault_policy" "bkup_vault_policy" {
-  backup_vault_name = aws_backup_vault.bkup_vault.name
-
-  policy = jsonencode(
-    {
-      Version = "2012-10-17"
-      Id      = "default"
-      Statement = [
-        {
-          Sid    = "default"
-          Effect = "Allow"
-          Principal = {
-            AWS = "*"
-          }
-          Action = [
-            "backup:DescribeBackupVault",
-            "backup:DeleteBackupVault",
-            "backup:PutBackupVaultAccessPolicy",
-            "backup:DeleteBackupVaultAccessPolicy",
-            "backup:GetBackupVaultAccessPolicy",
-            "backup:StartBackupJob",
-            "backup:GetBackupVaultNotifications",
-            "backup:PutBackupVaultNotifications",
-          ]
-          Resource = aws_backup_vault.bkup_vault.arn
-        }
-      ]
-  })
-}
-
 # Create the Backup plan
 resource "aws_backup_plan" "bkup_plan" {
   name = "${var.app_name}-${var.app_env}-db-backup-plan"
@@ -63,11 +33,6 @@ resource "aws_backup_plan" "bkup_plan" {
     lifecycle {
       cold_storage_after = 7   # a week in days
       delete_after       = 100 # must be at least 90 days more than cold_storage_after
-    }
-
-    # Metadata you assign to help organize the resources that you create
-    recovery_point_tags = {
-      datetime = timestamp()
     }
   }
 
@@ -110,7 +75,8 @@ resource "aws_iam_role_policy_attachment" "bkup_policy_attachment" {
 
 # Create notifications
 resource "aws_sns_topic" "bkup_sns_topic" {
-  name = "backup-vault-events"
+  count = var.sns_topic_arn == "" ? 1 : 0
+  name  = "backup-vault-events"
 }
 
 data "aws_iam_policy_document" "bkup_sns_policy" {
@@ -127,7 +93,7 @@ data "aws_iam_policy_document" "bkup_sns_policy" {
     }
 
     resources = [
-      aws_sns_topic.bkup_sns_topic.arn,
+      local.sns_topic_arn,
     ]
 
     sid = "__default_statement_ID"
@@ -135,12 +101,16 @@ data "aws_iam_policy_document" "bkup_sns_policy" {
 }
 
 resource "aws_sns_topic_policy" "bkup_sns_topic_policy" {
-  arn    = aws_sns_topic.bkup_sns_topic.arn
+  arn    = local.sns_topic_arn
   policy = data.aws_iam_policy_document.bkup_sns_policy.json
 }
 
 resource "aws_backup_vault_notifications" "bkup_vault_notifications" {
   backup_vault_name   = aws_backup_vault.bkup_vault.name
-  sns_topic_arn       = aws_sns_topic.bkup_sns_topic.arn
+  sns_topic_arn       = local.sns_topic_arn
   backup_vault_events = var.notification_events
+}
+
+locals {
+  sns_topic_arn = var.sns_topic_arn == "" ? aws_sns_topic.bkup_sns_topic[0].arn : var.sns_topic_arn
 }

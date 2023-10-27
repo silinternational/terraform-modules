@@ -6,25 +6,34 @@ locals {
     ecs_cluster_name     = var.ecs_cluster_name
     additional_user_data = var.additional_user_data
   })
+  credits = var.cpu_credits == "" ? [] : [var.cpu_credits]
 }
 
 /*
  * Create Launch Template
  */
 resource "aws_launch_template" "asg_lt" {
-  default_version = 1
-  ebs_optimized   = false
-  name            = "lt-${var.app_name}-${var.app_env}"
-  image_id        = var.ami_id
-  instance_type   = var.aws_instance["instance_type"]
-  key_name        = var.key_name
-  user_data       = base64encode(local.user_data)
+  ebs_optimized          = false
+  name                   = "lt-${var.app_name}-${var.app_env}"
+  image_id               = var.ami_id
+  instance_type          = var.aws_instance["instance_type"]
+  key_name               = var.key_name
+  update_default_version = true
+  user_data              = base64encode(local.user_data)
 
   block_device_mappings {
     device_name = var.root_device_name
     ebs {
       delete_on_termination = true
       volume_size           = var.aws_instance["volume_size"]
+    }
+  }
+
+  dynamic "credit_specification" {
+    iterator = ii
+    for_each = local.credits
+    content {
+      cpu_credits = ii.value
     }
   }
 
@@ -39,6 +48,17 @@ resource "aws_launch_template" "asg_lt" {
 
   monitoring {
     enabled = true
+  }
+
+  dynamic "tag_specifications" {
+    for_each = ["network-interface", "volume"]
+    iterator = resource
+
+    content {
+      resource_type = resource.value
+
+      tags = var.tags
+    }
   }
 }
 
@@ -82,10 +102,9 @@ resource "aws_autoscaling_group" "asg" {
     for_each = var.tags
 
     content {
-      key                 = tag.value.key
-      value               = tag.value.value
-      propagate_at_launch = tag.value.propagate_at_launch
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
     }
   }
 }
-
