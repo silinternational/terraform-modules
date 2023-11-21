@@ -12,6 +12,12 @@ IAM roles to function.
  - `app_name` - Name of application, ex: Doorman, IdP, etc.
  - `app_env` - Name of environment, ex: prod, test, etc.
 
+## Optional Inputs
+
+ - `amiFilter` - A filter to limit which Amazon Machine Images (AMI) to include in the `ami_id` output. The default is "amzn2-ami-ecs-hvm-*-x86_64-ebs".
+ - `cluster_name` - Name of the ECS cluster - if blank, the cluster name will be "app_name-app_env" - if not blank, `app_name` and `app_env` are not required
+ - `tags` - Map of tags to add to the ECS service. Duplicate tags will be overridden.
+
 ## Outputs
 
  - `ecs_cluster_name` - The ECS cluster name
