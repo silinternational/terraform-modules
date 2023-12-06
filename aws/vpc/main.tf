@@ -89,9 +89,30 @@ resource "aws_nat_gateway" "nat_gateway" {
 }
 
 /*
- * Routes for private subnets to use NAT gateway
+ * Set use_transit_gateway to true create transit gateway attachments in the private subnets and
+ * route traffic to the TGW instead of NAT GW.
+ * Should be used when create_nat_gateway=false.
  */
-resource "aws_route_table" "nat_route_table" {
+resource "aws_ec2_transit_gateway_vpc_attachment" "transit_gateway" {
+  count = var.use_transit_gateway ? 1 : 0
+
+  subnet_ids                                      = aws_subnet.private_subnet.*.id
+  transit_gateway_id                              = var.transit_gateway_id
+  vpc_id                                          = aws_vpc.vpc.vpc_id
+  transit_gateway_default_route_table_association = var.transit_gateway_default_route_table_association
+  transit_gateway_default_route_table_propagation = var.transit_gateway_default_route_table_propagation
+
+  tags = {
+    Name     = "TGW-${var.app_name}-${var.app_env}"
+    app_name = var.app_name
+    app_env  = var.app_env
+  }
+}
+
+/*
+ * Routes for private subnets to use NAT or Transit gateway
+ */
+resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
@@ -100,19 +121,33 @@ resource "aws_route_table" "nat_route_table" {
     app_env  = var.app_env
   }
 }
+#Temporary refactoring information to note that we renamed aws_route_table.nat_route_table to aws_route_table.private_route_table
+#This prevents the resource from being destroyed and recreated. Should be kept until all dependant resources have been applied.
+moved {
+  from = aws_route_table.nat_route_table
+  to   = aws_route_table.private_route_table
+}
 
 resource "aws_route" "nat_route" {
   count = var.create_nat_gateway ? 1 : 0
 
-  route_table_id         = aws_route_table.nat_route_table.id
+  route_table_id         = aws_route_table.private_route_table.id
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = one(aws_nat_gateway.nat_gateway[*].id)
+}
+
+resource "aws_route" "transit_gateway" {
+  count = var.use_transit_gateway ? 1 : 0
+
+  route_table_id         = aws_route_table.private_route_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  transit_gateway_id     = var.transit_gateway_id
 }
 
 resource "aws_route_table_association" "private_route" {
   count          = length(var.aws_zones)
   subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
-  route_table_id = aws_route_table.nat_route_table.id
+  route_table_id = aws_route_table.private_route_table.id
 }
 
 /*
