@@ -98,7 +98,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "transit_gateway" {
 
   subnet_ids                                      = aws_subnet.private_subnet.*.id
   transit_gateway_id                              = var.transit_gateway_id
-  vpc_id                                          = aws_vpc.vpc.vpc_id
+  vpc_id                                          = aws_vpc.vpc.id
   transit_gateway_default_route_table_association = var.transit_gateway_default_route_table_association
   transit_gateway_default_route_table_propagation = var.transit_gateway_default_route_table_propagation
 
@@ -121,8 +121,12 @@ resource "aws_route_table" "private_route_table" {
     app_env  = var.app_env
   }
 }
-#Temporary refactoring information to note that we renamed aws_route_table.nat_route_table to aws_route_table.private_route_table
-#This prevents the resource from being destroyed and recreated. Should be kept until all dependant resources have been applied.
+
+/*
+ * Refactoring information to note that we renamed aws_route_table.nat_route_table to aws_route_table.private_route_table
+ * This prevents the resource from being destroyed and recreated. Should be kept at least until the next major revision
+ * but probably should remain permanently.
+ */
 moved {
   from = aws_route_table.nat_route_table
   to   = aws_route_table.private_route_table
