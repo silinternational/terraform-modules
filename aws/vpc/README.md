@@ -7,7 +7,7 @@ be useful.
  - Create VPC named after `app_name` and `app_env`
  - Create public and private subnets for each `aws_zones` specified
  - Provision a Internet Gateway and configure public subnets to route through it
- - Provision a NAT Gateway or Transit Gateway and configure private subnets to route through it
+ - Provision a NAT Gateway (or use an existing Transit Gateway) and configure private subnets to route through it
  - Create a DB subnet group including all private subnets
 
 ## Required Inputs
