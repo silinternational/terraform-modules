@@ -10,11 +10,15 @@ variable "app_env" {
 }
 
 variable "aws_access_key" {
-  type = string
+  description = "not needed, not used"
+  type        = string
+  default     = ""
 }
 
 variable "aws_secret_key" {
-  type = string
+  description = "not needed, not used"
+  type        = string
+  default     = ""
 }
 
 variable "source_arns" {
