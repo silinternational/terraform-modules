@@ -36,6 +36,17 @@ variable "aws_instance" {
   }
 }
 
+variable "cpu_credits" {
+  description = "One of 'standard', 'unlimited'"
+  type        = string
+  default     = ""
+}
+
+variable "root_device_name" {
+  type    = string
+  default = "/dev/xvda"
+}
+
 variable "aws_region" {
 }
 
@@ -70,6 +81,12 @@ variable "additional_user_data" {
   type        = string
   description = "Shell command to append to the EC2 user_data"
   default     = ""
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "Map of tags to be added to all resources, including the network-interface and volume created by the launch template"
+  default     = {}
 }
 
 variable "ebs_device" {

@@ -1,10 +1,8 @@
 /*
  * Generate user_data from template file
  */
-data "template_file" "user_data" {
-  template = file("${path.module}/user-data.sh")
-
-  vars = {
+locals {
+  user_data = templatefile("${path.module}/user-data.sh", {
     ecs_cluster_name     = var.ecs_cluster_name
     additional_user_data = var.additional_user_data
     aws_region           = var.aws_region
@@ -18,29 +16,60 @@ data "template_file" "user_data" {
     ebs_mkfs_extraopts   = var.ebs_mkfs_extraopts
     ebs_fs_type          = var.ebs_fs_type
     ebs_mountopts        = var.ebs_mountopts
-  }
+  })
+  credits = var.cpu_credits == "" ? [] : [var.cpu_credits]
 }
 
 /*
- * Create Launch Configuration
+ * Create Launch Template
  */
-resource "aws_launch_configuration" "as_conf" {
-  name_prefix                 = "${var.app_name}-${var.app_env}-"
-  image_id                    = var.ami_id
-  instance_type               = var.aws_instance["instance_type"]
-  security_groups             = concat([var.default_sg_id], var.additional_security_groups)
-  iam_instance_profile        = var.ecs_instance_profile_id
-  key_name                    = var.key_name
-  associate_public_ip_address = var.associate_public_ip_address
+resource "aws_launch_template" "asg_lt" {
+  default_version = 1
+  ebs_optimized   = false
+  name            = "lt-${var.app_name}-${var.app_env}"
+  image_id        = var.ami_id
+  instance_type   = var.aws_instance["instance_type"]
+  key_name        = var.key_name
+  user_data       = base64encode(local.user_data)
 
-  root_block_device {
-    volume_size = var.aws_instance["volume_size"]
+  block_device_mappings {
+    device_name = var.root_device_name
+    ebs {
+      delete_on_termination = true
+      volume_size           = var.aws_instance["volume_size"]
+    }
   }
 
-  user_data = data.template_file.user_data.rendered
+  dynamic "credit_specification" {
+    iterator = ii
+    for_each = local.credits
+    content {
+      cpu_credits = ii.value
+    }
+  }
 
-  lifecycle {
-    create_before_destroy = true
+  network_interfaces {
+    associate_public_ip_address = var.associate_public_ip_address
+    security_groups             = concat([var.default_sg_id], var.additional_security_groups)
+  }
+
+  iam_instance_profile {
+    name = var.ecs_instance_profile_id
+  }
+
+  monitoring {
+    enabled = true
+  }
+
+  dynamic "tag_specifications" {
+    for_each = ["network-interface", "volume"]
+    iterator = resource
+
+    content {
+      resource_type = resource.value
+
+      tags = var.tags
+    }
   }
 }
 
@@ -53,13 +82,13 @@ resource "aws_autoscaling_group" "asg" {
   min_size                  = var.aws_instance["instance_count"]
   max_size                  = var.aws_instance["instance_count"]
   desired_capacity          = var.aws_instance["instance_count"]
-  launch_configuration      = aws_launch_configuration.as_conf.id
   health_check_type         = "EC2"
   health_check_grace_period = "120"
   default_cooldown          = "30"
 
-  lifecycle {
-    create_before_destroy = true
+  launch_template {
+    id      = aws_launch_template.asg_lt.id
+    version = "$Latest"
   }
 
   tag {
@@ -79,5 +108,14 @@ resource "aws_autoscaling_group" "asg" {
     value               = var.app_env
     propagate_at_launch = true
   }
-}
 
+  dynamic "tag" {
+    for_each = var.tags
+
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+  }
+}

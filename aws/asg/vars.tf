@@ -30,6 +30,17 @@ variable "aws_instance" {
   }
 }
 
+variable "cpu_credits" {
+  description = "One of 'standard', 'unlimited'"
+  type        = string
+  default     = ""
+}
+
+variable "root_device_name" {
+  type    = string
+  default = "/dev/xvda"
+}
+
 variable "private_subnet_ids" {
   type = list(string)
 }
@@ -64,7 +75,7 @@ variable "additional_user_data" {
 }
 
 variable "tags" {
-  type        = list(any)
-  description = "Additional tags to add to asg."
-  default     = []
+  type        = map(string)
+  description = "Map of tags to be added to all resources, including the network-interface and volume created by the launch template"
+  default     = {}
 }

@@ -13,7 +13,8 @@ This module is used to set up CloudTrail logging for your AWS account.
 
 ## Optional Inputs
 
-- `cloudtrail_name` - The name for your Trail in AWS CloudTrail
+- `cloudtrail_name` - The name for your Trail in AWS CloudTrail. Default: `"aws-account-cloudtrail"`
+- `is_multi_region_trail` - Whether the trail is created in the current region or in all regions. Default: `false`
 
 ## Outputs
 

@@ -21,6 +21,12 @@ variable "desired_count" {
   type = string
 }
 
+variable "volumes" {
+  default     = []
+  description = "A list of volume definitions in JSON format that containers in your task may use"
+  type        = list(any)
+}
+
 /*
  * Optional Variables
  */

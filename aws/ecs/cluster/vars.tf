@@ -2,111 +2,35 @@
  * Required variables
  */
 variable "app_name" {
-  type = string
+  description = "The name of the app. Used to create the ECS cluster name. Required if `cluster_name` is not specified."
+  type        = string
+  default     = ""
 }
 
 variable "app_env" {
-  type = string
+  description = "The environment of the app, e.g. \"prod\". Used to create the ECS cluster name."
+  type        = string
+  default     = ""
 }
 
 /*
  * Optional variables
  */
-variable "ecsInstanceRoleAssumeRolePolicy" {
-  type = string
 
-  default = <<EOF
-{
-  "Version": "2008-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-
+variable "amiFilter" {
+  description = "A filter to limit which Amazon Machine Images (AMI) to include in the `ami_id` output."
+  type        = string
+  default     = "amzn2-ami-ecs-hvm-*-x86_64-ebs"
 }
 
-variable "ecsInstancerolePolicy" {
-  type = string
-
-  default = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ecs:CreateCluster",
-        "ecs:DeregisterContainerInstance",
-        "ecs:DiscoverPollEndpoint",
-        "ecs:Poll",
-        "ecs:RegisterContainerInstance",
-        "ecs:StartTelemetrySession",
-        "ecs:Submit*",
-        "ecr:GetAuthorizationToken",
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-
+variable "cluster_name" {
+  description = "Name of the ECS cluster - if blank, the cluster name will be \"app_name-app_env\" - if not blank, app_name and app_env are not required"
+  type        = string
+  default     = ""
 }
 
-variable "ecsServiceRoleAssumeRolePolicy" {
-  type = string
-
-  default = <<EOF
-{
-  "Version": "2008-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "ecs.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
+variable "tags" {
+  description = "Map of tags to add to the ECS service. Duplicate tags will be overridden."
+  type        = map(any)
+  default     = {}
 }
-EOF
-
-}
-
-variable "ecsServiceRolePolicy" {
-  default = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:AuthorizeSecurityGroupIngress",
-        "ec2:Describe*",
-        "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
-        "elasticloadbalancing:DeregisterTargets",
-        "elasticloadbalancing:Describe*",
-        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
-        "elasticloadbalancing:RegisterTargets"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-
-}
-
