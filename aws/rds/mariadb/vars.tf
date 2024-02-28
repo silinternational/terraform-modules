@@ -38,6 +38,11 @@ variable "availability_zone" {
   default = ""
 }
 
+variable "ca_cert_identifier" {
+  type    = string
+  default = "rds-ca-rsa2048-g1"
+}
+
 variable "copy_tags_to_snapshot" {
   type    = bool
   default = true
