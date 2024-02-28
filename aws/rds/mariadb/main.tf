@@ -1,4 +1,5 @@
 resource "aws_db_instance" "db_instance" {
+  apply_immediately       = var.apply_immediately
   engine                  = var.engine
   engine_version          = var.engine_version
   allocated_storage       = var.allocated_storage
