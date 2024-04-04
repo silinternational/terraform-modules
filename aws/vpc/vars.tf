@@ -12,8 +12,7 @@ variable "app_env" {
 }
 
 variable "aws_zones" {
-  description = "A list of zones to create subnets (max 8)"
-  type        = list(string)
+  type = list(string)
 
   default = [
     "us-east-1c",
@@ -73,10 +72,4 @@ variable "vpc_cidr_block" {
   description = "The block of IP addresses (as a CIDR) the VPC should use"
   type        = string
   default     = "10.0.0.0/16"
-}
-
-variable "ipv6_enable" {
-  description = "Add an IPv6 CIDR block to the VPC and IPv6 CIDR blocks to the public and private subnets"
-  type        = bool
-  default     = false
 }
