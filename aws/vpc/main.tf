@@ -59,8 +59,9 @@ resource "aws_subnet" "private_subnet" {
   }
 }
 
+
 /*
- * Create internet gateway for VPC
+ * Create internet gateway(s) for VPC
  */
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc.id
@@ -71,6 +72,27 @@ resource "aws_internet_gateway" "internet_gateway" {
     app_env  = var.app_env
   }
 }
+
+resource "aws_egress_only_internet_gateway" "ipv6" {
+  count = var.ipv6_enable ? 1 : 0
+
+  vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name     = "egress-${var.app_name}-${var.app_env}"
+    app_name = var.app_name
+    app_env  = var.app_env
+  }
+}
+
+resource "aws_route" "private_ipv6" {
+  count = var.ipv6_enable ? 1 : 0
+
+  route_table_id              = aws_route_table.private_route_table.id
+  destination_ipv6_cidr_block = "::/0"
+  gateway_id                  = one(aws_egress_only_internet_gateway.ipv6[*].id)
+}
+
 
 /*
  * Create NAT gateway and allocate Elastic IP for it

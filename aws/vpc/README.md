@@ -9,6 +9,7 @@ be useful.
 - Provision a Internet Gateway and configure public subnets to route through it
 - Provision a NAT Gateway (or use an existing Transit Gateway) and configure private subnets to route through it
 - Create a DB subnet group including all private subnets
+- Optionally allocate IPv6 CIDR blocks, egress-only internet gateway, and default IPv6 routes
 
 ## Required Inputs
 
@@ -27,6 +28,7 @@ be useful.
 - `transit_gateway_id` - required if `use_transit_gateway` is true
 - `transit_gateway_default_route_table_association` - default `true`
 - `transit_gateway_default_route_table_propagation` - default `true`
+- `ipv6_enable` - default `false` 
 
 ## Outputs
 
