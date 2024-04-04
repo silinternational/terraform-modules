@@ -1,4 +1,8 @@
-module "vpc" {
+module "vpc_minimal" {
+  source = "../aws/vpc"
+}
+
+module "vpc_all_inputs" {
   source = "../aws/vpc"
 
   app_name                                        = ""
@@ -13,4 +17,5 @@ module "vpc" {
   transit_gateway_default_route_table_association = false
   transit_gateway_default_route_table_propagation = false
   vpc_cidr_block                                  = ""
+  ipv6_enable                                     = true
 }
