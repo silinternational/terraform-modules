@@ -1,6 +1,13 @@
-// Default Security Group ID
 output "id" {
   value = aws_vpc.vpc.id
+}
+
+output "ipv6_association_id" {
+  value = aws_vpc.vpc.ipv6_association_id
+}
+
+output "ipv6_cidr_block" {
+  value = aws_vpc.vpc.ipv6_cidr_block
 }
 
 output "vpc_default_sg_id" {
@@ -34,4 +41,3 @@ output "aws_zones" {
 output "nat_gateway_ip" {
   value = one(aws_nat_gateway.nat_gateway[*].public_ip)
 }
-
