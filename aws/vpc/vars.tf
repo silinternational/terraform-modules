@@ -75,7 +75,7 @@ variable "vpc_cidr_block" {
   default     = "10.0.0.0/16"
 }
 
-variable "ipv6_enable" {
+variable "enable_ipv6" {
   description = "Add an IPv6 CIDR block to the VPC and IPv6 CIDR blocks to the public and private subnets"
   type        = bool
   default     = false

@@ -28,7 +28,7 @@ be useful.
 - `transit_gateway_id` - required if `use_transit_gateway` is true
 - `transit_gateway_default_route_table_association` - default `true`
 - `transit_gateway_default_route_table_propagation` - default `true`
-- `ipv6_enable` - default `false` 
+- `enable_ipv6` - default `false` 
 
 ## Outputs
 

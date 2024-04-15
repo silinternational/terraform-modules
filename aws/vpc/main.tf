@@ -4,7 +4,7 @@
 resource "aws_vpc" "vpc" {
   cidr_block                       = var.vpc_cidr_block
   enable_dns_hostnames             = var.enable_dns_hostnames
-  assign_generated_ipv6_cidr_block = var.ipv6_enable
+  assign_generated_ipv6_cidr_block = var.enable_ipv6
 
   tags = {
     Name     = "vpc-${var.app_name}-${var.app_env}"
@@ -27,8 +27,8 @@ data "aws_security_group" "vpc_default_sg" {
 
 locals {
   ipv6_cidr_block = aws_vpc.vpc.ipv6_cidr_block
-  public_subnets  = var.ipv6_enable ? cidrsubnets(cidrsubnet(local.ipv6_cidr_block, 4, 0), 4, 4, 4, 4, 4, 4, 4, 4) : []
-  private_subnets = var.ipv6_enable ? cidrsubnets(cidrsubnet(local.ipv6_cidr_block, 4, 1), 4, 4, 4, 4, 4, 4, 4, 4) : []
+  public_subnets  = var.enable_ipv6 ? cidrsubnets(cidrsubnet(local.ipv6_cidr_block, 4, 0), 4, 4, 4, 4, 4, 4, 4, 4) : []
+  private_subnets = var.enable_ipv6 ? cidrsubnets(cidrsubnet(local.ipv6_cidr_block, 4, 1), 4, 4, 4, 4, 4, 4, 4, 4) : []
 }
 
 resource "aws_subnet" "public_subnet" {
@@ -36,7 +36,7 @@ resource "aws_subnet" "public_subnet" {
   vpc_id            = aws_vpc.vpc.id
   availability_zone = element(var.aws_zones, count.index)
   cidr_block        = element(var.public_subnet_cidr_blocks, count.index)
-  ipv6_cidr_block   = var.ipv6_enable ? element(local.public_subnets, count.index) : null
+  ipv6_cidr_block   = var.enable_ipv6 ? element(local.public_subnets, count.index) : null
 
   tags = {
     Name     = "public-${element(var.aws_zones, count.index)}"
@@ -50,7 +50,7 @@ resource "aws_subnet" "private_subnet" {
   vpc_id            = aws_vpc.vpc.id
   availability_zone = element(var.aws_zones, count.index)
   cidr_block        = element(var.private_subnet_cidr_blocks, count.index)
-  ipv6_cidr_block   = var.ipv6_enable ? element(local.private_subnets, count.index) : null
+  ipv6_cidr_block   = var.enable_ipv6 ? element(local.private_subnets, count.index) : null
 
   tags = {
     Name     = "private-${element(var.aws_zones, count.index)}"
@@ -74,7 +74,7 @@ resource "aws_internet_gateway" "internet_gateway" {
 }
 
 resource "aws_egress_only_internet_gateway" "ipv6" {
-  count = var.ipv6_enable ? 1 : 0
+  count = var.enable_ipv6 ? 1 : 0
 
   vpc_id = aws_vpc.vpc.id
 
@@ -86,7 +86,7 @@ resource "aws_egress_only_internet_gateway" "ipv6" {
 }
 
 resource "aws_route" "private_ipv6" {
-  count = var.ipv6_enable ? 1 : 0
+  count = var.enable_ipv6 ? 1 : 0
 
   route_table_id              = aws_route_table.private_route_table.id
   destination_ipv6_cidr_block = "::/0"
@@ -206,7 +206,7 @@ resource "aws_route" "igw_route" {
 }
 
 resource "aws_route" "public_ipv6" {
-  count = var.ipv6_enable ? 1 : 0
+  count = var.enable_ipv6 ? 1 : 0
 
   route_table_id              = aws_route_table.igw_route_table.id
   destination_ipv6_cidr_block = "::/0"
