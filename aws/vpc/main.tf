@@ -90,7 +90,7 @@ resource "aws_route" "private_ipv6" {
 
   route_table_id              = aws_route_table.private_route_table.id
   destination_ipv6_cidr_block = "::/0"
-  gateway_id                  = one(aws_egress_only_internet_gateway.ipv6[*].id)
+  egress_only_gateway_id      = one(aws_egress_only_internet_gateway.ipv6[*].id)
 }
 
 
