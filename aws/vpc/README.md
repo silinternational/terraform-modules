@@ -13,7 +13,7 @@ be useful.
 
 ## Required Inputs
 
-- `app_name` - Name of application, ex: Doorman, IdP, etc.
+- `app_name` - Name of application, ex: Cover, IdP, etc.
 - `app_env` - Name of environment, ex: prod, test, etc.
 
 ## Optional Inputs
