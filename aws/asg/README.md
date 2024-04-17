@@ -27,6 +27,7 @@ an auto scaling group that uses the template.
  - `additional_user_data` - command to append to the EC2 user\_data, default is ""
  - `tags` - Map of tags to be added to all resources, including the network-interface and volume created by the launch template. The `propagate_at_launch` flag will be set true for all tags.
  - `cpu_credits` - Value for the `credit_specification` if you want to override the AWS default for `aws_launch_template`.
+ - `enable_ipv6` - Set to true to add an IPv6 IP address to ASG-created instances. Default: `false`
 
 ## Outputs
 
