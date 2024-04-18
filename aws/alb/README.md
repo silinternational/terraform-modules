@@ -30,6 +30,7 @@ groups for traffic and a default target group.
  - `health_check_status_codes` - Default: `200`, separate multiple values with comma, ex: `200,204`
  - `idle_timeout` - Default: `60`
  - `load_balancer_type` - Options: `application` or `network`. Default: `application`
+ - `enable_ipv6` - Set to `true` to enable IPv6. Changes the ALB `ip_address_type` to `"dualstack"`. Default: `false`
 
 ## Outputs
 

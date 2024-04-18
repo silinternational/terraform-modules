@@ -79,3 +79,9 @@ variable "tags" {
   description = "Map of tags to be added to all resources, including the network-interface and volume created by the launch template"
   default     = {}
 }
+
+variable "enable_ipv6" {
+  description = "set to true to add an IPv6 IP address to ASG-created instances"
+  type        = bool
+  default     = false
+}
