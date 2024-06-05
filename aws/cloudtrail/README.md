@@ -18,7 +18,8 @@ This module is used to set up CloudTrail logging for your AWS account.
 
 ## Outputs
 
-_none_
+- `s3_bucket_iam_user_name` - The name of the created IAM user that has access to the S3 bucket,
+  which is needed if you want to create an IAM access key (external to this module).
 
 ## Example Usage
 
