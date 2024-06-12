@@ -65,6 +65,11 @@ resource "aws_iam_user_policy" "cloudtrail-s3" {
   })
 }
 
+resource "aws_iam_access_key" "cloudtrail-s3" {
+  count = var.create_access_key ? 1 : 0
+  user  = aws_iam_user.cloudtrail-s3.name
+}
+
 resource "aws_cloudtrail" "cloudtrail" {
   count                         = 1
   name                          = var.cloudtrail_name
