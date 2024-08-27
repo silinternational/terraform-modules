@@ -1,6 +1,6 @@
 # Deprecation Notice
 
-This module is deprecated. Use https://registry.terraform.io/modules/silinternational/cloudtrail/aws/latest instead.
+This module is deprecated. Please use [terraform-aws-cloudtrail](https://github.com/silinternational/terraform-aws-cloudtrail) instead. See [Terraform Registry](https://registry.terraform.io/modules/silinternational/cloudtrail/aws/latest) for more details.
 
 # aws/cloudtrail - CloudTrail
 This module is used to set up CloudTrail logging for your AWS account.
