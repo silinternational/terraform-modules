@@ -1,3 +1,7 @@
+# Deprecation Notice
+
+This module is deprecated. Please use [terraform-aws-vpc](https://github.com/silinternational/terraform-aws-vpc) instead. See [Terraform Registry](https://registry.terraform.io/modules/silinternational/vpc/aws/latest) for more details.
+
 # aws/vpc - Virtual Private Cloud
 This module is used to create a VPC along with the necessary configuration to
 be useful.
