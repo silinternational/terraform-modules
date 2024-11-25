@@ -24,7 +24,6 @@ locals {
  * Create Launch Template
  */
 resource "aws_launch_template" "asg_lt" {
-  default_version = 1
   ebs_optimized   = false
   name            = "lt-${var.app_name}-${var.app_env}"
   image_id        = var.ami_id
