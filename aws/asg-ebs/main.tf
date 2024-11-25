@@ -24,12 +24,12 @@ locals {
  * Create Launch Template
  */
 resource "aws_launch_template" "asg_lt" {
-  ebs_optimized   = false
-  name            = "lt-${var.app_name}-${var.app_env}"
-  image_id        = var.ami_id
-  instance_type   = var.aws_instance["instance_type"]
-  key_name        = var.key_name
-  user_data       = base64encode(local.user_data)
+  ebs_optimized = false
+  name          = "lt-${var.app_name}-${var.app_env}"
+  image_id      = var.ami_id
+  instance_type = var.aws_instance["instance_type"]
+  key_name      = var.key_name
+  user_data     = base64encode(local.user_data)
 
   block_device_mappings {
     device_name = var.root_device_name
