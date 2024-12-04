@@ -57,7 +57,7 @@ resource "aws_launch_template" "asg_lt" {
   }
 
   monitoring {
-    enabled = true
+    enabled = var.enable_ec2_detailed_monitoring
   }
 
   dynamic "tag_specifications" {

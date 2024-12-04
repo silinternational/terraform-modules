@@ -85,3 +85,9 @@ variable "enable_ipv6" {
   type        = bool
   default     = false
 }
+
+variable "enable_ec2_detailed_monitoring" {
+  description = "Enables/disables detailed monitoring for EC2 instances"
+  type        = bool
+  default     = true
+}
