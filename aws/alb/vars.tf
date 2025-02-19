@@ -100,3 +100,8 @@ variable "load_balancer_type" {
   default = "application"
 }
 
+variable "enable_ipv6" {
+  description = "Set to `true` to enable IPv6. Changes the ALB `ip_address_type` to `\"dualstack\"`."
+  type        = bool
+  default     = false
+}

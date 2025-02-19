@@ -1,3 +1,7 @@
+# Deprecation Notice
+
+This module is deprecated. Please use [terraform-aws-backup](https://github.com/silinternational/terraform-aws-backup) instead. See [Terraform Registry](https://registry.terraform.io/modules/silinternational/backup/aws/latest) for more details. 
+
 # aws/backup/rds - AWSBackup of databases
 This module is used to create scheduled backups of AWS databases.
 
@@ -6,14 +10,14 @@ This module is used to create scheduled backups of AWS databases.
 
 - `app_name` - Name of application, ex: Doorman, IdP, etc.
 - `app_env` - Name of environment, ex: prod, test, etc.
-- `aws_access_key` - Access key to allow access via the AWS CLI
-- `aws_secret_key` - Secret access key to allow access via the AWS CLI
 - `source_arns` - List of ARN's of the databases to backup
 
 ### Optional Inputs
 
 - `backup_cron_schedule` - Default: "11 1 * * ? *"
 - `notification_events` - Default: ["BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_FAILED", "RESTORE_JOB_COMPLETED"]
+- `aws_access_key` - Not needed and not used
+- `aws_secret_key` - Not needed and not used
 
 
 ## Outputs

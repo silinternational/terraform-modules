@@ -40,6 +40,7 @@ resource "aws_launch_template" "asg_lt" {
   network_interfaces {
     associate_public_ip_address = var.associate_public_ip_address
     security_groups             = concat([var.default_sg_id], var.additional_security_groups)
+    ipv6_address_count          = var.enable_ipv6 ? 1 : 0
   }
 
   iam_instance_profile {
@@ -47,7 +48,7 @@ resource "aws_launch_template" "asg_lt" {
   }
 
   monitoring {
-    enabled = true
+    enabled = var.enable_ec2_detailed_monitoring
   }
 
   dynamic "tag_specifications" {

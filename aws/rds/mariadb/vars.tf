@@ -33,9 +33,21 @@ variable "security_groups" {
  * Optional variables
  */
 
+variable "apply_immediately" {
+  description = "Apply database modifications immediately, rather than during the next maintenance window. CAUTION: may cause downtime!"
+  type        = bool
+  default     = false
+}
+
 variable "availability_zone" {
   type    = string
   default = ""
+}
+
+variable "ca_cert_identifier" {
+  description = "The identifier of the CA certificate for the DB instance."
+  type        = string
+  default     = null
 }
 
 variable "copy_tags_to_snapshot" {

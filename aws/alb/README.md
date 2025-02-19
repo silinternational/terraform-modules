@@ -1,3 +1,7 @@
+# Deprecation Notice
+
+This module is deprecated. Please use [terraform-aws-alb](https://github.com/silinternational/terraform-aws-alb) instead. See [Terraform Registry](https://registry.terraform.io/modules/silinternational/alb/aws/latest) for more details.
+
 # aws/alb - Application Load Balancer
 This module is used to create an application load balancer along with security
 groups for traffic and a default target group.
@@ -30,6 +34,7 @@ groups for traffic and a default target group.
  - `health_check_status_codes` - Default: `200`, separate multiple values with comma, ex: `200,204`
  - `idle_timeout` - Default: `60`
  - `load_balancer_type` - Options: `application` or `network`. Default: `application`
+ - `enable_ipv6` - Set to `true` to enable IPv6. Changes the ALB `ip_address_type` to `"dualstack"`. Default: `false`
 
 ## Outputs
 
