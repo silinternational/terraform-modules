@@ -7,6 +7,7 @@ The following is a list of the new module sources:
 - [silinternational/alb/aws](https://github.com/silinternational/terraform-aws-alb) replaces aws/alb
 - [silinternational/backup/aws](https://github.com/silinternational/terraform-aws-backup) replaces aws/backup/rds
 - [silinternational/cloudtrail/aws](https://github.com/silinternational/terraform-aws-cloudtrail) replaces aws/cloudtrail
+- [silinternational/ecs-service/aws](https://github.com/silinternational/terraform-aws-ecs-service) replaces aws/ecs/service-only
 - [silinternational/vpc/aws](https://github.com/silinternational/terraform-aws-vpc) replaces aws/vpc
 
 # Terraform Modules
