@@ -69,3 +69,8 @@ variable "deployment_minimum_healthy_percent" {
   default = 50
 }
 
+variable "execution_role_arn" {
+  type        = string
+  default     = ""
+}
+
