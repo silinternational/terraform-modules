@@ -19,6 +19,7 @@ This module is used to create an ECS service as well as task definition
 ### Optional Inputs
 
  - `task_role_arn` - ARN for role to assign to task definition. Default: `blank`
+ - `execution_role_arn` - ARN for execution role that allows ECS to make AWS API calls on your behalf, such as to pull container images from ECR when using Fargate or to reference secrets from SSM Parameter Store. Default: `blank`
  - `network_mode` - Networking mode for task. Default: `bridge`
  - `deployment_maximum_percent` - Upper limit of tasks that can run during a deployment. Default: `200`%
  - `deployment_minimum_healthy_percent` - Lower limit of tasks that must be running during a deployment. Default: `50`%

@@ -13,6 +13,7 @@ resource "aws_ecs_task_definition" "td" {
   family                = "${var.service_name}-${var.service_env}"
   container_definitions = var.container_def_json
   task_role_arn         = var.task_role_arn
+  execution_role_arn    = var.execution_role_arn
   network_mode          = var.network_mode
 
   volume {
