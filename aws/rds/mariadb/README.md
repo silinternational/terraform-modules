@@ -19,6 +19,8 @@ This module is used to create an RDS instance.
 
  - `apply_immediately` - Default: `false` - description = Apply database modifications immediately, rather than during the next maintenance window. CAUTION: may cause downtime!
  - `availability_zone` - Default: `""` - Availability zone name to place instance in
+ - `auto_minor_version_upgrade` - Default: `false` - description = Indicates that minor engine upgrades will be applied automatically during the maintenance window
+ - `allow_major_version_upgrade` -Default: `false` - description = Indicates that major version upgrades are allowed. Change this to true when upgrading major versions
  - `ca_cert_identifier` - Default: `null` - The identifier of the CA certificate for the DB instance.
  - `copy_tags_to_snapshot` - Default: `true`
  - `engine` - Default: `mariadb`
