@@ -39,6 +39,18 @@ variable "apply_immediately" {
   default     = false
 }
 
+variable "auto_minor_version_upgrade" {
+  description = "Indicates that minor engine upgrades will be applied automatically during the maintenance window"
+  type        = bool
+  default     = true
+}
+
+variable "allow_major_version_upgrade" {
+  description = "Indicates that major version upgrades are allowed. Change this to true when upgrading major versions"
+  type        = bool
+  default     = false
+}
+
 variable "availability_zone" {
   type    = string
   default = ""
