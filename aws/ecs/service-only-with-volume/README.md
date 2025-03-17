@@ -24,6 +24,7 @@ This module is used to create an ECS service as well as task definition
 
  - `task_role_arn` - ARN for role to assign to task definition. Default: `blank`
  - `network_mode` - Networking mode for task. Default: `bridge`
+ - `execution_role_arn` - ARN for execution role that allows ECS to make AWS API calls on your behalf, such as to pull container images from ECR when using Fargate or to reference secrets from SSM Parameter Store. Default: `blank`
  - `deployment_maximum_percent` - Upper limit of tasks that can run during a deployment. Default: `200`%
  - `deployment_minimum_healthy_percent` - Lower limit of tasks that must be running during a deployment. Default: `50`%
 
@@ -54,5 +55,6 @@ module "ecsservice" {
   ecsServiceRole_arn = "${data.terraform_remote_state.core.ecsServiceRole_arn}"
   volume_name        = "${var.volume_name}"
   volume_host_path   = "${var.volume_host_path}"
+  execution_role_arn = "${aws_iam_role.ecs_task_execution_role.arn}"
 }
 ```
